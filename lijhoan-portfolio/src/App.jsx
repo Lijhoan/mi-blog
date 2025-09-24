@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button.jsx'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.jsx'
 import { Badge } from '@/components/ui/badge.jsx'
-import SplashCursor from './components/SplashCursor.jsx'
+import Lanyard from './components/Lanyard.jsx'
+import ProfileCard from './components/ProfileCard.jsx'
 import {
   BarChart3,
   TrendingUp,
@@ -126,9 +127,6 @@ function App() {
     ]
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
-      {/* Efecto de cursor animado en toda la app */}
-      <SplashCursor />
-      
       {/* Navigation Sidebar */}
       <nav className="fixed left-0 top-0 h-full w-20 bg-black/20 backdrop-blur-xl border-r border-white/10 z-50">
         <div className="flex flex-col items-center py-8 space-y-8">
@@ -156,99 +154,48 @@ function App() {
       <main className="ml-20 min-h-screen">
         {/* Home Section */}
         {activeSection === 'home' && (
-          <section className={`min-h-screen flex items-center justify-center p-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Profile Card */}
-              <div className="bg-gradient-to-br from-cyan-500/10 to-blue-600/10 backdrop-blur-xl rounded-3xl p-8 border border-white/10 shadow-2xl">
-                <div className="text-center space-y-6">
-                  <div className="relative w-32 h-32 mx-auto">
-                    {/* Efecto de fondo tipo glow */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full opacity-20 blur-sm"></div>
-                    
-                    {/* Contenedor de la foto */}
-                    <div className="relative w-32 h-32 bg-gradient-to-r from-cyan-400/20 to-blue-500/20 rounded-full border-2 border-cyan-400/30 flex items-center justify-center overflow-hidden">
-                      <img 
-                        src={fotoPerfil} 
-                        alt="Foto de Lijhoan Machaca" 
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                      Lijhoan Machaca
-                    </h1>
-                    <p className="text-gray-300 text-lg mt-2">Systems engineer & Data Specialist</p>
-                    <div className="flex items-center justify-center mt-2 text-sm text-gray-400">
-                      <MapPin size={16} className="mr-1" />
-                      Lima, Perú
-                    </div>
-                  </div>
-                  
-                  <div className="flex justify-center space-x-4">
-                    <Button variant="outline" size="icon" className="bg-white/5 border-white/20 hover:bg-white/10">
-                      <a
-                        href="https://www.linkedin.com/in/lijhoanmc"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/5 border border-white/20 hover:bg-white/10"
-                      >
-                        <LinkedinIcon size={24} />
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="icon" className="bg-white/5 border-white/20 hover:bg-white/10">
-                      <a
-                        href="https://github.com/Lijhoan"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/5 border border-white/20 hover:bg-white/10"
-                      >
-                        <GithubIcon size={24} />
-                      </a>
-                    </Button>
-                    <Button variant="outline" size="icon" className="bg-white/5 border-white/20 hover:bg-white/10">
-                    <a
-                      href="mailto:lijhoan.machaca@gmail.com"
-                      className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white/5 border border-white/20 hover:bg-white/10"
-                    >
-                      <Mail size={20} />
-                    </a>
-                    </Button>
-                  </div>
-                  
-                  <a
-                    href="/cv.pdf"
-                    download
-                    className="inline-flex items-center gap-2 px-8 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white"
-                  >
-                    <Download size={20} className="mr-2" />
-                    Descargar CV
-                  </a>
-                </div>
+          <section className={`min-h-screen flex items-center justify-center p-4 sm:p-6 lg:p-8 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              {/* Profile Card - React Bits Original */}
+              <div className="flex items-center justify-center h-full">
+                <ProfileCard
+                  avatarUrl={fotoPerfil}
+                  name="Lijhoan Machaca"
+                  title="Systems Engineer & Data Specialist"
+                  handle="lijhoanmc"
+                  status="Lima, Perú"
+                  contactText="Contactar"
+                  showUserInfo={true}
+                  enableTilt={true}
+                  enableMobileTilt={true}
+                  mobileTiltSensitivity={5}
+                  onContactClick={() => setActiveSection('contact')}
+                  className="max-w-sm"
+                />
               </div>
 
               {/* Hero Content */}
               <div className="space-y-8">
                 <div className="space-y-4">
-                  <h2 className="text-5xl font-bold leading-tight">
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
                     Transformando
                     <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"> datos </span>
                     en decisiones estratégicas
                   </h2>
-                  <p className="text-xl text-gray-300 leading-relaxed">
+                  <p className="text-base sm:text-lg lg:text-xl text-gray-300 leading-relaxed">
                     Más de 6 años de experiencia en Business Intelligence, creando soluciones analíticas 
                     que optimizan procesos y potencian la toma de decisiones empresariales.
                   </p>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-                    <div className="text-2xl font-bold text-cyan-400">6+</div>
-                    <div className="text-sm text-gray-300">Años de experiencia</div>
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div className="bg-white/5 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/10">
+                    <div className="text-xl sm:text-2xl font-bold text-cyan-400">6+</div>
+                    <div className="text-xs sm:text-sm text-gray-300">Años de experiencia</div>
                   </div>
-                  <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-                    <div className="text-2xl font-bold text-blue-400">50+</div>
-                    <div className="text-sm text-gray-300">Proyectos completados</div>
+                  <div className="bg-white/5 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/10">
+                    <div className="text-xl sm:text-2xl font-bold text-blue-400">50+</div>
+                    <div className="text-xs sm:text-sm text-gray-300">Proyectos completados</div>
                   </div>
                 </div>
                 
@@ -265,36 +212,43 @@ function App() {
         )}
         {/* About Section */}
         {activeSection === 'about' && (
-          <section className="min-h-screen p-8 flex items-center">
-            <div className="max-w-4xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold mb-4">
+          <section className="min-h-screen p-4 sm:p-6 lg:p-8 flex items-center">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-8 sm:mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold mb-4">
                   Sobre <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Mí</span>
                 </h2>
               </div>
               
-              <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
-                  <p className="text-lg text-gray-300 leading-relaxed mb-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-center">
+                {/* Columna IZQUIERDA - Lanyard */}
+                <div className="w-full h-[300px] sm:h-[400px] lg:h-[500px] relative order-2 lg:order-1">
+                  <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
+                </div>
+
+                {/* Columna DERECHA - Contenido textual */}
+                <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-4 sm:p-6 lg:p-8 border border-white/10 order-1 lg:order-2">
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6">
                     Soy Systems and Computer Science Engineer en desarrollo, con experiencia como Financial Performance Analyst con sólida experiencia en Business Intelligence, análisis financiero y estrategias basadas en datos. Me especializo en transformar métricas complejas en acciones claras que impulsan resultados reales. / I'm a Systems and Computer Science Engineer in progress and a Financial Performance Analyst with solid experience in Business Intelligence, financial analysis, and data-driven strategy.
                   </p>
 
-                  <p className="text-lg text-gray-300 leading-relaxed mb-6">
+                  <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6">
                     Apasionado por la analítica, combino herramientas de visualización, diseño de KPIs y metodologías ágiles para optimizar la toma de decisiones empresariales. En este espacio comparto insights, buenas prácticas y recursos para convertir los datos en tu mejor aliado estratégico. / Passionate about analytics, I combine visualization tools, KPI design, and agile methodologies to improve business decision-making. This space is where I share insights, best practices, and resources to turn data into your strongest strategic asset.
                   </p>
 
-                
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-cyan-400 mb-2">20%</div>
-                    <div className="text-gray-300">Mejora en eficiencia</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-400 mb-2">15%</div>
-                    <div className="text-gray-300">Reducción de errores</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-400 mb-2">25%</div>
-                    <div className="text-gray-300">Optimización de procesos</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
+                    <div className="text-center">
+                      <div className="text-2xl sm:text-3xl font-bold text-cyan-400 mb-1 sm:mb-2">20%</div>
+                      <div className="text-xs sm:text-sm text-gray-300">Mejora en eficiencia</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl sm:text-3xl font-bold text-blue-400 mb-1 sm:mb-2">15%</div>
+                      <div className="text-xs sm:text-sm text-gray-300">Reducción de errores</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl sm:text-3xl font-bold text-purple-400 mb-1 sm:mb-2">25%</div>
+                      <div className="text-xs sm:text-sm text-gray-300">Optimización de procesos</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -304,16 +258,16 @@ function App() {
 
         {/* Projects Section */}
         {activeSection === 'projects' && (
-          <section className="min-h-screen p-8">
+          <section className="min-h-screen p-4 sm:p-6 lg:p-8">
             <div className="max-w-7xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold mb-4">
+              <div className="text-center mb-8 sm:mb-12">
+                <h2 className="text-3xl sm:text-4xl font-bold mb-4">
                   Mis <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Proyectos</span>
                 </h2>
-                <p className="text-xl text-gray-300">Dashboards y soluciones de Business Intelligence</p>
+                <p className="text-lg sm:text-xl text-gray-300">Dashboards y soluciones de Business Intelligence</p>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                 {projects.map((project) => (
                   <Card key={project.id} className="bg-white/5 backdrop-blur-xl border-white/10 hover:bg-white/10 transition-all duration-300 group overflow-hidden">
                     <CardHeader className="p-0">
@@ -364,50 +318,50 @@ function App() {
         )}
 
       {activeSection === 'skills' && (
-        <section className="min-h-screen p-8 flex items-center">
+        <section className="min-h-screen p-4 sm:p-6 lg:p-8 flex items-center">
           <div className="max-w-6xl mx-auto w-full">
-            <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold mb-4">
+            <div className="text-center mb-8 sm:mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold mb-4">
                 Mis <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Habilidades</span>
               </h2>
-              <p className="text-xl text-gray-300">Tecnologías y herramientas que domino</p>
+              <p className="text-lg sm:text-xl text-gray-300">Tecnologías y herramientas que domino</p>
             </div>
 
             {/* Grupo: Data & BI */}
-            <h3 className="text-xl font-semibold text-white mb-4">📊 Data & BI</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">📊 Data & BI</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
               {dataSkills.map((skill) => (
                 <SkillCard key={skill.name} skill={skill} />
               ))}
             </div>
 
             {/* Grupo: Data Science */}
-            <h3 className="text-xl font-semibold text-white mb-4">🧠 Data Science / ML</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">🧠 Data Science / ML</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
               {mlSkills.map((skill) => (
                 <SkillCard key={skill.name} skill={skill} />
               ))}
             </div>
 
             {/* Grupo: Desarrollo */}
-            <h3 className="text-xl font-semibold text-white mb-4">💻 Desarrollo / Automatización</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">💻 Desarrollo / Automatización</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
               {devSkills.map((skill) => (
                 <SkillCard key={skill.name} skill={skill} />
               ))}
             </div>
 
           {/* Grupo: Inteligencia Artificial */}
-          <h3 className="text-xl font-semibold text-white mb-4">🧠 Inteligencia Artificial</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+          <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">🧠 Inteligencia Artificial</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
             {aiSkills.map((skill) => (
               <SkillCard key={skill.name} skill={skill} />
             ))}
           </div>
 
           {/* Grupo: Infraestructura / Gestión */}
-          <h3 className="text-xl font-semibold text-white mb-4">☁️ Infraestructura / Gestión</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <h3 className="text-lg sm:text-xl font-semibold text-white mb-3 sm:mb-4">☁️ Infraestructura / Gestión</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             {infraSkills.map((skill) => (
               <SkillCard key={skill.name} skill={skill} />
             ))}
@@ -419,96 +373,96 @@ function App() {
 
 {/* Contact Section */}
 {activeSection === 'contact' && (
-  <section className="min-h-screen p-8 flex items-center">
+  <section className="min-h-screen p-4 sm:p-6 lg:p-8 flex items-center">
     <div className="max-w-4xl mx-auto w-full">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold mb-4">
+      <div className="text-center mb-8 sm:mb-12">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-4">
           <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
             Contacto
           </span>
         </h2>
-        <p className="text-xl text-gray-300">
+        <p className="text-lg sm:text-xl text-gray-300">
           ¿Listo para transformar tus datos en insights?
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
         {/* Información de Contacto */}
-        <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
-          <h3 className="text-2xl font-bold text-white mb-6">
+        <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-4 sm:p-6 lg:p-8 border border-white/10">
+          <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
             Información de Contacto
           </h3>
           
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {/* Email Card */}
-            <div className="bg-white/5 rounded-lg p-4 border border-white/10 hover:border-cyan-500/30 transition-colors group">
+            <div className="bg-white/5 rounded-lg p-3 sm:p-4 border border-white/10 hover:border-cyan-500/30 transition-colors group">
               <a
                 href="mailto:lijhoan.machaca@gmail.com"
                 className="flex items-center text-cyan-400 hover:text-cyan-300 transition-colors"
               >
-                <Mail size={24} className="mr-4 flex-shrink-0" />
-                <span className="text-gray-300 group-hover:text-white transition-colors">
+                <Mail size={20} className="mr-3 sm:mr-4 flex-shrink-0" />
+                <span className="text-gray-300 group-hover:text-white transition-colors text-sm sm:text-base break-all min-w-0">
                   lijhoan.machaca@gmail.com
                 </span>
               </a>
             </div>
 
             {/* LinkedIn Card */}
-            <div className="bg-white/5 rounded-lg p-4 border border-white/10 hover:border-cyan-500/30 transition-colors group">
+            <div className="bg-white/5 rounded-lg p-3 sm:p-4 border border-white/10 hover:border-cyan-500/30 transition-colors group">
               <a
                 href="https://www.linkedin.com/in/lijhoanmc"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-cyan-400 hover:text-cyan-300 transition-colors"
               >
-                <LinkedinIcon size={24} className="mr-4 flex-shrink-0" />
-                <span className="text-gray-300 group-hover:text-white transition-colors">
+                <LinkedinIcon size={20} className="mr-3 sm:mr-4 flex-shrink-0" />
+                <span className="text-gray-300 group-hover:text-white transition-colors text-sm sm:text-base">
                   lijhoanmc
                 </span>
-                <ExternalLink size={16} className="ml-2 opacity-60" />
+                <ExternalLink size={14} className="ml-2 opacity-60 flex-shrink-0" />
               </a>
             </div>
 
             {/* WhatsApp Card */}
-            <div className="bg-white/5 rounded-lg p-4 border border-white/10 hover:border-cyan-500/30 transition-colors group">
+            <div className="bg-white/5 rounded-lg p-3 sm:p-4 border border-white/10 hover:border-cyan-500/30 transition-colors group">
               <a
                 href="https://wa.me/51931347134"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-cyan-400 hover:text-cyan-300 transition-colors"
               >
-                <MessageSquare size={24} className="mr-4 flex-shrink-0" />
-                <span className="text-gray-300 group-hover:text-white transition-colors">
+                <MessageSquare size={20} className="mr-3 sm:mr-4 flex-shrink-0" />
+                <span className="text-gray-300 group-hover:text-white transition-colors text-sm sm:text-base">
                   +51 931 347 134
                 </span>
-                <Phone size={16} className="ml-2 opacity-60" />
+                <Phone size={14} className="ml-2 opacity-60 flex-shrink-0" />
               </a>
             </div>
           </div>
         </div>
 
         {/* Servicios */}
-        <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 border border-white/10">
-          <h3 className="text-2xl font-bold text-white mb-6">
+        <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-4 sm:p-6 lg:p-8 border border-white/10">
+          <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
             ¿Trabajamos juntos?
           </h3>
-          <p className="text-gray-300 mb-6">
+          <p className="text-sm sm:text-base text-gray-300 mb-4 sm:mb-6">
             Estoy disponible para proyectos de Business Intelligence, análisis de datos 
             y consultoría en transformación digital.
           </p>
           
-          <div className="space-y-4">
-            <div className="bg-white/5 rounded-lg p-4">
-              <div className="text-cyan-400 font-semibold">Business Intelligence</div>
-              <div className="text-sm text-gray-300">Dashboards y KPIs estratégicos</div>
+          <div className="space-y-3 sm:space-y-4">
+            <div className="bg-white/5 rounded-lg p-3 sm:p-4">
+              <div className="text-cyan-400 font-semibold text-sm sm:text-base">Business Intelligence</div>
+              <div className="text-xs sm:text-sm text-gray-300">Dashboards y KPIs estratégicos</div>
             </div>
-            <div className="bg-white/5 rounded-lg p-4">
-              <div className="text-blue-400 font-semibold">Data Analytics</div>
-              <div className="text-sm text-gray-300">Análisis predictivo y insights</div>
+            <div className="bg-white/5 rounded-lg p-3 sm:p-4">
+              <div className="text-blue-400 font-semibold text-sm sm:text-base">Data Analytics</div>
+              <div className="text-xs sm:text-sm text-gray-300">Análisis predictivo y insights</div>
             </div>
-            <div className="bg-white/5 rounded-lg p-4">
-              <div className="text-purple-400 font-semibold">Consultoría</div>
-              <div className="text-sm text-gray-300">Optimización de procesos</div>
+            <div className="bg-white/5 rounded-lg p-3 sm:p-4">
+              <div className="text-purple-400 font-semibold text-sm sm:text-base">Consultoría</div>
+              <div className="text-xs sm:text-sm text-gray-300">Optimización de procesos</div>
             </div>
           </div>
         </div>
@@ -525,11 +479,11 @@ function App() {
 // Componente SkillCard fuera del componente principal
 function SkillCard({ skill }) {
   return (
-    <div className="bg-white/5 backdrop-blur-xl rounded-xl p-6 border border-white/10">
-      <div className="flex items-center mb-4">
-        <skill.icon size={32} className="text-cyan-400 mr-4" />
-        <div className="flex-1">
-          <h3 className="text-xl font-semibold text-white">{skill.name}</h3>
+    <div className="bg-white/5 backdrop-blur-xl rounded-xl p-4 sm:p-6 border border-white/10">
+      <div className="flex items-center mb-3 sm:mb-4">
+        <skill.icon size={28} className="text-cyan-400 mr-3 sm:mr-4 flex-shrink-0" />
+        <div className="flex-1 min-w-0">
+          <h3 className="text-lg sm:text-xl font-semibold text-white truncate">{skill.name}</h3>
           <div className="w-full bg-white/10 rounded-full h-2 mt-2">
             <div 
               className="bg-gradient-to-r from-cyan-400 to-blue-500 h-2 rounded-full transition-all duration-1000"
@@ -537,7 +491,7 @@ function SkillCard({ skill }) {
             ></div>
           </div>
         </div>
-        <span className="text-cyan-400 font-bold text-lg ml-4">{skill.level}%</span>
+        <span className="text-cyan-400 font-bold text-base sm:text-lg ml-2 sm:ml-4 flex-shrink-0">{skill.level}%</span>
       </div>
     </div>
   )
