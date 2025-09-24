@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button.jsx'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card.jsx'
 import { Badge } from '@/components/ui/badge.jsx'
+import SplashCursor from './components/SplashCursor.jsx'
 import {
   BarChart3,
   TrendingUp,
@@ -125,6 +126,9 @@ function App() {
     ]
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
+      {/* Efecto de cursor animado en toda la app */}
+      <SplashCursor />
+      
       {/* Navigation Sidebar */}
       <nav className="fixed left-0 top-0 h-full w-20 bg-black/20 backdrop-blur-xl border-r border-white/10 z-50">
         <div className="flex flex-col items-center py-8 space-y-8">
