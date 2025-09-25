@@ -199,13 +199,23 @@ function App() {
                   </div>
                 </div>
                 
-                <Button 
-                  onClick={() => setActiveSection('projects')}
-                  className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-8 py-3 rounded-xl"
-                >
-                  Ver Proyectos
-                  <ChevronRight size={20} className="ml-2" />
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Button 
+                    onClick={() => setActiveSection('projects')}
+                    className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-6 sm:px-8 py-3 rounded-xl flex-1"
+                  >
+                    Ver Proyectos
+                    <ChevronRight size={20} className="ml-2" />
+                  </Button>
+                  
+                  <Button 
+                    onClick={() => window.open('/cv.pdf', '_blank')}
+                    className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-6 sm:px-8 py-3 rounded-xl flex-1"
+                  >
+                    <Download size={20} className="mr-2" />
+                    Descargar CV
+                  </Button>
+                </div>
               </div>
             </div>
           </section>
