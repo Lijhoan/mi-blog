@@ -54,13 +54,13 @@ function App() {
     {
       id: 'machine-learning',
       title: 'Aprendizaje automático',
-      summary: 'Prediccion, segmentacion y despliegue de modelos orientados a impacto real.',
+      summary: 'Predicción, segmentación y despliegue de modelos orientados a impacto real.',
       items: skills.ml,
     },
     {
       id: 'engineering-delivery',
       title: 'Entrega de ingeniería',
-      summary: 'Automatizacion, desarrollo y ejecucion de flujos completos de producto y datos.',
+      summary: 'Automatización, desarrollo y ejecución de flujos completos de producto y datos.',
       items: [...skills.dev, ...skills.ai],
     },
     {
@@ -210,7 +210,7 @@ function App() {
                   <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/72">Pilares operativos</p>
                   <ul className="mt-4 space-y-3 text-sm text-gray-200">
                     <li className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-3">Arquitectura de datos orientada a decisiones de negocio.</li>
-                    <li className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-3">Implementacion full-stack con foco en adopcion operativa.</li>
+                    <li className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-3">Implementación full-stack con foco en adopción operativa.</li>
                     <li className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-3">Gobernanza y escalabilidad para contextos corporativos.</li>
                   </ul>
                   <p className="mt-4 text-xs uppercase tracking-[0.16em] text-gray-400">Sin artificios. Solo claridad, sistemas y evidencia.</p>
@@ -274,7 +274,7 @@ function App() {
                 <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/70">Tesis de confianza</p>
                 <h3 className="mt-3 text-xl font-semibold text-white">Ejecución antes que retórica</h3>
                 <p className="mt-3 text-sm text-gray-300 leading-relaxed">
-                  La credibilidad se construye con continuidad entre arquitectura, entrega y adopcion operativa. Este bloque resume esa linea de consistencia.
+                  La credibilidad se construye con continuidad entre arquitectura, entrega y adopción operativa. Este bloque resume esa línea de consistencia.
                 </p>
                 <ul className="mt-4 space-y-2 text-sm text-gray-200">
                   <li className="rounded-lg border border-white/10 bg-black/20 px-3 py-3">Implementacion en entornos corporativos con requisitos de control y escalabilidad.</li>

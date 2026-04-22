@@ -51,7 +51,7 @@ export const flagshipProofCaseStudy: FlagshipProofCaseStudy = {
   projectTitle: 'Tale Insight Analytics',
   projectCategory: 'Plataforma de inteligencia de negocio',
   whyThisCase:
-    'Combina diferenciacion tecnica, alcance empresarial real y claridad narrativa: arquitectura moderna (Next.js 15 + React 19), control de acceso por areas y una capa BI preparada para evolucionar sin romper el sistema.',
+    'Combina diferenciación técnica, alcance empresarial real y claridad narrativa: arquitectura moderna (Next.js 15 + React 19), control de acceso por áreas y una capa BI preparada para evolucionar sin romper el sistema.',
   problemFraming: [
     'La organizacion necesitaba centralizar el consumo de reportes en un entorno unico, legible y gobernado por areas.',
     'El flujo previo dispersaba la lectura operativa y hacia dificil sostener decisiones sincronizadas entre equipos.',
@@ -158,15 +158,15 @@ export const flagshipProofCaseStudy: FlagshipProofCaseStudy = {
     {
       title: 'Marco del problema',
       points: [
-        'Fragmentacion de lectura operativa entre areas.',
-        'Necesidad de unificar acceso, contexto y decision.',
+        'Fragmentación de lectura operativa entre áreas.',
+        'Necesidad de unificar acceso, contexto y decisión.',
       ],
     },
     {
       title: 'Snapshot de arquitectura',
       points: [
         'Shell web moderno + control de acceso + infraestructura portable.',
-        'Integracion BI dentro de una experiencia de producto corporativa.',
+        'Integración BI dentro de una experiencia de producto corporativa.',
       ],
     },
     {

@@ -167,7 +167,7 @@ export default function FlagshipProofPanel() {
           Alcance honesto
         </p>
         <p className="mt-2 leading-relaxed text-amber-100/90">
-          Las metricas de ahorro economico exacto siguen pendientes de instrumentacion. Este capítulo solo declara impacto verificado y deja el contrato BI listo para conexión futura.
+          Las métricas de ahorro económico exacto siguen pendientes de instrumentación. Este capítulo solo declara impacto verificado y deja el contrato BI listo para conexión futura.
         </p>
       </div>
     </article>
