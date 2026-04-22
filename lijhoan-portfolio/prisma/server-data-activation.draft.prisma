@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ContentStatus {
+  canonical
+  derived
+  optional
+  pending_verification
+}
+
+enum MetricVerificationStatus {
+  verified
+  estimated
+  pending
+  unavailable
+}
+
+enum BiActivationState {
+  idle
+  ready
+  loading
+  unavailable
+}
+
+enum BiAccessMode {
+  private
+  service_principal
+  public
+}
+
+enum BiAuthorizationState {
+  authorized
+  denied
+  unavailable
+}
+
+enum OrgAreaKind {
+  area
+  sub_area
+  role
+}
+
+model Project {
+  id           String        @id
+  slug         String        @unique
+  title        String
+  description  String
+  technologies String[]
+  year         String
+  client       String
+  category     String
+  status       ContentStatus
+  note         String?
+  isFlagship   Boolean       @default(false)
+  sourceNote   String?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model FlagshipMetric {
+  id             String                  @id @default(cuid())
+  caseStudyId    String
+  label          String
+  value          String
+  unit           String
+  status         MetricVerificationStatus
+  sourceNote     String
+  timeframe      String
+  baseline       String?
+  after          String?
+  delta          String?
+  confidenceNote String?
+  createdAt      DateTime                @default(now())
+  updatedAt      DateTime                @updatedAt
+
+  @@index([caseStudyId, status])
+}
+
+model TelemetrySession {
+  id          String           @id
+  createdAt   DateTime         @default(now())
+  lastEventAt DateTime         @updatedAt
+  userAgent   String?
+  referrer    String?
+  path        String?
+  events      TelemetryEvent[]
+}
+
+model TelemetryEvent {
+  id          String           @id
+  sessionId   String
+  session     TelemetrySession  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  name        String
+  path        String
+  timestampAt DateTime         @default(now())
+  payload     Json
+
+  @@index([sessionId, timestampAt])
+  @@index([name, timestampAt])
+}
+
+model BiActivationRecord {
+  id                String           @id @default(cuid())
+  correlationId     String           @unique
+  sourceId          String
+  workspaceId       String
+  reportId          String
+  tenantId          String
+  accessMode        BiAccessMode
+  state             BiActivationState
+  authorizationState BiAuthorizationState
+  requestedAt       DateTime         @default(now())
+  tokenIssuedAt     DateTime?
+  tokenExpiresAt    DateTime?
+  failureReason     String?
+
+  @@index([reportId, requestedAt])
+}
+
+model OrgArea {
+  id           String    @id @default(cuid())
+  name         String
+  kind         OrgAreaKind
+  status       ContentStatus
+  sortOrder    Int       @default(0)
+  parentAreaId String?
+  parentArea   OrgArea?  @relation("OrgAreaTree", fields: [parentAreaId], references: [id])
+  children     OrgArea[] @relation("OrgAreaTree")
+}

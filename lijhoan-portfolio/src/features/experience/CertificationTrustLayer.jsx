@@ -7,6 +7,7 @@ import {
   featuredCertificationCredentials,
   supportingCertificationCredentials,
 } from '@/content/certifications/certificationTrust.data.ts'
+import { trackTelemetryEvent } from '@/features/telemetry/telemetryClient.ts'
 import { Calendar, Eye, ShieldCheck, X } from 'lucide-react'
 
 function CertificationImage({ credential, className }) {
@@ -29,13 +30,20 @@ function CertificationImage({ credential, className }) {
   )
 }
 
-function CredentialCard({ credential, compact = false, onOpen }) {
+function CredentialCard({ credential, compact = false, emphasis = 'standard', onOpen }) {
+  const isLead = emphasis === 'lead'
+
   return (
-    <article className="group overflow-hidden rounded-2xl border border-white/12 bg-white/[0.045] backdrop-blur-xl transition-all duration-300 hover:border-cyan-300/35 hover:bg-white/[0.08]">
+    <article className={[
+      'group overflow-hidden rounded-2xl border backdrop-blur-xl transition-all duration-300',
+      isLead
+        ? 'border-cyan-300/28 bg-slate-950/62 hover:border-cyan-200/40'
+        : 'border-white/12 bg-white/[0.045] hover:border-cyan-300/35 hover:bg-white/[0.08]',
+    ].join(' ')}>
       <div className="relative">
         <CertificationImage
           credential={credential}
-          className={compact ? 'h-44 w-full object-cover' : 'h-56 w-full object-cover'}
+          className={isLead ? 'h-64 w-full object-cover object-top' : compact ? 'h-44 w-full object-cover' : 'h-56 w-full object-cover'}
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/20 to-transparent" />
         <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3 py-1 text-xs text-white backdrop-blur-md">
@@ -47,7 +55,7 @@ function CredentialCard({ credential, compact = false, onOpen }) {
       <div className="space-y-4 p-4 sm:p-5">
         <div className="space-y-2">
           <p className="text-xs uppercase tracking-[0.22em] text-cyan-200/70">{credential.issuer}</p>
-          <h3 className={compact ? 'text-base font-semibold leading-snug text-white' : 'text-xl font-semibold leading-snug text-white'}>
+          <h3 className={isLead ? 'text-xl sm:text-2xl font-semibold leading-snug text-white' : compact ? 'text-base font-semibold leading-snug text-white' : 'text-xl font-semibold leading-snug text-white'}>
             {credential.title}
           </h3>
         </div>
@@ -61,9 +69,20 @@ function CredentialCard({ credential, compact = false, onOpen }) {
         </div>
 
         <Button
-          onClick={() => onOpen(credential)}
+          onClick={() => {
+            trackTelemetryEvent('trust_interaction', {
+              action: 'open-credential-proof',
+              credentialId: credential.id,
+              issuer: credential.issuer,
+              compact,
+            })
+            onOpen(credential)
+          }}
           variant="secondary"
-          className="w-full justify-center bg-cyan-500/18 text-cyan-100 hover:bg-cyan-500/30"
+          className={[
+            'justify-center bg-cyan-500/18 text-cyan-100 hover:bg-cyan-500/30',
+            isLead ? 'w-full sm:w-fit' : 'w-full',
+          ].join(' ')}
         >
           Ver prueba
           <Eye size={14} className="ml-2" />
@@ -76,6 +95,7 @@ function CredentialCard({ credential, compact = false, onOpen }) {
 export default function CertificationTrustLayer() {
   const [selectedCredential, setSelectedCredential] = useState(null)
   const [archiveOpen, setArchiveOpen] = useState(false)
+  const [leadFeatured, ...secondaryFeatured] = featuredCertificationCredentials
 
   const archiveCountLabel = useMemo(
     () => `${certificationTrustSummary.archiveCount} credenciales historicas`,
@@ -97,11 +117,11 @@ export default function CertificationTrustLayer() {
   return (
     <>
       <div className="grid gap-6">
-        <article className="rounded-2xl border border-cyan-300/25 bg-gradient-to-r from-cyan-500/12 via-blue-500/8 to-transparent p-5 sm:p-6">
+        <article className="rounded-2xl border border-cyan-300/25 bg-gradient-to-r from-cyan-500/10 via-blue-500/8 to-transparent p-5 sm:p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs uppercase tracking-[0.24em] text-cyan-100/75">Trust Layer</p>
-              <h3 className="mt-2 text-xl font-semibold text-white sm:text-2xl">Credenciales verificables para reforzar evidencia profesional</h3>
+              <h3 className="mt-2 text-xl font-semibold text-white sm:text-2xl">Credenciales verificables con jerarquia editorial</h3>
               <p className="mt-2 max-w-3xl text-sm text-slate-200/85 sm:text-base">
                 Priorizacion editorial: featured para posicionamiento actual, supporting para amplitud tecnica y archive para trazabilidad completa.
               </p>
@@ -119,11 +139,31 @@ export default function CertificationTrustLayer() {
             <h4 className="text-lg font-semibold tracking-tight text-white sm:text-xl">Featured Credentials</h4>
             <span className="text-xs uppercase tracking-[0.22em] text-cyan-200/70">Alta relevancia de posicionamiento</span>
           </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {featuredCertificationCredentials.map((credential) => (
-              <CredentialCard key={credential.id} credential={credential} onOpen={setSelectedCredential} />
-            ))}
-          </div>
+          {leadFeatured && (
+            <div className="grid gap-4 lg:grid-cols-[1.18fr_0.82fr]">
+              <CredentialCard credential={leadFeatured} emphasis="lead" onOpen={setSelectedCredential} />
+              <article className="rounded-2xl border border-white/12 bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl">
+                <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/72">Editorial reading</p>
+                <h5 className="mt-3 text-lg font-semibold text-white">Featured no es volumen, es señal</h5>
+                <p className="mt-3 text-sm text-gray-300 leading-relaxed">
+                  Estas credenciales se priorizan porque fortalecen posicionamiento profesional, validan foco tecnico actual y sostienen narrativa de confianza ante stakeholders.
+                </p>
+                <ul className="mt-4 space-y-2 text-sm text-gray-200">
+                  <li className="rounded-lg border border-white/10 bg-black/20 px-3 py-3">Credenciales con mayor impacto en lectura de seniority.</li>
+                  <li className="rounded-lg border border-white/10 bg-black/20 px-3 py-3">Pruebas visuales disponibles para validacion rapida.</li>
+                  <li className="rounded-lg border border-white/10 bg-black/20 px-3 py-3">Soporte directo para el chapter Trust del portfolio.</li>
+                </ul>
+              </article>
+            </div>
+          )}
+
+          {secondaryFeatured.length > 0 && (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              {secondaryFeatured.map((credential) => (
+                <CredentialCard key={credential.id} credential={credential} onOpen={setSelectedCredential} />
+              ))}
+            </div>
+          )}
         </section>
 
         <section className="space-y-4">
@@ -131,7 +171,7 @@ export default function CertificationTrustLayer() {
             <h4 className="text-lg font-semibold tracking-tight text-white sm:text-xl">Supporting Credentials</h4>
             <span className="text-xs uppercase tracking-[0.22em] text-cyan-200/70">Contexto y cobertura complementaria</span>
           </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-2">
             {supportingCertificationCredentials.map((credential) => (
               <CredentialCard key={credential.id} credential={credential} compact onOpen={setSelectedCredential} />
             ))}
@@ -142,9 +182,19 @@ export default function CertificationTrustLayer() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h4 className="text-base font-semibold text-white sm:text-lg">Archive</h4>
-              <p className="text-sm text-gray-300">{archiveCountLabel}. Se muestran bajo demanda para no sobrecargar la lectura inicial.</p>
+              <p className="text-sm text-gray-300">{archiveCountLabel}. Disponible bajo demanda para mantener el chapter limpio y sin sobrecarga visual.</p>
             </div>
-            <Button onClick={() => setArchiveOpen(true)} variant="outline" className="border-cyan-300/40 text-cyan-100 hover:bg-cyan-500/12">
+            <Button
+              onClick={() => {
+                trackTelemetryEvent('trust_interaction', {
+                  action: 'open-archive-drawer',
+                  archiveCount: certificationTrustSummary.archiveCount,
+                })
+                setArchiveOpen(true)
+              }}
+              variant="outline"
+              className="border-cyan-300/40 text-cyan-100 hover:bg-cyan-500/12"
+            >
               Abrir archivo
               <ShieldCheck size={14} className="ml-2" />
             </Button>

@@ -8,7 +8,7 @@ export const profileContent: ProfileContent = {
     email: 'lijhoan@gmail.com',
     phone: '(+51) 931347134',
     linkedin: 'https://www.linkedin.com/in/lijhoanmc/',
-    github: 'https://www.google.com/search?q=https://github.com/Lijhoan',
+    github: 'https://github.com/Lijhoan',
     tags: ['Solutions Architect', 'Cloud Data Engineering', 'Full Stack', 'TypeScript', 'Next.js 15', 'Python', 'GCP', 'ERP', 'Infraestructura'],
   },
   positioning: {
@@ -28,7 +28,7 @@ export const profileContent: ProfileContent = {
     contact: [
       { label: 'Email', href: 'mailto:lijhoan@gmail.com', external: false, status: 'canonical' },
       { label: 'LinkedIn', href: 'https://www.linkedin.com/in/lijhoanmc/', external: true, status: 'canonical' },
-      { label: 'GitHub', href: 'https://www.google.com/search?q=https://github.com/Lijhoan', external: true, status: 'pending-verification', note: 'Markdown source contains a search URL instead of a direct profile URL.' },
+      { label: 'GitHub', href: 'https://github.com/Lijhoan', external: true, status: 'canonical' },
       { label: 'WhatsApp', href: 'https://wa.me/51931347134', external: true, status: 'canonical' },
       { label: 'CV', href: '/cv.pdf', external: true, status: 'optional' },
     ],
@@ -63,13 +63,13 @@ export const profileContent: ProfileContent = {
   verification: [
     {
       field: 'GitHub URL',
-      detail: 'Markdown source includes a search URL instead of a direct GitHub profile URL.',
-      status: 'pending-verification',
+      detail: 'Direct profile URL configured as canonical contact link.',
+      status: 'canonical',
     },
     {
       field: 'CV PDF',
-      detail: 'The markdown source references a CV link path, but the file is not present in the current workspace.',
-      status: 'pending-verification',
+      detail: 'Public CV PDF exists in workspace as /public/cv.pdf and is linked from profile.',
+      status: 'canonical',
     },
   ],
 }

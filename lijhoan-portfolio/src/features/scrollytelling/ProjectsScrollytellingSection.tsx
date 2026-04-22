@@ -1,11 +1,14 @@
 'use client'
 
+import { useEffect } from 'react'
 import { Badge } from '@/components/ui/badge.jsx'
 import { Button } from '@/components/ui/button.jsx'
 import { CardDescription, CardTitle } from '@/components/ui/card.jsx'
 import ScrollyTellingContainer from '@/components/layout/ScrollyTellingContainer.tsx'
 import ScrollRuntimeHud from '@/features/motion/debug/ScrollRuntimeHud.tsx'
 import ProofChapterOverlay from '@/features/experience/ProofChapterOverlay.tsx'
+import FlagshipProofPanel from '@/features/proof/FlagshipProofPanel.tsx'
+import { trackTelemetryEvent } from '@/features/telemetry/telemetryClient.ts'
 import type { ProjectItem } from '@/content/profile/profile.types'
 import { Calendar, ExternalLink } from 'lucide-react'
 
@@ -29,45 +32,43 @@ const hasCredibleLink = (link?: string) => {
 export default function ProjectsScrollytellingSection({ projects }: ProjectsScrollytellingSectionProps) {
   const showRuntimeHud = import.meta.env.DEV && import.meta.env.VITE_SHOW_RUNTIME_HUD === 'true'
 
+  useEffect(() => {
+    trackTelemetryEvent('proof_interaction', {
+      action: 'proof-section-visible',
+      projectCount: projects.length,
+    })
+  }, [projects.length])
+
   return (
     <section className="chapter-section relative min-h-screen overflow-hidden px-4 py-8 sm:px-6 lg:px-10">
       <ScrollRuntimeHud enabled={showRuntimeHud} />
       <ProofChapterOverlay />
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="mb-8 max-w-3xl text-left sm:mb-10">
+        <div className="mb-6 max-w-2xl text-left sm:mb-8">
           <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/70">Proof chapter</p>
           <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
             Proyectos <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">con evidencia de impacto</span>
           </h2>
-          <p className="text-base text-gray-300 sm:text-lg">Una lectura curada: contexto editorial breve, recorrido horizontal y casos con decisiones, stack y resultado.</p>
+          <p className="text-base text-gray-300 sm:text-lg">Un recorrido curado: flagship primero, supporting cases después.</p>
         </div>
 
         <ScrollyTellingContainer className="bg-transparent" runtimeSceneId="projects-scrollytelling">
-          <article className="flex min-h-[84svh] w-[86vw] max-w-[980px] shrink-0 flex-col justify-between rounded-[1.6rem] border border-white/12 bg-slate-950/55 p-6 sm:p-8 lg:p-10 backdrop-blur-lg">
-            <div className="max-w-2xl space-y-4">
-              <Badge variant="secondary" className="w-fit bg-cyan-500/20 text-cyan-200">
-                Editorial intro
-              </Badge>
-              <h3 className="text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-4xl">
-                Casos seleccionados para demostrar criterio tecnico, ejecucion y confiabilidad operativa.
+          <article className="flex min-h-[74svh] w-[64vw] min-w-[22rem] max-w-[760px] shrink-0 flex-col justify-between rounded-[1.4rem] border border-white/12 bg-slate-950/58 p-5 sm:p-6 backdrop-blur-lg">
+            <div className="max-w-xl space-y-3">
+              <Badge variant="secondary" className="w-fit bg-cyan-500/18 text-cyan-200">Editorial context</Badge>
+              <h3 className="text-xl font-semibold leading-tight text-white sm:text-2xl lg:text-3xl">
+                Flagship primero. Soportes después.
               </h3>
               <p className="text-sm leading-relaxed text-gray-300 sm:text-base">
-                El recorrido horizontal muestra proyectos priorizados desde el contenido canonico, sin ruido de capas ni decoracion competidora.
+                Jerarquía explícita: una historia principal con evidencia y un set reducido de casos complementarios.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4 sm:max-w-lg sm:gap-5">
-              <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
-                <div className="text-2xl font-semibold text-cyan-300">{projects.length.toString().padStart(2, '0')}</div>
-                <div className="text-xs uppercase tracking-[0.18em] text-gray-300">Proyectos foco</div>
-              </div>
-              <div className="rounded-xl border border-white/10 bg-white/[0.04] p-4">
-                <div className="text-2xl font-semibold text-blue-300">Proof</div>
-                <div className="text-xs uppercase tracking-[0.18em] text-gray-300">Narrativa guiada</div>
-              </div>
-            </div>
+            <p className="text-xs uppercase tracking-[0.18em] text-gray-400">{projects.length.toString().padStart(2, '0')} supporting cases</p>
           </article>
+
+          <FlagshipProofPanel />
 
           {projects.map((project) => {
             const projectHasLink = hasCredibleLink(project.link)
@@ -75,7 +76,7 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
             return (
             <article
               key={project.id}
-              className="group flex min-h-[84svh] w-[86vw] max-w-[980px] shrink-0 flex-col overflow-hidden rounded-[1.6rem] border border-white/12 bg-slate-950/55 backdrop-blur-lg transition-all duration-300 hover:border-cyan-300/35"
+              className="group flex min-h-[78svh] w-[78vw] max-w-[920px] shrink-0 flex-col overflow-hidden rounded-[1.5rem] border border-white/12 bg-slate-950/58 backdrop-blur-lg transition-all duration-300 hover:border-cyan-300/35"
             >
               <div className="grid h-full grid-rows-[auto,1fr] lg:grid-cols-[1.2fr_0.8fr] lg:grid-rows-1">
                 <div className="relative min-h-[22rem] lg:min-h-full">
@@ -127,6 +128,12 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
                         return
                       }
 
+                      trackTelemetryEvent('proof_interaction', {
+                        action: 'project-link-open',
+                        projectId: project.id,
+                        projectTitle: project.title,
+                      })
+
                       window.open(project.link, '_blank', 'noopener,noreferrer')
                     }}
                     className={[
@@ -136,13 +143,13 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
                         : 'cursor-not-allowed border border-white/20 bg-white/10 text-gray-300 opacity-85',
                     ].join(' ')}
                   >
-                    {projectHasLink ? 'Ver Proyecto' : 'Case study bajo solicitud'}
+                    {projectHasLink ? 'Ver Proyecto' : 'Demo no publica'}
                     {projectHasLink && <ExternalLink size={16} className="ml-2" />}
                   </Button>
 
                   {!projectHasLink && (
                     <p className="text-xs uppercase tracking-[0.16em] text-gray-400">
-                      Credencial privada o enlace publico pendiente de publicacion.
+                      {project.note || 'Proyecto en entorno privado o bajo NDA. Evidencia disponible en entrevista tecnica.'}
                     </p>
                   )}
                 </div>

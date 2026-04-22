@@ -3,11 +3,15 @@
 import { Suspense, useMemo, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Sparkles } from '@react-three/drei'
+import { getChapterMoodToken } from '@/features/experience/chapterMoodTokens'
 import { useScrollRuntimeSelector } from '@/features/motion/runtime/scrollRuntime.ts'
 import type { SceneChapterConfig } from '@/features/experience/scene.types'
 
+export type WebGLPerformanceTier = 'high' | 'balanced' | 'constrained'
+
 export type MinimalWebGLLayerProps = {
   chapter: SceneChapterConfig
+  performanceTier?: WebGLPerformanceTier
 }
 
 type ChapterGraphicsPreset = {
@@ -22,6 +26,11 @@ type ChapterGraphicsPreset = {
   haloOpacity: number
 }
 
+type EffectiveGraphicsPreset = ChapterGraphicsPreset & {
+  renderSecondaryHalo: boolean
+  renderPointCloud: boolean
+}
+
 type AnimatedGroupRef = {
   rotation: { x: number; y: number; z: number }
   position: { x: number; y: number; z: number }
@@ -32,47 +41,59 @@ const graphicsByChapter: Record<SceneChapterConfig['id'], ChapterGraphicsPreset>
   identity: {
     color: '#7dd3fc',
     glowColor: '#38bdf8',
-    sparkles: 72,
-    sparkleScale: 8.5,
+    sparkles: 56,
+    sparkleScale: 7.8,
     sparkleSpeed: 0.12,
-    sparkleSize: 1.6,
-    sparkleOpacity: 0.18,
-    drift: 0.28,
-    haloOpacity: 0.07,
+    sparkleSize: 1.4,
+    sparkleOpacity: 0.15,
+    drift: 0.24,
+    haloOpacity: 0.06,
   },
   proof: {
     color: '#93c5fd',
     glowColor: '#60a5fa',
-    sparkles: 96,
-    sparkleScale: 9.2,
+    sparkles: 72,
+    sparkleScale: 8.2,
     sparkleSpeed: 0.22,
-    sparkleSize: 1.8,
-    sparkleOpacity: 0.24,
-    drift: 0.42,
-    haloOpacity: 0.1,
+    sparkleSize: 1.55,
+    sparkleOpacity: 0.2,
+    drift: 0.36,
+    haloOpacity: 0.08,
   },
   trust: {
     color: '#cbd5e1',
     glowColor: '#e2e8f0',
-    sparkles: 58,
-    sparkleScale: 7.8,
+    sparkles: 44,
+    sparkleScale: 7.1,
     sparkleSpeed: 0.08,
-    sparkleSize: 1.45,
-    sparkleOpacity: 0.14,
-    drift: 0.18,
-    haloOpacity: 0.05,
+    sparkleSize: 1.3,
+    sparkleOpacity: 0.11,
+    drift: 0.15,
+    haloOpacity: 0.045,
   },
   cta: {
     color: '#fdba74',
     glowColor: '#fb923c',
-    sparkles: 54,
-    sparkleScale: 7.2,
+    sparkles: 36,
+    sparkleScale: 6.6,
     sparkleSpeed: 0.06,
-    sparkleSize: 1.35,
-    sparkleOpacity: 0.12,
-    drift: 0.14,
-    haloOpacity: 0.045,
+    sparkleSize: 1.2,
+    sparkleOpacity: 0.1,
+    drift: 0.12,
+    haloOpacity: 0.04,
   },
+}
+
+const performanceTierMultiplier: Record<WebGLPerformanceTier, number> = {
+  high: 1,
+  balanced: 0.82,
+  constrained: 0.62,
+}
+
+const dprByTier: Record<WebGLPerformanceTier, number> = {
+  high: 1.15,
+  balanced: 1.05,
+  constrained: 1,
 }
 
 const createSeededRandom = (seedText: string) => {
@@ -90,7 +111,7 @@ const createSeededRandom = (seedText: string) => {
   }
 }
 
-function AmbientOrbit({ chapter, preset }: { chapter: SceneChapterConfig; preset: ChapterGraphicsPreset }) {
+function AmbientOrbit({ chapter, preset }: { chapter: SceneChapterConfig; preset: EffectiveGraphicsPreset }) {
   const groupRef = useRef<AnimatedGroupRef | null>(null)
   const runtime = useScrollRuntimeSelector((snapshot) => ({
     reducedMotion: snapshot.reducedMotion,
@@ -150,45 +171,67 @@ function AmbientOrbit({ chapter, preset }: { chapter: SceneChapterConfig; preset
         <icosahedronGeometry args={[1, 1]} />
         <meshBasicMaterial color={preset.glowColor} transparent opacity={runtime.reducedMotion ? preset.haloOpacity * 0.6 : preset.haloOpacity} blending={2} depthWrite={false} />
       </mesh>
-      <mesh position={[-4.2, -1.4, -2.8]} scale={[1.6, 1.6, 1.6]}>
-        <sphereGeometry args={[1, 16, 16]} />
-        <meshBasicMaterial color={preset.color} transparent opacity={runtime.reducedMotion ? preset.haloOpacity * 0.45 : preset.haloOpacity} blending={2} depthWrite={false} />
-      </mesh>
-      <points>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[points, 3]} />
-        </bufferGeometry>
-        <pointsMaterial
-          size={0.04}
-          color={preset.color}
-          transparent
-          opacity={runtime.reducedMotion ? 0.05 : 0.09}
-          depthWrite={false}
-          blending={2}
-          sizeAttenuation
-        />
-      </points>
+      {preset.renderSecondaryHalo && (
+        <mesh position={[-4.2, -1.4, -2.8]} scale={[1.6, 1.6, 1.6]}>
+          <sphereGeometry args={[1, 16, 16]} />
+          <meshBasicMaterial color={preset.color} transparent opacity={runtime.reducedMotion ? preset.haloOpacity * 0.45 : preset.haloOpacity} blending={2} depthWrite={false} />
+        </mesh>
+      )}
+      {preset.renderPointCloud && (
+        <points>
+          <bufferGeometry>
+            <bufferAttribute attach="attributes-position" args={[points, 3]} />
+          </bufferGeometry>
+          <pointsMaterial
+            size={0.04}
+            color={preset.color}
+            transparent
+            opacity={runtime.reducedMotion ? 0.05 : 0.09}
+            depthWrite={false}
+            blending={2}
+            sizeAttenuation
+          />
+        </points>
+      )}
     </group>
   )
 }
 
-export default function MinimalWebGLLayer({ chapter }: MinimalWebGLLayerProps) {
+export default function MinimalWebGLLayer({ chapter, performanceTier = 'balanced' }: MinimalWebGLLayerProps) {
   const preset = graphicsByChapter[chapter.id]
+  const tierMultiplier = performanceTierMultiplier[performanceTier]
+  const dprMax = dprByTier[performanceTier]
+  const effectivePreset = useMemo(() => {
+    const mood = getChapterMoodToken(chapter.id)
+
+    return {
+      ...preset,
+      sparkles: Math.max(20, Math.round(preset.sparkles * tierMultiplier * (0.9 + mood.motionIntensity.driftMultiplier * 0.08))),
+      sparkleScale: preset.sparkleScale * (0.94 + mood.calmExpressiveBalance * 0.04),
+      sparkleSpeed: preset.sparkleSpeed * (0.9 + tierMultiplier * 0.1),
+      sparkleSize: preset.sparkleSize * (0.96 + mood.atmosphere.intensityOpacity * 0.04),
+      sparkleOpacity: preset.sparkleOpacity * (0.88 + mood.atmosphere.intensityOpacity * 0.12),
+      drift: preset.drift * mood.motionIntensity.driftMultiplier * (0.92 + tierMultiplier * 0.08),
+      haloOpacity: preset.haloOpacity * (0.84 + mood.atmosphere.intensityOpacity * 0.16),
+      renderSecondaryHalo: performanceTier !== 'constrained',
+      renderPointCloud: performanceTier !== 'constrained',
+    }
+  }, [chapter.id, performanceTier, preset, tierMultiplier])
 
   return (
     <Canvas
       camera={{ position: [0, 0, 6.5], fov: 42 }}
-      dpr={[1, 1.35]}
-      gl={{ alpha: true, antialias: false, powerPreference: 'high-performance', depth: false, stencil: false }}
+      dpr={[1, dprMax]}
+      gl={{ alpha: true, antialias: false, powerPreference: performanceTier === 'constrained' ? 'low-power' : 'high-performance', depth: false, stencil: false, premultipliedAlpha: false }}
       frameloop="always"
-      style={{ pointerEvents: 'none', width: '100%', height: '100%' }}
+      style={{ pointerEvents: 'none', width: '100%', height: '100%', contain: 'layout paint' }}
       onCreated={({ gl }) => {
         gl.setClearColor(0x000000, 0)
         gl.domElement.style.display = 'block'
       }}
     >
       <Suspense fallback={null}>
-        <AmbientOrbit chapter={chapter} preset={preset} />
+        <AmbientOrbit chapter={chapter} preset={effectivePreset} />
       </Suspense>
     </Canvas>
   )

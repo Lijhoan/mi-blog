@@ -67,9 +67,9 @@ export const chapterMoodTokens: Record<SceneChapterId, ChapterMoodToken> = {
       blur: 'backdrop-blur-xl',
     },
     atmosphere: {
-      intensityOpacity: 0.78,
-      gridOpacity: 0.16,
-      frameLineOpacity: 0.2,
+      intensityOpacity: 0.54,
+      gridOpacity: 0.06,
+      frameLineOpacity: 0.08,
     },
     accentDensity: {
       meterOpacity: 'text-cyan-300/90',
@@ -85,10 +85,10 @@ export const chapterMoodTokens: Record<SceneChapterId, ChapterMoodToken> = {
       chipClass: 'text-gray-200 border-white/10 bg-black/30',
     },
     motionIntensity: {
-      driftMultiplier: 1,
-      pulseMultiplier: 1,
+      driftMultiplier: 0.74,
+      pulseMultiplier: 0.86,
     },
-    calmExpressiveBalance: 0.58,
+    calmExpressiveBalance: 0.44,
   },
   proof: {
     typographyEmphasis: {
@@ -111,9 +111,9 @@ export const chapterMoodTokens: Record<SceneChapterId, ChapterMoodToken> = {
       blur: 'backdrop-blur-2xl',
     },
     atmosphere: {
-      intensityOpacity: 0.9,
-      gridOpacity: 0.22,
-      frameLineOpacity: 0.28,
+      intensityOpacity: 0.64,
+      gridOpacity: 0.07,
+      frameLineOpacity: 0.1,
     },
     accentDensity: {
       meterOpacity: 'text-blue-200/95',
@@ -129,10 +129,10 @@ export const chapterMoodTokens: Record<SceneChapterId, ChapterMoodToken> = {
       chipClass: 'text-slate-100 border-slate-200/20 bg-slate-900/35',
     },
     motionIntensity: {
-      driftMultiplier: 1.18,
-      pulseMultiplier: 1.04,
+      driftMultiplier: 0.9,
+      pulseMultiplier: 0.94,
     },
-    calmExpressiveBalance: 0.76,
+    calmExpressiveBalance: 0.66,
   },
   trust: {
     typographyEmphasis: {
@@ -155,9 +155,9 @@ export const chapterMoodTokens: Record<SceneChapterId, ChapterMoodToken> = {
       blur: 'backdrop-blur-xl',
     },
     atmosphere: {
-      intensityOpacity: 0.6,
-      gridOpacity: 0.12,
-      frameLineOpacity: 0.15,
+      intensityOpacity: 0.38,
+      gridOpacity: 0.04,
+      frameLineOpacity: 0.06,
     },
     accentDensity: {
       meterOpacity: 'text-cyan-100/90',
@@ -173,10 +173,10 @@ export const chapterMoodTokens: Record<SceneChapterId, ChapterMoodToken> = {
       chipClass: 'text-gray-200 border-white/10 bg-slate-950/40',
     },
     motionIntensity: {
-      driftMultiplier: 0.72,
-      pulseMultiplier: 0.98,
+      driftMultiplier: 0.52,
+      pulseMultiplier: 0.78,
     },
-    calmExpressiveBalance: 0.34,
+    calmExpressiveBalance: 0.24,
   },
   cta: {
     typographyEmphasis: {
@@ -199,9 +199,9 @@ export const chapterMoodTokens: Record<SceneChapterId, ChapterMoodToken> = {
       blur: 'backdrop-blur-xl',
     },
     atmosphere: {
-      intensityOpacity: 0.62,
-      gridOpacity: 0.1,
-      frameLineOpacity: 0.14,
+      intensityOpacity: 0.32,
+      gridOpacity: 0.03,
+      frameLineOpacity: 0.04,
     },
     accentDensity: {
       meterOpacity: 'text-amber-100/90',
@@ -217,10 +217,10 @@ export const chapterMoodTokens: Record<SceneChapterId, ChapterMoodToken> = {
       chipClass: 'text-amber-50 border-amber-100/20 bg-slate-900/40',
     },
     motionIntensity: {
-      driftMultiplier: 0.7,
-      pulseMultiplier: 0.96,
+      driftMultiplier: 0.46,
+      pulseMultiplier: 0.72,
     },
-    calmExpressiveBalance: 0.3,
+    calmExpressiveBalance: 0.18,
   },
 }
 

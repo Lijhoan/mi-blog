@@ -21,14 +21,14 @@ export default function NavigationShell({ items, activeSectionId, onChangeSectio
       <aside className="pointer-events-none fixed left-0 top-0 z-50 hidden h-screen w-[86px] md:flex md:items-center md:justify-center lg:w-[104px]">
         <nav
           aria-label="Primary chapter navigation"
-          className="pointer-events-auto relative flex h-[74vh] w-[68px] flex-col items-center rounded-[2rem] border border-white/10 bg-slate-950/45 px-2 py-5 backdrop-blur-2xl lg:w-[78px]"
+          className="pointer-events-auto relative flex h-[70vh] w-[58px] flex-col items-center rounded-[1.7rem] border border-white/7 bg-slate-950/22 px-2 py-4 backdrop-blur-xl lg:w-[66px]"
         >
-          <div className="mb-5 text-[10px] uppercase tracking-[0.28em] text-cyan-200/70">Nav</div>
+          <div className="mb-4 h-1.5 w-1.5 rounded-full bg-cyan-200/60" />
 
           <div className="relative flex-1">
-            <div className="absolute left-1/2 top-2 h-[calc(100%-16px)] w-px -translate-x-1/2 bg-white/15" />
+            <div className="absolute left-1/2 top-2 h-[calc(100%-16px)] w-px -translate-x-1/2 bg-white/10" />
             <div
-              className="absolute left-1/2 top-2 w-px -translate-x-1/2 bg-gradient-to-b from-cyan-300 to-blue-400 transition-[height] duration-500 motion-reduce:transition-none"
+              className="absolute left-1/2 top-2 w-px -translate-x-1/2 bg-gradient-to-b from-cyan-300/80 to-blue-400/80 transition-[height] duration-500 motion-reduce:transition-none"
               style={{ height: `calc((100% - 16px) * ${progress / 100})` }}
             />
 
@@ -45,18 +45,18 @@ export default function NavigationShell({ items, activeSectionId, onChangeSectio
                       aria-current={isActive ? 'page' : undefined}
                       aria-label={`${item.label} - ${chapterKindCopy[item.kind]}`}
                       className={[
-                        'group relative flex h-8 w-8 items-center justify-center rounded-full border transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 motion-reduce:transition-none',
+                        'group relative flex h-7 w-7 items-center justify-center rounded-full border transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 motion-reduce:transition-none',
                         isActive
-                          ? 'border-cyan-300/70 bg-cyan-400/22 shadow-lg shadow-cyan-500/25'
+                          ? 'border-cyan-300/52 bg-cyan-400/16 shadow-lg shadow-cyan-500/10'
                           : isCompleted
-                            ? 'border-cyan-300/35 bg-cyan-500/15 hover:border-cyan-200/50'
-                            : 'border-white/20 bg-slate-900/80 hover:border-white/40',
+                            ? 'border-cyan-300/22 bg-cyan-500/8 hover:border-cyan-200/30'
+                            : 'border-white/12 bg-slate-900/45 hover:border-white/24',
                       ].join(' ')}
                     >
                       <span
                         className={[
                           'h-2 w-2 rounded-full transition-colors duration-300 motion-reduce:transition-none',
-                          isActive ? 'bg-cyan-200' : isCompleted ? 'bg-cyan-300/80' : 'bg-gray-300/70',
+                          isActive ? 'bg-cyan-200' : isCompleted ? 'bg-cyan-300/70' : 'bg-gray-300/60',
                         ].join(' ')}
                       />
 
@@ -64,8 +64,8 @@ export default function NavigationShell({ items, activeSectionId, onChangeSectio
                         className={[
                           'pointer-events-none absolute left-[42px] top-1/2 hidden -translate-y-1/2 whitespace-nowrap rounded-full border px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] backdrop-blur-md lg:block',
                           isActive
-                            ? 'border-cyan-200/30 bg-slate-900/90 text-cyan-100 opacity-100'
-                            : 'border-white/10 bg-slate-900/80 text-gray-300 opacity-0 transition-opacity duration-300 group-hover:opacity-100 motion-reduce:transition-none',
+                            ? 'border-cyan-200/25 bg-slate-900/85 text-cyan-100 opacity-100'
+                            : 'border-white/8 bg-slate-900/75 text-gray-300 opacity-0 transition-opacity duration-300 group-hover:opacity-100 motion-reduce:transition-none',
                         ].join(' ')}
                       >
                         {item.label}
@@ -77,16 +77,15 @@ export default function NavigationShell({ items, activeSectionId, onChangeSectio
             </ol>
           </div>
 
-          <div className="mt-5 w-full space-y-2 border-t border-white/10 pt-3 text-center">
-            <p className="text-[10px] uppercase tracking-[0.24em] text-gray-300">{Math.round(progress)}%</p>
-            <p className="text-[10px] uppercase tracking-[0.18em] text-cyan-200/80">{activeItem.kind === 'immersive' ? 'Immersive' : 'Reading'}</p>
+          <div className="mt-4 w-full border-t border-white/7 pt-3 text-center">
+            <p className="text-[10px] uppercase tracking-[0.2em] text-gray-300/82">{Math.round(progress)}%</p>
           </div>
         </nav>
       </aside>
 
       <nav
         aria-label="Mobile chapter navigation"
-        className="fixed inset-x-3 bottom-3 z-50 rounded-2xl border border-white/10 bg-slate-950/70 p-2.5 backdrop-blur-2xl md:hidden"
+        className="fixed inset-x-3 bottom-3 z-50 rounded-2xl border border-white/8 bg-slate-950/62 p-2 backdrop-blur-2xl md:hidden"
       >
         <div className="flex gap-1.5 overflow-x-auto pb-1">
           {items.map((item) => {
@@ -101,8 +100,8 @@ export default function NavigationShell({ items, activeSectionId, onChangeSectio
                 className={[
                   'shrink-0 rounded-full border px-3 py-2 text-[11px] uppercase tracking-[0.16em] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 motion-reduce:transition-none',
                   isActive
-                    ? 'border-cyan-300/45 bg-cyan-500/20 text-cyan-100'
-                    : 'border-white/15 bg-white/5 text-gray-300',
+                    ? 'border-cyan-300/38 bg-cyan-500/16 text-cyan-100'
+                    : 'border-white/12 bg-white/4 text-gray-300',
                 ].join(' ')}
               >
                 {item.shortLabel ?? item.label}

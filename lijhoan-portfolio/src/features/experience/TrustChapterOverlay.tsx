@@ -14,21 +14,31 @@ export default function TrustChapterOverlay() {
   const chapter = sceneRegistry.find((item) => item.id === 'trust') ?? sceneRegistry[2]
 
   const trustPoints = useMemo(() => [
-    `${experienceTimeline.length} career stops`,
-    `${certificationGroups.length} certification tracks`,
-    experienceTimeline[0]?.company ?? 'Enterprise delivery',
+    {
+      label: 'Career continuity',
+      value: `${experienceTimeline.length} career stops`,
+    },
+    {
+      label: 'Credential density',
+      value: `${certificationGroups.length} certification tracks`,
+    },
+    {
+      label: 'Current enterprise anchor',
+      value: experienceTimeline[0]?.company ?? 'Enterprise delivery',
+    },
   ], [])
 
   return (
     <ChapterOverlay chapter={chapter}>
       <div className="absolute left-4 bottom-5 sm:left-8 sm:bottom-8 grid gap-3 sm:grid-cols-3 max-w-4xl">
         {trustPoints.map((point) => (
-          <div key={point} className={[
-            'rounded-2xl px-4 py-3 text-sm backdrop-blur-xl transition-colors duration-300',
+          <article key={point.label} className={[
+            'rounded-2xl px-4 py-3 backdrop-blur-xl transition-colors duration-300',
             chapterPanelClassesById[chapter.id],
           ].join(' ')}>
-            {point}
-          </div>
+            <p className="text-[10px] uppercase tracking-[0.18em] text-cyan-100/72">{point.label}</p>
+            <p className="mt-1 text-sm text-gray-100">{point.value}</p>
+          </article>
         ))}
       </div>
     </ChapterOverlay>
