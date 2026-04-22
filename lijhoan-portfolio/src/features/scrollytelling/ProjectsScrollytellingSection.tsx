@@ -45,29 +45,15 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
       <ProofChapterOverlay />
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="mb-6 max-w-2xl text-left sm:mb-8">
-          <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/70">Proof chapter</p>
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
+        <div className="mb-5 max-w-xl text-left sm:mb-6">
+          <p className="text-xs uppercase tracking-[0.22em] text-cyan-200/66">Capítulo de proyectos</p>
+          <h2 className="mb-3 text-3xl font-semibold tracking-tight sm:text-4xl">
             Proyectos <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">con evidencia de impacto</span>
           </h2>
-          <p className="text-base text-gray-300 sm:text-lg">Un recorrido curado: flagship primero, supporting cases después.</p>
+          <p className="text-sm text-gray-300 sm:text-base">Entrada directa: caso principal primero y casos de soporte después.</p>
         </div>
 
         <ScrollyTellingContainer className="bg-transparent" runtimeSceneId="projects-scrollytelling">
-          <article className="flex min-h-[74svh] w-[64vw] min-w-[22rem] max-w-[760px] shrink-0 flex-col justify-between rounded-[1.4rem] border border-white/12 bg-slate-950/58 p-5 sm:p-6 backdrop-blur-lg">
-            <div className="max-w-xl space-y-3">
-              <Badge variant="secondary" className="w-fit bg-cyan-500/18 text-cyan-200">Editorial context</Badge>
-              <h3 className="text-xl font-semibold leading-tight text-white sm:text-2xl lg:text-3xl">
-                Flagship primero. Soportes después.
-              </h3>
-              <p className="text-sm leading-relaxed text-gray-300 sm:text-base">
-                Jerarquía explícita: una historia principal con evidencia y un set reducido de casos complementarios.
-              </p>
-            </div>
-
-            <p className="text-xs uppercase tracking-[0.18em] text-gray-400">{projects.length.toString().padStart(2, '0')} supporting cases</p>
-          </article>
-
           <FlagshipProofPanel />
 
           {projects.map((project) => {
@@ -76,7 +62,7 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
             return (
             <article
               key={project.id}
-              className="group flex min-h-[78svh] w-[78vw] max-w-[920px] shrink-0 flex-col overflow-hidden rounded-[1.5rem] border border-white/12 bg-slate-950/58 backdrop-blur-lg transition-all duration-300 hover:border-cyan-300/35"
+                className="group flex min-h-[78svh] w-[76vw] max-w-[900px] shrink-0 flex-col overflow-hidden rounded-[1.4rem] border border-white/10 bg-slate-950/48 backdrop-blur-lg transition-all duration-300 hover:border-cyan-300/28"
             >
               <div className="grid h-full grid-rows-[auto,1fr] lg:grid-cols-[1.2fr_0.8fr] lg:grid-rows-1">
                 <div className="relative min-h-[22rem] lg:min-h-full">
@@ -86,7 +72,7 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:group-hover:scale-100"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/35 to-transparent" />
-                  <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full border border-white/15 bg-black/45 px-3 py-2 text-xs text-white backdrop-blur-md">
+                  <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full border border-white/12 bg-black/35 px-3 py-2 text-xs text-white backdrop-blur-sm">
                     <Calendar size={12} />
                     {project.year}
                   </div>
@@ -95,7 +81,7 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
                 <div className="flex flex-col justify-between gap-6 p-6 sm:p-7 lg:p-8">
                   <div className="space-y-4">
                     <div className="flex flex-wrap items-center justify-between gap-3">
-                      <Badge variant="secondary" className="bg-cyan-500/20 text-cyan-200">
+                      <Badge variant="secondary" className="bg-cyan-500/14 text-cyan-100">
                         {project.category}
                       </Badge>
                       <div className="text-xs uppercase tracking-[0.18em] text-gray-400">{project.client}</div>
@@ -110,9 +96,9 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
                       </CardDescription>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-1.5">
                       {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="outline" className="border-white/20 bg-white/[0.03] text-gray-200">
+                        <Badge key={tech} variant="outline" className="border-white/14 bg-white/[0.02] text-gray-200">
                           {tech}
                         </Badge>
                       ))}
@@ -139,11 +125,11 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
                     className={[
                       'w-full transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 sm:w-fit',
                       projectHasLink
-                        ? 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 hover:shadow-lg hover:shadow-cyan-500/20'
+                        ? 'border border-cyan-300/24 bg-cyan-500/14 hover:bg-cyan-500/20'
                         : 'cursor-not-allowed border border-white/20 bg-white/10 text-gray-300 opacity-85',
                     ].join(' ')}
                   >
-                    {projectHasLink ? 'Ver Proyecto' : 'Demo no publica'}
+                    {projectHasLink ? 'Ver proyecto' : 'Demo no pública'}
                     {projectHasLink && <ExternalLink size={16} className="ml-2" />}
                   </Button>
 

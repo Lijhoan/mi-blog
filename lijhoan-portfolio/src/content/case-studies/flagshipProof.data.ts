@@ -49,7 +49,7 @@ export type FlagshipProofCaseStudy = {
 export const flagshipProofCaseStudy: FlagshipProofCaseStudy = {
   id: 'tale-insight-analytics-flagship',
   projectTitle: 'Tale Insight Analytics',
-  projectCategory: 'Business Intelligence Platform',
+  projectCategory: 'Plataforma de inteligencia de negocio',
   whyThisCase:
     'Combina diferenciacion tecnica, alcance empresarial real y claridad narrativa: arquitectura moderna (Next.js 15 + React 19), control de acceso por areas y una capa BI preparada para evolucionar sin romper el sistema.',
   problemFraming: [
@@ -156,21 +156,21 @@ export const flagshipProofCaseStudy: FlagshipProofCaseStudy = {
   },
   storyPanels: [
     {
-      title: 'Problem Framing',
+      title: 'Marco del problema',
       points: [
         'Fragmentacion de lectura operativa entre areas.',
         'Necesidad de unificar acceso, contexto y decision.',
       ],
     },
     {
-      title: 'Architecture Snapshot',
+      title: 'Snapshot de arquitectura',
       points: [
         'Shell web moderno + control de acceso + infraestructura portable.',
         'Integracion BI dentro de una experiencia de producto corporativa.',
       ],
     },
     {
-      title: 'Impact and Credibility',
+      title: 'Impacto y credibilidad',
       points: [
         'Cobertura en 8 areas y 28 sub-areas.',
         'Base lista para instrumentar impacto cuantitativo de ROI.',

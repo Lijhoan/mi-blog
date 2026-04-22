@@ -76,7 +76,7 @@ export const chapterMoodTokens: Record<SceneChapterId, ChapterMoodToken> = {
       accentGlow: 'shadow-cyan-500/20',
     },
     frameVisibility: {
-      desktop: true,
+      desktop: false,
       mobile: false,
     },
     contrastBehavior: {
@@ -120,7 +120,7 @@ export const chapterMoodTokens: Record<SceneChapterId, ChapterMoodToken> = {
       accentGlow: 'shadow-blue-500/25',
     },
     frameVisibility: {
-      desktop: true,
+      desktop: false,
       mobile: false,
     },
     contrastBehavior: {
@@ -164,7 +164,7 @@ export const chapterMoodTokens: Record<SceneChapterId, ChapterMoodToken> = {
       accentGlow: 'shadow-slate-500/15',
     },
     frameVisibility: {
-      desktop: true,
+      desktop: false,
       mobile: false,
     },
     contrastBehavior: {
@@ -208,7 +208,7 @@ export const chapterMoodTokens: Record<SceneChapterId, ChapterMoodToken> = {
       accentGlow: 'shadow-amber-500/20',
     },
     frameVisibility: {
-      desktop: true,
+      desktop: false,
       mobile: false,
     },
     contrastBehavior: {

@@ -20,7 +20,7 @@ export type SceneShellProps = {
  * Reusable scene shell for premium section-level composition.
  * It turns runtime signals into subtle atmospheric motion without owning content or scroll logic.
  */
-export default function SceneShell({ chapterId, title, eyebrow, summary, accentLabel = 'Immersive profile', children, className }: SceneShellProps) {
+export default function SceneShell({ chapterId, title, eyebrow, summary, accentLabel = 'Perfil inmersivo', children, className }: SceneShellProps) {
   const scene = useScrollRuntimeSelector((runtime) => ({
     reducedMotion: runtime.reducedMotion,
     globalProgress: runtime.globalProgress,
@@ -101,7 +101,7 @@ export default function SceneShell({ chapterId, title, eyebrow, summary, accentL
         'absolute bottom-4 right-4 lg:bottom-8 lg:right-8 rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.2em] backdrop-blur-md',
         mood.contrastBehavior.chipClass,
       ].join(' ')}>
-        {scene.reducedMotion ? 'Reduced motion' : `Scroll ${Math.round(scene.globalProgress * 100)}%`}
+        {scene.reducedMotion ? 'Movimiento reducido' : `Recorrido ${Math.round(scene.globalProgress * 100)}%`}
       </div>
 
       <div className="pointer-events-auto relative z-10 h-full w-full">

@@ -47,25 +47,25 @@ function App() {
   const skillGroups = [
     {
       id: 'data-intelligence',
-      title: 'Data Intelligence',
-      summary: 'Modelado de indicadores, visual analytics y decisiones operativas con trazabilidad.',
+      title: 'Inteligencia de datos',
+      summary: 'Modelado de indicadores, analítica visual y decisiones operativas con trazabilidad.',
       items: skills.dataBi,
     },
     {
       id: 'machine-learning',
-      title: 'Machine Learning',
+      title: 'Aprendizaje automático',
       summary: 'Prediccion, segmentacion y despliegue de modelos orientados a impacto real.',
       items: skills.ml,
     },
     {
       id: 'engineering-delivery',
-      title: 'Engineering Delivery',
+      title: 'Entrega de ingeniería',
       summary: 'Automatizacion, desarrollo y ejecucion de flujos completos de producto y datos.',
       items: [...skills.dev, ...skills.ai],
     },
     {
       id: 'platform-governance',
-      title: 'Platform and Governance',
+      title: 'Plataforma y gobernanza',
       summary: 'Infraestructura cloud, seguridad operativa y escalabilidad para entornos corporativos.',
       items: skills.infra,
     },
@@ -97,11 +97,11 @@ function App() {
   const navigation = [
     { id: 'home', label: 'Inicio', shortLabel: 'Inicio', kind: 'immersive' },
     { id: 'about', label: 'Perfil', shortLabel: 'Perfil', kind: 'reading' },
-    { id: 'projects', label: 'Proyectos', shortLabel: 'Proof', kind: 'immersive' },
-    { id: 'skills', label: 'Habilidades', shortLabel: 'Skills', kind: 'reading' },
-    { id: 'experience', label: 'Experiencia', shortLabel: 'Trust', kind: 'immersive' },
-    { id: 'certifications', label: 'Credenciales', shortLabel: 'Creds', kind: 'reading' },
-    { id: 'contact', label: 'Contacto', shortLabel: 'CTA', kind: 'immersive' },
+    { id: 'projects', label: 'Proyectos', shortLabel: 'Prueba', kind: 'immersive' },
+    { id: 'skills', label: 'Habilidades', shortLabel: 'Habilidades', kind: 'reading' },
+    { id: 'experience', label: 'Experiencia', shortLabel: 'Confianza', kind: 'immersive' },
+    { id: 'certifications', label: 'Credenciales', shortLabel: 'Credenciales', kind: 'reading' },
+    { id: 'contact', label: 'Contacto', shortLabel: 'Contacto', kind: 'immersive' },
   ]
 
   return (
@@ -113,39 +113,39 @@ function App() {
       />
 
       {/* Main Content */}
-      <main className="relative z-10 min-h-screen pb-24 md:ml-[86px] md:pb-0 lg:ml-[104px]">
+      <main className="relative z-10 min-h-screen pb-24 md:ml-[74px] md:pb-0 lg:ml-[84px]">
         <SceneContinuityLayer chapter={currentChapter} />
         {/* Home Section */}
         {activeSection === 'home' && (
           <section className={`chapter-section relative min-h-screen flex items-center justify-center px-4 py-8 sm:px-6 lg:px-10 transition-all duration-1000 motion-reduce:transition-none ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <IdentityChapterOverlay />
-            <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1.12fr_0.88fr] gap-8 lg:gap-12 items-start">
-              <div className="space-y-8">
-                <div className="space-y-5 max-w-3xl">
-                  <p className="text-[11px] uppercase tracking-[0.32em] text-cyan-100/70">Identity chapter</p>
-                  <h2 className="text-3xl sm:text-4xl lg:text-6xl font-semibold tracking-tight leading-[1.04] text-balance">
+            <div className="relative z-10 mx-auto grid max-w-6xl grid-cols-1 items-start gap-8 lg:grid-cols-[1.18fr_0.82fr] lg:gap-10">
+              <div className="space-y-7">
+                <div className="max-w-3xl space-y-5">
+                  <p className="text-[11px] uppercase tracking-[0.28em] text-cyan-100/66">Inicio</p>
+                  <h1 className="text-3xl font-semibold leading-[1.04] tracking-tight text-balance sm:text-4xl lg:text-6xl">
                     {hero.headline}
-                  </h2>
+                  </h1>
                   <p className="text-base sm:text-lg lg:text-xl text-gray-200/95 leading-relaxed max-w-[56ch]">
                     {hero.summary}
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 sm:gap-4 max-w-xl">
+                <div className="grid max-w-xl grid-cols-2 gap-3 sm:gap-4">
                   {hero.metrics.map((metric) => (
-                    <article key={metric.label} className="rounded-xl border border-white/12 bg-white/[0.035] px-4 py-4 backdrop-blur-md">
-                      <p className="text-2xl sm:text-3xl font-semibold text-cyan-200">{metric.value}</p>
-                      <p className="mt-1 text-xs uppercase tracking-[0.18em] text-gray-300">{metric.label}</p>
+                    <article key={metric.label} className="border-l border-cyan-300/24 pl-3">
+                      <p className="text-2xl font-semibold text-cyan-200 sm:text-3xl">{metric.value}</p>
+                      <p className="mt-1 text-[11px] uppercase tracking-[0.16em] text-gray-300">{metric.label}</p>
                     </article>
                   ))}
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 max-w-xl">
+                <div className="flex max-w-xl flex-col gap-3 sm:flex-row">
                   <Button
                     onClick={() => setActiveSection('projects')}
-                    className="bg-white/10 hover:bg-white/18 text-white border border-white/18 px-6 sm:px-8 py-3 rounded-xl flex-1 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
+                    className="flex-1 rounded-xl border border-cyan-300/26 bg-cyan-500/14 px-6 py-3 text-white transition-all duration-300 hover:bg-cyan-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 sm:px-8"
                   >
-                    Ver Proof
+                    Ver proyectos
                     <ChevronRight size={20} className="ml-2" />
                   </Button>
 
@@ -154,7 +154,7 @@ function App() {
                       trackCtaInteraction('download-cv', '/cv.pdf')
                       window.open('/cv.pdf', '_blank')
                     }}
-                    className="bg-gradient-to-r from-cyan-500/95 to-blue-600/95 hover:from-cyan-600 hover:to-blue-700 text-white px-6 sm:px-8 py-3 rounded-xl flex-1 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
+                    className="flex-1 rounded-xl border border-white/18 bg-white/8 px-6 py-3 text-white transition-all duration-300 hover:bg-white/14 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 sm:px-8"
                   >
                     <Download size={20} className="mr-2" />
                     Descargar CV
@@ -162,15 +162,14 @@ function App() {
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-white/12 bg-slate-950/58 p-5 sm:p-6 backdrop-blur-xl">
-                <div className="aspect-[4/5] overflow-hidden rounded-xl border border-white/10 bg-slate-900/65">
-                  <img src={fotoPerfil} alt={`${profile.name} portrait`} className="h-full w-full object-cover object-top" />
+              <div className="mx-auto w-full max-w-[20rem] rounded-[1.3rem] border border-white/10 bg-slate-950/38 p-4 backdrop-blur-lg lg:ml-auto lg:max-w-[22rem]">
+                <div className="aspect-[4/5] overflow-hidden rounded-lg bg-slate-900/65">
+                  <img src={fotoPerfil} alt={`Retrato de ${profile.name}`} className="h-full w-full object-cover object-top" />
                 </div>
-                <div className="mt-4 space-y-2">
-                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/70">Author signal</p>
-                  <h3 className="text-xl font-semibold text-white">{profile.name}</h3>
-                  <p className="text-sm text-gray-300">{profile.role}</p>
-                  <p className="text-xs uppercase tracking-[0.16em] text-gray-400">{profile.location}</p>
+                <div className="mt-3 space-y-1.5">
+                  <p className="text-[11px] uppercase tracking-[0.17em] text-cyan-100/70">Perfil</p>
+                  <h3 className="text-lg font-semibold text-white">{profile.name}</h3>
+                  <p className="text-xs uppercase tracking-[0.14em] text-gray-400">{profile.location}</p>
                 </div>
               </div>
             </div>
@@ -184,7 +183,7 @@ function App() {
                 <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-4 max-w-2xl">
                   Sobre <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Mí</span>
                 </h2>
-                <p className="text-sm uppercase tracking-[0.26em] text-cyan-200/70">Positioning and operating model</p>
+                <p className="text-sm uppercase tracking-[0.26em] text-cyan-200/70">Posicionamiento y modelo operativo</p>
               </div>
 
               <div className="grid grid-cols-1 lg:grid-cols-[1.12fr_0.88fr] gap-6 lg:gap-8 items-start">
@@ -208,13 +207,13 @@ function App() {
                 </article>
 
                 <aside className="rounded-2xl border border-white/12 bg-slate-950/58 p-5 sm:p-6 backdrop-blur-xl">
-                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/72">Operating pillars</p>
+                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/72">Pilares operativos</p>
                   <ul className="mt-4 space-y-3 text-sm text-gray-200">
                     <li className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-3">Arquitectura de datos orientada a decisiones de negocio.</li>
                     <li className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-3">Implementacion full-stack con foco en adopcion operativa.</li>
                     <li className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-3">Gobernanza y escalabilidad para contextos corporativos.</li>
                   </ul>
-                  <p className="mt-4 text-xs uppercase tracking-[0.16em] text-gray-400">No gimmicks. Solo claridad, sistemas y evidencia.</p>
+                  <p className="mt-4 text-xs uppercase tracking-[0.16em] text-gray-400">Sin artificios. Solo claridad, sistemas y evidencia.</p>
                 </aside>
               </div>
             </div>
@@ -230,7 +229,7 @@ function App() {
         <section className="chapter-section min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center">
           <div className="max-w-6xl mx-auto w-full space-y-7">
             <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/72">Capability chapter</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/72">Capítulo de capacidades</p>
               <h2 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight text-white">
                 Capacidades <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">curadas por impacto</span>
               </h2>
@@ -261,7 +260,7 @@ function App() {
           <TrustChapterOverlay />
           <div className="relative z-10 max-w-6xl mx-auto w-full space-y-6">
             <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/72">Trust chapter</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/72">Capítulo de confianza</p>
               <h2 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight text-white">
                 Trayectoria <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">con evidencia operativa</span>
               </h2>
@@ -272,8 +271,8 @@ function App() {
 
             <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
               <article className="rounded-2xl border border-white/12 bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl">
-                <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/70">Trust thesis</p>
-                <h3 className="mt-3 text-xl font-semibold text-white">Execution before rhetoric</h3>
+                <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/70">Tesis de confianza</p>
+                <h3 className="mt-3 text-xl font-semibold text-white">Ejecución antes que retórica</h3>
                 <p className="mt-3 text-sm text-gray-300 leading-relaxed">
                   La credibilidad se construye con continuidad entre arquitectura, entrega y adopcion operativa. Este bloque resume esa linea de consistencia.
                 </p>
@@ -285,11 +284,11 @@ function App() {
                 <div className="mt-4 grid grid-cols-2 gap-3">
                   <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-3">
                     <p className="text-2xl font-semibold text-cyan-200">{experience.length}</p>
-                    <p className="text-xs uppercase tracking-[0.16em] text-gray-300">career stops</p>
+                    <p className="text-xs uppercase tracking-[0.16em] text-gray-300">hitos de carrera</p>
                   </div>
                   <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-3">
                     <p className="text-2xl font-semibold text-cyan-200">Enterprise</p>
-                    <p className="text-xs uppercase tracking-[0.16em] text-gray-300">delivery focus</p>
+                    <p className="text-xs uppercase tracking-[0.16em] text-gray-300">foco de entrega</p>
                   </div>
                 </div>
               </article>
@@ -321,7 +320,7 @@ function App() {
         <section className="chapter-section min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center">
           <div className="max-w-6xl mx-auto w-full space-y-6">
             <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/72">Credential chapter</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/72">Capítulo de credenciales</p>
               <h2 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
                 Certificaciones <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">& Formación</span>
               </h2>
@@ -388,15 +387,15 @@ function App() {
         </article>
 
         <aside className="rounded-2xl border border-white/12 bg-slate-950/58 p-5 sm:p-6 backdrop-blur-xl">
-          <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/70">Focus</p>
-          <h4 className="mt-3 text-lg sm:text-xl font-semibold text-white">Roadmap de colaboración</h4>
+          <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/70">Foco</p>
+          <h4 className="mt-3 text-lg sm:text-xl font-semibold text-white">Ruta de colaboración</h4>
           <p className="mt-3 text-sm text-gray-300 leading-relaxed">
             Diseño y ejecución de plataformas BI, data pipelines y arquitectura cloud para equipos que necesitan velocidad con gobernanza.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
-            <span className="rounded-full border border-cyan-200/25 bg-cyan-500/10 px-3 py-1 text-xs uppercase tracking-[0.14em] text-cyan-100">Business Intelligence</span>
-            <span className="rounded-full border border-blue-200/25 bg-blue-500/10 px-3 py-1 text-xs uppercase tracking-[0.14em] text-blue-100">Data Engineering</span>
-            <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.14em] text-slate-100">Cloud Architecture</span>
+            <span className="rounded-full border border-cyan-200/25 bg-cyan-500/10 px-3 py-1 text-xs uppercase tracking-[0.14em] text-cyan-100">Inteligencia de negocio</span>
+            <span className="rounded-full border border-blue-200/25 bg-blue-500/10 px-3 py-1 text-xs uppercase tracking-[0.14em] text-blue-100">Ingeniería de datos</span>
+            <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.14em] text-slate-100">Arquitectura cloud</span>
           </div>
         </aside>
       </div>
@@ -415,10 +414,10 @@ const resolveSkillBand = (level) => {
   }
 
   if (level >= 80) {
-    return { label: 'Advanced', className: 'text-blue-100 border-blue-200/25 bg-blue-500/12' }
+    return { label: 'Avanzado', className: 'text-blue-100 border-blue-200/25 bg-blue-500/12' }
   }
 
-  return { label: 'Operational', className: 'text-slate-100 border-white/20 bg-white/[0.06]' }
+  return { label: 'Operativo', className: 'text-slate-100 border-white/20 bg-white/[0.06]' }
 }
 
 function SkillCard({ skill }) {

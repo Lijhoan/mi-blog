@@ -11,10 +11,10 @@ export default function IdentityChapterOverlay() {
   return (
     <SceneShell
       chapterId="identity"
-      eyebrow="Identity chapter"
+      eyebrow="Capítulo de identidad"
       title={profileContent.positioning.headline}
       summary={profileContent.positioning.summary}
-      accentLabel="Profile signal"
+      accentLabel="Señal de perfil"
     />
   )
 }
