@@ -97,11 +97,11 @@ function App() {
   const navigation = [
     { id: 'home', label: 'Inicio', shortLabel: 'Inicio', kind: 'immersive' },
     { id: 'about', label: 'Perfil', shortLabel: 'Perfil', kind: 'reading' },
-    { id: 'projects', label: 'Proyectos', shortLabel: 'Proof', kind: 'immersive' },
-    { id: 'skills', label: 'Habilidades', shortLabel: 'Skills', kind: 'reading' },
-    { id: 'experience', label: 'Experiencia', shortLabel: 'Trust', kind: 'immersive' },
-    { id: 'certifications', label: 'Credenciales', shortLabel: 'Creds', kind: 'reading' },
-    { id: 'contact', label: 'Contacto', shortLabel: 'CTA', kind: 'immersive' },
+    { id: 'projects', label: 'Proyectos', shortLabel: 'Proyectos', kind: 'immersive' },
+    { id: 'skills', label: 'Habilidades', shortLabel: 'Habilidades', kind: 'reading' },
+    { id: 'experience', label: 'Trayectoria', shortLabel: 'Trayectoria', kind: 'immersive' },
+    { id: 'certifications', label: 'Credenciales', shortLabel: 'Credenciales', kind: 'reading' },
+    { id: 'contact', label: 'Contacto', shortLabel: 'Contacto', kind: 'immersive' },
   ]
 
   return (
@@ -117,36 +117,37 @@ function App() {
         <SceneContinuityLayer chapter={currentChapter} />
         {/* Home Section */}
         {activeSection === 'home' && (
-          <section className={`chapter-section relative min-h-screen flex items-center justify-center px-4 py-8 sm:px-6 lg:px-10 transition-all duration-1000 motion-reduce:transition-none ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <section className={`chapter-section relative min-h-screen flex items-center px-4 py-8 sm:px-6 lg:px-10 transition-all duration-1000 motion-reduce:transition-none ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <IdentityChapterOverlay />
-            <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[1.12fr_0.88fr] gap-8 lg:gap-12 items-start">
-              <div className="space-y-8">
-                <div className="space-y-5 max-w-3xl">
-                  <p className="text-[11px] uppercase tracking-[0.32em] text-cyan-100/70">Identity chapter</p>
-                  <h2 className="text-3xl sm:text-4xl lg:text-6xl font-semibold tracking-tight leading-[1.04] text-balance">
+            <div className="relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-12 lg:gap-16 items-center">
+              {/* Left: Dominant headline + narrative */}
+              <div className="space-y-8 order-2 lg:order-1">
+                <div className="space-y-6 max-w-3xl">
+                  <p className="text-[10px] uppercase tracking-[0.32em] text-cyan-100/60">Identidad</p>
+                  <h1 className="text-4xl sm:text-5xl lg:text-7xl font-semibold tracking-tighter leading-[1.08] text-white">
                     {hero.headline}
-                  </h2>
-                  <p className="text-base sm:text-lg lg:text-xl text-gray-200/95 leading-relaxed max-w-[56ch]">
+                  </h1>
+                  <p className="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-[52ch]">
                     {hero.summary}
                   </p>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 sm:gap-4 max-w-xl">
+                <div className="grid grid-cols-2 gap-4 max-w-sm">
                   {hero.metrics.map((metric) => (
-                    <article key={metric.label} className="rounded-xl border border-white/12 bg-white/[0.035] px-4 py-4 backdrop-blur-md">
-                      <p className="text-2xl sm:text-3xl font-semibold text-cyan-200">{metric.value}</p>
-                      <p className="mt-1 text-xs uppercase tracking-[0.18em] text-gray-300">{metric.label}</p>
-                    </article>
+                    <div key={metric.label} className="space-y-1">
+                      <p className="text-3xl sm:text-4xl font-bold text-cyan-300">{metric.value}</p>
+                      <p className="text-xs uppercase tracking-[0.16em] text-gray-400">{metric.label}</p>
+                    </div>
                   ))}
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 max-w-xl">
+                <div className="flex flex-col sm:flex-row gap-3 max-w-md pt-2">
                   <Button
                     onClick={() => setActiveSection('projects')}
-                    className="bg-white/10 hover:bg-white/18 text-white border border-white/18 px-6 sm:px-8 py-3 rounded-xl flex-1 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
+                    className="bg-cyan-500/18 hover:bg-cyan-500/28 text-cyan-200 border border-cyan-300/28 px-6 py-2.5 rounded-lg flex-1 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70 text-sm font-medium"
                   >
-                    Ver Proof
-                    <ChevronRight size={20} className="ml-2" />
+                    Ver Proyectos
+                    <ChevronRight size={16} className="ml-2" />
                   </Button>
 
                   <Button
@@ -154,23 +155,22 @@ function App() {
                       trackCtaInteraction('download-cv', '/cv.pdf')
                       window.open('/cv.pdf', '_blank')
                     }}
-                    className="bg-gradient-to-r from-cyan-500/95 to-blue-600/95 hover:from-cyan-600 hover:to-blue-700 text-white px-6 sm:px-8 py-3 rounded-xl flex-1 transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
+                    className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-6 py-2.5 rounded-lg flex-1 transition-all duration-300 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70"
                   >
-                    <Download size={20} className="mr-2" />
-                    Descargar CV
+                    <Download size={16} className="mr-2" />
+                    CV
                   </Button>
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-white/12 bg-slate-950/58 p-5 sm:p-6 backdrop-blur-xl">
-                <div className="aspect-[4/5] overflow-hidden rounded-xl border border-white/10 bg-slate-900/65">
-                  <img src={fotoPerfil} alt={`${profile.name} portrait`} className="h-full w-full object-cover object-top" />
+              {/* Right: Portrait (subordinated) */}
+              <div className="order-1 lg:order-2">
+                <div className="aspect-[3/4] overflow-hidden rounded-2xl border border-white/8 bg-gradient-to-b from-slate-800 to-slate-900">
+                  <img src={fotoPerfil} alt={`${profile.name}`} className="h-full w-full object-cover object-top" />
                 </div>
-                <div className="mt-4 space-y-2">
-                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/70">Author signal</p>
-                  <h3 className="text-xl font-semibold text-white">{profile.name}</h3>
-                  <p className="text-sm text-gray-300">{profile.role}</p>
-                  <p className="text-xs uppercase tracking-[0.16em] text-gray-400">{profile.location}</p>
+                <div className="mt-4 space-y-1 text-center lg:text-left">
+                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60">{profile.name}</p>
+                  <p className="text-sm text-gray-400">{profile.role}</p>
                 </div>
               </div>
             </div>
@@ -180,41 +180,39 @@ function App() {
         {activeSection === 'about' && (
           <section className="chapter-section min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center">
             <div className="max-w-6xl mx-auto w-full">
-              <div className="text-left mb-8 sm:mb-10">
-                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-4 max-w-2xl">
-                  Sobre <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Mí</span>
+              <div className="mb-12 max-w-3xl">
+                <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60 mb-4">Perfil</p>
+                <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 text-white">
+                  Sobre <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">mí</span>
                 </h2>
-                <p className="text-sm uppercase tracking-[0.26em] text-cyan-200/70">Positioning and operating model</p>
+                <p className="text-lg text-gray-300 leading-relaxed max-w-2xl">
+                  {overview}
+                </p>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-[1.12fr_0.88fr] gap-6 lg:gap-8 items-start">
-                <article className="rounded-2xl border border-white/12 bg-white/[0.04] p-6 sm:p-7 lg:p-8 backdrop-blur-xl">
-                  <p className="text-sm sm:text-base lg:text-lg text-gray-200 leading-relaxed mb-4 sm:mb-6 max-w-[62ch]">
-                    {overview}
-                  </p>
-
-                  <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed mb-4 sm:mb-6 max-w-[62ch]">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
+                <div className="lg:col-span-2 space-y-6">
+                  <p className="text-base text-gray-300 leading-relaxed">
                     {positioning.focus}
                   </p>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
+                  <div className="grid grid-cols-3 gap-4">
                     {metrics.slice(1, 4).map((metric) => (
-                      <article key={metric.label} className="rounded-xl border border-white/10 bg-black/20 px-4 py-4">
-                        <p className="text-2xl sm:text-3xl font-semibold text-cyan-300 mb-1 sm:mb-2">{metric.value}</p>
-                        <p className="text-xs uppercase tracking-[0.16em] text-gray-300">{metric.label}</p>
-                      </article>
+                      <div key={metric.label} className="space-y-2">
+                        <p className="text-3xl sm:text-4xl font-bold text-cyan-300">{metric.value}</p>
+                        <p className="text-xs uppercase tracking-[0.14em] text-gray-400">{metric.label}</p>
+                      </div>
                     ))}
                   </div>
-                </article>
+                </div>
 
-                <aside className="rounded-2xl border border-white/12 bg-slate-950/58 p-5 sm:p-6 backdrop-blur-xl">
-                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/72">Operating pillars</p>
-                  <ul className="mt-4 space-y-3 text-sm text-gray-200">
-                    <li className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-3">Arquitectura de datos orientada a decisiones de negocio.</li>
-                    <li className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-3">Implementacion full-stack con foco en adopcion operativa.</li>
-                    <li className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-3">Gobernanza y escalabilidad para contextos corporativos.</li>
+                <aside className="space-y-4 lg:pt-2">
+                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60">Pilares operativos</p>
+                  <ul className="space-y-3 text-sm text-gray-300 leading-relaxed">
+                    <li>Arquitectura de datos orientada a decisiones empresariales</li>
+                    <li>Implementación full-stack con adopción operativa</li>
+                    <li>Gobernanza y escalabilidad corporativa</li>
                   </ul>
-                  <p className="mt-4 text-xs uppercase tracking-[0.16em] text-gray-400">No gimmicks. Solo claridad, sistemas y evidencia.</p>
                 </aside>
               </div>
             </div>
@@ -228,23 +226,25 @@ function App() {
 
       {activeSection === 'skills' && (
         <section className="chapter-section min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center">
-          <div className="max-w-6xl mx-auto w-full space-y-7">
+          <div className="max-w-6xl mx-auto w-full space-y-10">
             <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/72">Capability chapter</p>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight text-white">
-                Capacidades <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">curadas por impacto</span>
+              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60 mb-4">Capacidades</p>
+              <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 text-white">
+                Curadas <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">por impacto</span>
               </h2>
-              <p className="mt-3 text-sm sm:text-base text-gray-300 leading-relaxed max-w-[62ch]">
-                Cada bloque agrupa habilidades por rol operativo real, no por listado utilitario. El foco esta en capacidad de ejecucion, madurez tecnica y transferencia a negocio.
+              <p className="text-base text-gray-300 leading-relaxed max-w-2xl">
+                Cada grupo agrupa habilidades por rol operativo real. Foco en capacidad de ejecución, madurez técnica y transferencia a negocio.
               </p>
             </div>
 
-            <div className="grid gap-5 lg:grid-cols-2">
+            <div className="grid gap-8 lg:grid-cols-2">
               {skillGroups.map((group) => (
-                <article key={group.id} className="rounded-2xl border border-white/12 bg-white/[0.035] p-5 sm:p-6 backdrop-blur-xl">
-                  <p className="text-xs uppercase tracking-[0.22em] text-cyan-100/72">{group.title}</p>
-                  <p className="mt-3 text-sm text-gray-300 leading-relaxed min-h-[3.4rem]">{group.summary}</p>
-                  <div className="mt-4 grid gap-3">
+                <article key={group.id} className="space-y-4">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.22em] text-cyan-100/60 mb-2">{group.title}</p>
+                    <p className="text-sm text-gray-300">{group.summary}</p>
+                  </div>
+                  <div className="grid gap-2">
                     {group.items.map((skill) => (
                       <SkillCard key={skill.name} skill={skill} />
                     ))}
@@ -259,54 +259,44 @@ function App() {
       {activeSection === 'experience' && (
         <section className="chapter-section relative min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center overflow-hidden">
           <TrustChapterOverlay />
-          <div className="relative z-10 max-w-6xl mx-auto w-full space-y-6">
+          <div className="relative z-10 max-w-6xl mx-auto w-full space-y-8">
             <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/72">Trust chapter</p>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight text-white">
-                Trayectoria <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">con evidencia operativa</span>
+              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60 mb-4">Trayectoria</p>
+              <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 text-white">
+                Con <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">evidencia operativa</span>
               </h2>
-              <p className="mt-3 text-sm sm:text-base text-gray-300 leading-relaxed max-w-[62ch]">
-                De implementacion tecnica a adopcion empresarial: una secuencia de entrega continua, gobernanza y resultados medibles.
+              <p className="text-base text-gray-300 leading-relaxed max-w-2xl">
+                De implementación técnica a adopción empresarial: continuidad entre entrega, gobernanza y resultados.
               </p>
             </div>
 
-            <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-              <article className="rounded-2xl border border-white/12 bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl">
-                <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/70">Trust thesis</p>
-                <h3 className="mt-3 text-xl font-semibold text-white">Execution before rhetoric</h3>
-                <p className="mt-3 text-sm text-gray-300 leading-relaxed">
-                  La credibilidad se construye con continuidad entre arquitectura, entrega y adopcion operativa. Este bloque resume esa linea de consistencia.
-                </p>
-                <ul className="mt-4 space-y-2 text-sm text-gray-200">
-                  <li className="rounded-lg border border-white/10 bg-black/20 px-3 py-3">Implementacion en entornos corporativos con requisitos de control y escalabilidad.</li>
-                  <li className="rounded-lg border border-white/10 bg-black/20 px-3 py-3">Capacidad de traducir complejidad tecnica a decisiones de negocio accionables.</li>
-                  <li className="rounded-lg border border-white/10 bg-black/20 px-3 py-3">Ejecucion end-to-end: diseño, despliegue, adopcion y mejora continua.</li>
-                </ul>
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-3">
-                    <p className="text-2xl font-semibold text-cyan-200">{experience.length}</p>
-                    <p className="text-xs uppercase tracking-[0.16em] text-gray-300">career stops</p>
-                  </div>
-                  <div className="rounded-xl border border-white/10 bg-black/20 px-3 py-3">
-                    <p className="text-2xl font-semibold text-cyan-200">Enterprise</p>
-                    <p className="text-xs uppercase tracking-[0.16em] text-gray-300">delivery focus</p>
-                  </div>
+            <div className="grid gap-8 lg:grid-cols-[1fr_1.3fr]">
+              <div className="space-y-4">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60 mb-3">Tesis de confianza</p>
+                  <h3 className="text-xl font-semibold text-white mb-3">Ejecución antes que retórica</h3>
+                  <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                    La credibilidad se construye con continuidad entre arquitectura, entrega y adopción operativa.
+                  </p>
                 </div>
-              </article>
+                <ul className="space-y-2 text-sm text-gray-300">
+                  <li className="leading-relaxed">Implementación en entornos corporativos con requisitos de control y escalabilidad.</li>
+                  <li className="leading-relaxed">Capacidad de traducir complejidad técnica a decisiones accionables.</li>
+                  <li className="leading-relaxed">Ejecución end-to-end: diseño, despliegue, adopción y mejora continua.</li>
+                </ul>
+              </div>
 
               <div className="space-y-4">
                 {experience.map((entry) => (
-                  <article key={`${entry.company}-${entry.role}`} className="rounded-2xl border border-white/12 bg-slate-950/60 p-4 sm:p-5 backdrop-blur-xl transition-all duration-300 hover:border-cyan-300/28">
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                      <div>
-                        <p className="text-xs uppercase tracking-[0.18em] text-cyan-100/70">{entry.company}</p>
-                        <h3 className="mt-1 text-lg sm:text-xl font-semibold tracking-tight text-white">{entry.role}</h3>
-                      </div>
-                      <p className="text-xs uppercase tracking-[0.14em] text-gray-400">{entry.period}</p>
+                  <article key={`${entry.company}-${entry.role}`} className="space-y-2 pb-4 border-b border-white/8 last:border-0">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
+                      <h4 className="text-lg font-semibold text-white">{entry.role}</h4>
+                      <p className="text-xs uppercase tracking-[0.12em] text-gray-400">{entry.period}</p>
                     </div>
-                    <div className="mt-4 space-y-2">
+                    <p className="text-xs uppercase tracking-[0.14em] text-cyan-100/60">{entry.company}</p>
+                    <div className="space-y-1.5 mt-2">
                       {entry.highlights.map((highlight) => (
-                        <p key={highlight} className="border-l border-cyan-300/24 pl-3 text-sm text-gray-300 leading-relaxed">{highlight}</p>
+                        <p key={highlight} className="text-sm text-gray-300 leading-relaxed">{highlight}</p>
                       ))}
                     </div>
                   </article>
@@ -338,67 +328,62 @@ function App() {
 {activeSection === 'contact' && (
   <section className="chapter-section relative min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center overflow-hidden">
     <CtaChapterOverlay />
-    <div className="relative z-10 max-w-5xl mx-auto w-full">
-      <div className="text-left mb-8 sm:mb-10">
-        <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
-          <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-            Contacto
-          </span>
+    <div className="relative z-10 max-w-6xl mx-auto w-full">
+      <div className="mb-12">
+        <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60 mb-4">Contacto</p>
+        <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 text-white">
+          Conversemos <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">directamente</span>
         </h2>
-        <p className="text-lg sm:text-xl text-gray-300 max-w-3xl leading-relaxed">
-          Cierre editorial directo: estrategia de datos, arquitectura y ejecucion para convertir complejidad en ventaja operacional.
+        <p className="text-base text-gray-300 leading-relaxed max-w-2xl">
+          Si tienes un desafío técnico o una idea que merece exploración, estoy disponible.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-6 lg:gap-8">
-        <article className="rounded-2xl border border-white/12 bg-white/[0.04] p-5 sm:p-7 backdrop-blur-xl">
-          <h3 className="text-xl sm:text-2xl font-semibold text-white mb-4">Canales directos</h3>
+      <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
+        <div className="space-y-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60 mb-4">Canales activos</p>
+          <ul className="space-y-3">
+            <li>
+              <a href="mailto:hello@lijhoan.com" className="group inline-flex items-center gap-2 text-lg font-medium text-white hover:text-cyan-300 transition-colors duration-200">
+                <span>Email</span>
+                <span className="text-gray-400 group-hover:text-cyan-300/60 transition-colors">→</span>
+              </a>
+              <p className="text-xs text-gray-400 mt-1">hello@lijhoan.com</p>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/lijhoan/" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 text-lg font-medium text-white hover:text-cyan-300 transition-colors duration-200">
+                <span>LinkedIn</span>
+                <span className="text-gray-400 group-hover:text-cyan-300/60 transition-colors">→</span>
+              </a>
+              <p className="text-xs text-gray-400 mt-1">linkedin.com/in/lijhoan</p>
+            </li>
+            <li>
+              <a href="https://wa.me/5493773701340" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 text-lg font-medium text-white hover:text-cyan-300 transition-colors duration-200">
+                <span>WhatsApp</span>
+                <span className="text-gray-400 group-hover:text-cyan-300/60 transition-colors">→</span>
+              </a>
+              <p className="text-xs text-gray-400 mt-1">+54 3773 701340</p>
+            </li>
+          </ul>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60 mb-4">Foco actual</p>
           <div className="space-y-3">
-            <a
-              href={`mailto:${profile.email}`}
-              onClick={() => trackCtaInteraction('email-click', profile.email)}
-              className="flex items-center justify-between rounded-xl border border-white/12 bg-black/20 px-4 py-3 text-gray-200 hover:border-cyan-300/35 hover:text-cyan-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
-            >
-              <span className="flex items-center gap-3 text-sm sm:text-base"><Mail size={18} /> {profile.email}</span>
-              <ExternalLink size={14} className="opacity-60" />
-            </a>
-
-            <a
-              href={profile.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackCtaInteraction('linkedin-click', profile.linkedin)}
-              className="flex items-center justify-between rounded-xl border border-white/12 bg-black/20 px-4 py-3 text-gray-200 hover:border-cyan-300/35 hover:text-cyan-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
-            >
-              <span className="flex items-center gap-3 text-sm sm:text-base"><LinkedinIcon size={18} /> linkedin.com/in/lijhoanmc</span>
-              <ExternalLink size={14} className="opacity-60" />
-            </a>
-
-            <a
-              href={`https://wa.me/${profile.phone.replace(/\D/g, '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackCtaInteraction('whatsapp-click', profile.phone)}
-              className="flex items-center justify-between rounded-xl border border-white/12 bg-black/20 px-4 py-3 text-gray-200 hover:border-cyan-300/35 hover:text-cyan-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70"
-            >
-              <span className="flex items-center gap-3 text-sm sm:text-base"><MessageSquare size={18} /> {profile.phone}</span>
-              <Phone size={14} className="opacity-60" />
-            </a>
+            <div>
+              <h4 className="text-white font-medium mb-1">Desafíos de arquitectura de datos</h4>
+              <p className="text-sm text-gray-300">Diseño e implementación de plataformas de datos complejas en contextos empresariales.</p>
+            </div>
+            <div>
+              <h4 className="text-white font-medium mb-1">Transformación digital</h4>
+              <p className="text-sm text-gray-300">Aceleración de adopción de tecnología: gobernanza, capacitación, y cambio organizacional.</p>
+            </div>
+            <div>
+              <h4 className="text-white font-medium mb-1">Mentoring técnico</h4>
+              <p className="text-sm text-gray-300">Guía en arquitectura de sistemas, buenas prácticas de ingeniería y liderazgo técnico.</p>
+            </div>
           </div>
-        </article>
-
-        <aside className="rounded-2xl border border-white/12 bg-slate-950/58 p-5 sm:p-6 backdrop-blur-xl">
-          <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/70">Focus</p>
-          <h4 className="mt-3 text-lg sm:text-xl font-semibold text-white">Roadmap de colaboración</h4>
-          <p className="mt-3 text-sm text-gray-300 leading-relaxed">
-            Diseño y ejecución de plataformas BI, data pipelines y arquitectura cloud para equipos que necesitan velocidad con gobernanza.
-          </p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <span className="rounded-full border border-cyan-200/25 bg-cyan-500/10 px-3 py-1 text-xs uppercase tracking-[0.14em] text-cyan-100">Business Intelligence</span>
-            <span className="rounded-full border border-blue-200/25 bg-blue-500/10 px-3 py-1 text-xs uppercase tracking-[0.14em] text-blue-100">Data Engineering</span>
-            <span className="rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.14em] text-slate-100">Cloud Architecture</span>
-          </div>
-        </aside>
+        </div>
       </div>
     </div>
   </section>

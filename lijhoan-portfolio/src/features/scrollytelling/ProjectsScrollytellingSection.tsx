@@ -45,29 +45,14 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
       <ProofChapterOverlay />
 
       <div className="relative z-10 max-w-7xl mx-auto">
-        <div className="mb-6 max-w-2xl text-left sm:mb-8">
-          <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/70">Proof chapter</p>
-          <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
-            Proyectos <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">con evidencia de impacto</span>
+        <div className="mb-8 max-w-2xl text-left sm:mb-10">
+          <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60">Proyectos</p>
+          <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mt-3">
+            Con evidencia <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">de impacto</span>
           </h2>
-          <p className="text-base text-gray-300 sm:text-lg">Un recorrido curado: flagship primero, supporting cases después.</p>
         </div>
 
         <ScrollyTellingContainer className="bg-transparent" runtimeSceneId="projects-scrollytelling">
-          <article className="flex min-h-[74svh] w-[64vw] min-w-[22rem] max-w-[760px] shrink-0 flex-col justify-between rounded-[1.4rem] border border-white/12 bg-slate-950/58 p-5 sm:p-6 backdrop-blur-lg">
-            <div className="max-w-xl space-y-3">
-              <Badge variant="secondary" className="w-fit bg-cyan-500/18 text-cyan-200">Editorial context</Badge>
-              <h3 className="text-xl font-semibold leading-tight text-white sm:text-2xl lg:text-3xl">
-                Flagship primero. Soportes después.
-              </h3>
-              <p className="text-sm leading-relaxed text-gray-300 sm:text-base">
-                Jerarquía explícita: una historia principal con evidencia y un set reducido de casos complementarios.
-              </p>
-            </div>
-
-            <p className="text-xs uppercase tracking-[0.18em] text-gray-400">{projects.length.toString().padStart(2, '0')} supporting cases</p>
-          </article>
-
           <FlagshipProofPanel />
 
           {projects.map((project) => {
