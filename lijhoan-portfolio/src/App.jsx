@@ -47,25 +47,25 @@ function App() {
   const skillGroups = [
     {
       id: 'data-intelligence',
-      title: 'Data Intelligence',
+      title: 'Inteligencia de datos',
       summary: 'Modelado de indicadores, visual analytics y decisiones operativas con trazabilidad.',
       items: skills.dataBi,
     },
     {
       id: 'machine-learning',
-      title: 'Machine Learning',
+      title: 'Aprendizaje automatico',
       summary: 'Prediccion, segmentacion y despliegue de modelos orientados a impacto real.',
       items: skills.ml,
     },
     {
       id: 'engineering-delivery',
-      title: 'Engineering Delivery',
+      title: 'Entrega de ingenieria',
       summary: 'Automatizacion, desarrollo y ejecucion de flujos completos de producto y datos.',
       items: [...skills.dev, ...skills.ai],
     },
     {
       id: 'platform-governance',
-      title: 'Platform and Governance',
+      title: 'Plataforma y gobernanza',
       summary: 'Infraestructura cloud, seguridad operativa y escalabilidad para entornos corporativos.',
       items: skills.infra,
     },
@@ -165,7 +165,7 @@ function App() {
 
               {/* Right: Portrait (subordinated) */}
               <div className="order-1 lg:order-2">
-                <div className="aspect-[3/4] overflow-hidden rounded-2xl border border-white/8 bg-gradient-to-b from-slate-800 to-slate-900">
+                <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-gradient-to-b from-slate-800/70 to-slate-900/70 opacity-92">
                   <img src={fotoPerfil} alt={`${profile.name}`} className="h-full w-full object-cover object-top" />
                 </div>
                 <div className="mt-4 space-y-1 text-center lg:text-left">
@@ -311,7 +311,7 @@ function App() {
         <section className="chapter-section min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center">
           <div className="max-w-6xl mx-auto w-full space-y-6">
             <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/72">Credential chapter</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/72">Capitulo credenciales</p>
               <h2 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
                 Certificaciones <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">& Formación</span>
               </h2>
@@ -396,31 +396,31 @@ function App() {
 
 const resolveSkillBand = (level) => {
   if (level >= 90) {
-    return { label: 'Principal', className: 'text-cyan-100 border-cyan-200/25 bg-cyan-500/12' }
+    return { label: 'Nucleo', className: 'text-cyan-100' }
   }
 
   if (level >= 80) {
-    return { label: 'Advanced', className: 'text-blue-100 border-blue-200/25 bg-blue-500/12' }
+    return { label: 'Solido', className: 'text-blue-100' }
   }
 
-  return { label: 'Operational', className: 'text-slate-100 border-white/20 bg-white/[0.06]' }
+  return { label: 'Soporte', className: 'text-slate-100' }
 }
 
 function SkillCard({ skill }) {
   const band = resolveSkillBand(skill.level)
 
   return (
-    <article className="group rounded-xl border border-white/10 bg-black/20 px-4 py-4 transition-all duration-300 hover:border-cyan-300/28 hover:bg-white/[0.04]">
+    <article className="group px-2 py-3 transition-all duration-300">
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-slate-900/70">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900/60">
           <skill.icon size={18} className="text-cyan-300" />
         </div>
         <div className="min-w-0 flex-1">
           <h3 className="text-sm sm:text-base font-semibold text-white truncate">{skill.name}</h3>
-          <span className={[
-            'mt-1 inline-flex rounded-full border px-2 py-0.5 text-[10px] uppercase tracking-[0.14em]',
+          <p className={[
+            'mt-1 text-[10px] uppercase tracking-[0.14em]',
             band.className,
-          ].join(' ')}>{band.label}</span>
+          ].join(' ')}>{band.label}</p>
         </div>
         <p className="text-sm font-semibold text-cyan-200">{skill.level}%</p>
       </div>

@@ -2,8 +2,8 @@ import { useMemo } from 'react'
 import { ChevronRight } from 'lucide-react'
 
 const chapterKindCopy = {
-  immersive: 'Immersive chapter',
-  reading: 'Reading chapter',
+  immersive: 'Capitulo inmersivo',
+  reading: 'Capitulo de lectura',
 }
 
 export default function NavigationShell({ items, activeSectionId, onChangeSection }) {
@@ -20,7 +20,7 @@ export default function NavigationShell({ items, activeSectionId, onChangeSectio
     <>
       <aside className="pointer-events-none fixed left-0 top-0 z-50 hidden h-screen w-[86px] md:flex md:items-center md:justify-center lg:w-[104px]">
         <nav
-          aria-label="Primary chapter navigation"
+          aria-label="Navegacion principal por capitulos"
           className="pointer-events-auto relative flex h-[70vh] w-[58px] flex-col items-center rounded-[1.7rem] border border-white/7 bg-slate-950/22 px-2 py-4 backdrop-blur-xl lg:w-[66px]"
         >
           <div className="mb-4 h-1.5 w-1.5 rounded-full bg-cyan-200/60" />
@@ -84,7 +84,7 @@ export default function NavigationShell({ items, activeSectionId, onChangeSectio
       </aside>
 
       <nav
-        aria-label="Mobile chapter navigation"
+        aria-label="Navegacion movil por capitulos"
         className="fixed inset-x-3 bottom-3 z-50 rounded-2xl border border-white/8 bg-slate-950/62 p-2 backdrop-blur-2xl md:hidden"
       >
         <div className="flex gap-1.5 overflow-x-auto pb-1">
@@ -113,7 +113,7 @@ export default function NavigationShell({ items, activeSectionId, onChangeSectio
         <div className="mt-1 flex items-center justify-between px-1 text-[10px] uppercase tracking-[0.14em] text-gray-300">
           <span>{chapterKindCopy[activeItem.kind]}</span>
           <span className="flex items-center gap-1 text-cyan-100/85">
-            {nextItem ? `Next ${nextItem.shortLabel ?? nextItem.label}` : 'Journey complete'}
+            {nextItem ? `Siguiente ${nextItem.shortLabel ?? nextItem.label}` : 'Recorrido completo'}
             {nextItem && <ChevronRight size={11} />}
           </span>
         </div>

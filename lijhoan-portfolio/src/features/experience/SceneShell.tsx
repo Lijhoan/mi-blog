@@ -14,13 +14,15 @@ export type SceneShellProps = {
   accentLabel?: string
   children?: ReactNode
   className?: string
+  active?: boolean
 }
 
 /**
  * Reusable scene shell for premium section-level composition.
  * It turns runtime signals into subtle atmospheric motion without owning content or scroll logic.
  */
-export default function SceneShell({ chapterId, title, eyebrow, summary, accentLabel = 'Immersive profile', children, className }: SceneShellProps) {
+export default function SceneShell({ chapterId, title, eyebrow, summary, accentLabel = 'Immersive profile', children, className, active = true }: SceneShellProps) {
+  if (!active) return null
   const scene = useScrollRuntimeSelector((runtime) => ({
     reducedMotion: runtime.reducedMotion,
     globalProgress: runtime.globalProgress,

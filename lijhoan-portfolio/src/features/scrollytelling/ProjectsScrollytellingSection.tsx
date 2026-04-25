@@ -42,7 +42,7 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
   return (
     <section className="chapter-section relative min-h-screen overflow-hidden px-4 py-8 sm:px-6 lg:px-10">
       <ScrollRuntimeHud enabled={showRuntimeHud} />
-      <ProofChapterOverlay />
+      <ProofChapterOverlay active={true} />
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="mb-8 max-w-2xl text-left sm:mb-10">
@@ -61,7 +61,7 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
             return (
             <article
               key={project.id}
-              className="group flex min-h-[78svh] w-[78vw] max-w-[920px] shrink-0 flex-col overflow-hidden rounded-[1.5rem] border border-white/12 bg-slate-950/58 backdrop-blur-lg transition-all duration-300 hover:border-cyan-300/35"
+              className="group flex min-h-[78svh] w-[78vw] max-w-[920px] shrink-0 flex-col overflow-hidden rounded-[1.5rem] bg-slate-950/48 transition-all duration-300"
             >
               <div className="grid h-full grid-rows-[auto,1fr] lg:grid-cols-[1.2fr_0.8fr] lg:grid-rows-1">
                 <div className="relative min-h-[22rem] lg:min-h-full">
@@ -71,7 +71,7 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
                     className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 motion-reduce:group-hover:scale-100"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/35 to-transparent" />
-                  <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full border border-white/15 bg-black/45 px-3 py-2 text-xs text-white backdrop-blur-md">
+                  <div className="absolute left-5 top-5 flex items-center gap-2 px-2 py-1 text-xs text-white/85">
                     <Calendar size={12} />
                     {project.year}
                   </div>
@@ -80,9 +80,7 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
                 <div className="flex flex-col justify-between gap-6 p-6 sm:p-7 lg:p-8">
                   <div className="space-y-4">
                     <div className="flex flex-wrap items-center justify-between gap-3">
-                      <Badge variant="secondary" className="bg-cyan-500/20 text-cyan-200">
-                        {project.category}
-                      </Badge>
+                      <p className="text-[11px] uppercase tracking-[0.16em] text-cyan-100/75">{project.category}</p>
                       <div className="text-xs uppercase tracking-[0.18em] text-gray-400">{project.client}</div>
                     </div>
 
@@ -97,7 +95,7 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
 
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="outline" className="border-white/20 bg-white/[0.03] text-gray-200">
+                        <Badge key={tech} variant="outline" className="border-white/10 bg-transparent text-gray-300">
                           {tech}
                         </Badge>
                       ))}
