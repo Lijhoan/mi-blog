@@ -120,15 +120,15 @@ export default function CertificationTrustLayer() {
         <article className="rounded-2xl border border-cyan-300/25 bg-gradient-to-r from-cyan-500/10 via-blue-500/8 to-transparent p-5 sm:p-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-xs uppercase tracking-[0.24em] text-cyan-100/75">Trust Layer</p>
+              <p className="text-xs uppercase tracking-[0.24em] text-cyan-100/75">Capa de confianza</p>
               <h3 className="mt-2 text-xl font-semibold text-white sm:text-2xl">Credenciales verificables con jerarquia editorial</h3>
               <p className="mt-2 max-w-3xl text-sm text-slate-200/85 sm:text-base">
-                Priorizacion editorial: featured para posicionamiento actual, supporting para amplitud tecnica y archive para trazabilidad completa.
+                Priorizacion editorial: destacadas para posicionamiento actual, apoyo para amplitud tecnica y archivo para trazabilidad completa.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
-              <Badge className="bg-cyan-500/22 text-cyan-100">Featured {certificationTrustSummary.featuredCount}</Badge>
-              <Badge className="bg-blue-500/22 text-blue-100">Supporting {certificationTrustSummary.supportingCount}</Badge>
+              <Badge className="bg-cyan-500/22 text-cyan-100">Destacadas {certificationTrustSummary.featuredCount}</Badge>
+              <Badge className="bg-blue-500/22 text-blue-100">Apoyo {certificationTrustSummary.supportingCount}</Badge>
               <Badge variant="secondary" className="bg-white/10 text-slate-100">Total {certificationTrustSummary.total}</Badge>
             </div>
           </div>
@@ -136,22 +136,22 @@ export default function CertificationTrustLayer() {
 
         <section className="space-y-4">
           <div className="flex items-center justify-between gap-3">
-            <h4 className="text-lg font-semibold tracking-tight text-white sm:text-xl">Featured Credentials</h4>
+            <h4 className="text-lg font-semibold tracking-tight text-white sm:text-xl">Credenciales destacadas</h4>
             <span className="text-xs uppercase tracking-[0.22em] text-cyan-200/70">Alta relevancia de posicionamiento</span>
           </div>
           {leadFeatured && (
             <div className="grid gap-4 lg:grid-cols-[1.18fr_0.82fr]">
               <CredentialCard credential={leadFeatured} emphasis="lead" onOpen={setSelectedCredential} />
               <article className="rounded-2xl border border-white/12 bg-white/[0.04] p-5 sm:p-6 backdrop-blur-xl">
-                <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/72">Editorial reading</p>
-                <h5 className="mt-3 text-lg font-semibold text-white">Featured no es volumen, es señal</h5>
+                <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/72">Lectura editorial</p>
+                <h5 className="mt-3 text-lg font-semibold text-white">Lo destacado no es volumen, es señal</h5>
                 <p className="mt-3 text-sm text-gray-300 leading-relaxed">
                   Estas credenciales se priorizan porque fortalecen posicionamiento profesional, validan foco tecnico actual y sostienen narrativa de confianza ante stakeholders.
                 </p>
                 <ul className="mt-4 space-y-2 text-sm text-gray-200">
                   <li className="rounded-lg border border-white/10 bg-black/20 px-3 py-3">Credenciales con mayor impacto en lectura de seniority.</li>
                   <li className="rounded-lg border border-white/10 bg-black/20 px-3 py-3">Pruebas visuales disponibles para validacion rapida.</li>
-                  <li className="rounded-lg border border-white/10 bg-black/20 px-3 py-3">Soporte directo para el chapter Trust del portfolio.</li>
+                  <li className="rounded-lg border border-white/10 bg-black/20 px-3 py-3">Soporte directo para el capitulo Trayectoria del portfolio.</li>
                 </ul>
               </article>
             </div>
@@ -168,7 +168,7 @@ export default function CertificationTrustLayer() {
 
         <section className="space-y-4">
           <div className="flex items-center justify-between gap-3">
-            <h4 className="text-lg font-semibold tracking-tight text-white sm:text-xl">Supporting Credentials</h4>
+            <h4 className="text-lg font-semibold tracking-tight text-white sm:text-xl">Credenciales de apoyo</h4>
             <span className="text-xs uppercase tracking-[0.22em] text-cyan-200/70">Contexto y cobertura complementaria</span>
           </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-2">
@@ -181,7 +181,7 @@ export default function CertificationTrustLayer() {
         <section className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 sm:p-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h4 className="text-base font-semibold text-white sm:text-lg">Archive</h4>
+              <h4 className="text-base font-semibold text-white sm:text-lg">Archivo</h4>
               <p className="text-sm text-gray-300">{archiveCountLabel}. Disponible bajo demanda para mantener el chapter limpio y sin sobrecarga visual.</p>
             </div>
             <Button
@@ -211,7 +211,7 @@ export default function CertificationTrustLayer() {
             </Button>
           </div>
           <div className="mx-auto h-full w-full max-w-6xl overflow-y-auto px-4 pb-16 pt-20 sm:px-6">
-            <h4 className="mb-1 text-2xl font-semibold text-white">Certification Archive</h4>
+            <h4 className="mb-1 text-2xl font-semibold text-white">Archivo de certificaciones</h4>
             <p className="mb-6 text-sm text-slate-300">Historial completo de credenciales con acceso a prueba visual.</p>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {archiveCertificationCredentials.map((credential) => (

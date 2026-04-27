@@ -13,12 +13,7 @@ import { trackTelemetryEvent, useChapterTelemetry } from '@/features/telemetry/t
 import { initializeDataActivationLayer, smokeTestRemoteFlagshipContent } from '@/features/data-activation/client.ts'
 import {
   Download,
-  Mail,
-  LinkedinIcon,
-  MessageSquare,
   ChevronRight,
-  Phone,
-  ExternalLink
 } from 'lucide-react'
 import fotoPerfil from './assets/lijhoan.png'
 
@@ -37,6 +32,7 @@ function App() {
   const overview = profileContent.positioning.summary
   const metrics = profileContent.metrics
   const experience = experienceTimeline
+  const contactLinks = profileContent.links.contact
   const skills = {
     dataBi: dataBiSkills,
     ml: mlSkills,
@@ -70,6 +66,14 @@ function App() {
       items: skills.infra,
     },
   ]
+
+  const resolveContactHref = (label, fallback) => {
+    return contactLinks.find((link) => link.label === label)?.href ?? fallback
+  }
+
+  const emailHref = resolveContactHref('Email', `mailto:${profile.email}`)
+  const linkedinHref = resolveContactHref('LinkedIn', profile.linkedin)
+  const whatsappHref = resolveContactHref('WhatsApp', `https://wa.me/${profile.phone.replace(/\D/g, '')}`)
 
   useEffect(() => {
     setIsVisible(true)
@@ -328,61 +332,92 @@ function App() {
 {activeSection === 'contact' && (
   <section className="chapter-section relative min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center overflow-hidden">
     <CtaChapterOverlay />
-    <div className="relative z-10 max-w-6xl mx-auto w-full">
-      <div className="mb-12">
-        <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60 mb-4">Contacto</p>
+    <div className="relative z-10 max-w-6xl mx-auto w-full space-y-10">
+      <div className="max-w-4xl">
+        <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60 mb-4">Capitulo cierre</p>
         <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 text-white">
-          Conversemos <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">directamente</span>
+          Construyamos <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">el siguiente sistema</span>
         </h2>
-        <p className="text-base text-gray-300 leading-relaxed max-w-2xl">
-          Si tienes un desafío técnico o una idea que merece exploración, estoy disponible.
+        <p className="text-base sm:text-lg text-gray-300 leading-relaxed max-w-3xl">
+          Trabajo con equipos que necesitan pasar de iniciativas aisladas a plataformas confiables de datos, automatización y decisiones operativas.
         </p>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
-        <div className="space-y-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60 mb-4">Canales activos</p>
-          <ul className="space-y-3">
-            <li>
-              <a href="mailto:hello@lijhoan.com" className="group inline-flex items-center gap-2 text-lg font-medium text-white hover:text-cyan-300 transition-colors duration-200">
-                <span>Email</span>
-                <span className="text-gray-400 group-hover:text-cyan-300/60 transition-colors">→</span>
-              </a>
-              <p className="text-xs text-gray-400 mt-1">hello@lijhoan.com</p>
-            </li>
-            <li>
-              <a href="https://www.linkedin.com/in/lijhoan/" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 text-lg font-medium text-white hover:text-cyan-300 transition-colors duration-200">
-                <span>LinkedIn</span>
-                <span className="text-gray-400 group-hover:text-cyan-300/60 transition-colors">→</span>
-              </a>
-              <p className="text-xs text-gray-400 mt-1">linkedin.com/in/lijhoan</p>
-            </li>
-            <li>
-              <a href="https://wa.me/5493773701340" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 text-lg font-medium text-white hover:text-cyan-300 transition-colors duration-200">
-                <span>WhatsApp</span>
-                <span className="text-gray-400 group-hover:text-cyan-300/60 transition-colors">→</span>
-              </a>
-              <p className="text-xs text-gray-400 mt-1">+54 3773 701340</p>
-            </li>
-          </ul>
+      <div className="grid gap-10 lg:grid-cols-[1.12fr_0.88fr]">
+        <div className="space-y-6">
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60 mb-3">Siguiente paso</p>
+            <a
+              href={emailHref}
+              onClick={() => trackCtaInteraction('email-primary', emailHref)}
+              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:from-cyan-600 hover:to-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70"
+            >
+              Iniciar conversación por correo
+              <ChevronRight size={16} />
+            </a>
+            <p className="mt-3 text-xs text-gray-400">
+              Respuesta en 24 horas hábiles con enfoque inicial y siguientes pasos claros.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-gray-300">
+            <button
+              type="button"
+              onClick={() => {
+                trackCtaInteraction('review-experience', 'experience')
+                setActiveSection('experience')
+              }}
+              className="inline-flex items-center gap-2 text-cyan-200 hover:text-cyan-100 transition-colors duration-200"
+            >
+              Ver trayectoria reciente
+              <ChevronRight size={14} />
+            </button>
+
+            <a
+              href={linkedinHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackCtaInteraction('linkedin-secondary', linkedinHref)}
+              className="inline-flex items-center gap-2 hover:text-cyan-300 transition-colors duration-200"
+            >
+              LinkedIn
+              <span className="text-gray-500">→</span>
+            </a>
+
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackCtaInteraction('whatsapp-secondary', whatsappHref)}
+              className="inline-flex items-center gap-2 hover:text-cyan-300 transition-colors duration-200"
+            >
+              WhatsApp
+              <span className="text-gray-500">→</span>
+            </a>
+          </div>
+
+          <p className="text-xs text-gray-400">
+            {profile.email} · {profile.phone} · {profile.location}
+          </p>
         </div>
 
-        <div className="space-y-4">
-          <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60 mb-4">Foco actual</p>
+        <div className="space-y-6">
           <div className="space-y-3">
-            <div>
-              <h4 className="text-white font-medium mb-1">Desafíos de arquitectura de datos</h4>
-              <p className="text-sm text-gray-300">Diseño e implementación de plataformas de datos complejas en contextos empresariales.</p>
-            </div>
-            <div>
-              <h4 className="text-white font-medium mb-1">Transformación digital</h4>
-              <p className="text-sm text-gray-300">Aceleración de adopción de tecnología: gobernanza, capacitación, y cambio organizacional.</p>
-            </div>
-            <div>
-              <h4 className="text-white font-medium mb-1">Mentoring técnico</h4>
-              <p className="text-sm text-gray-300">Guía en arquitectura de sistemas, buenas prácticas de ingeniería y liderazgo técnico.</p>
-            </div>
+            <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60">Propuesta actual</p>
+            <p className="text-sm text-gray-300 leading-relaxed">
+              Tomo proyectos donde la complejidad técnica debe convertirse en operación estable, gobernable y medible para el negocio.
+            </p>
           </div>
+
+          <ul className="space-y-2 text-sm text-gray-300 leading-relaxed">
+            <li>Arquitectura y modernización de plataformas de datos en entornos corporativos.</li>
+            <li>Integración de sistemas, automatización de procesos y trazabilidad operativa.</li>
+            <li>Diseño de soluciones analíticas y de IA aplicadas a decisiones reales.</li>
+          </ul>
+
+          <p className="border-l border-cyan-300/35 pl-4 text-sm text-gray-300 leading-relaxed">
+            6+ años ejecutando de punta a punta: diseño, despliegue, adopción y mejora continua.
+          </p>
         </div>
       </div>
     </div>
