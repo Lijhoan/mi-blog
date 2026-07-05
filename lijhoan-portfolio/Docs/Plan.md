@@ -1,3 +1,8 @@
+> Estado documental: ASPIRACIONAL — describe una dirección futura de largo plazo.
+> El estado actual del proyecto está documentado en Docs/ROADMAP_CURRENT.md.
+> Stack real: Vite + React 19. La migración a Next.js 15 App Router no se ha ejecutado.
+> Varias capacidades descritas aquí (Prisma, PostgreSQL, CI/CD, Docker) no están implementadas.
+
 🗺️ Roadmap Arquitectónico: Portafolio Inmersivo "Awwwards Level"
 
 Objetivo: Construir un ecosistema web inmersivo, interactivo y de alto rendimiento que fusione Scrollytelling, WebGL y consumo de datos dinámicos, demostrando capacidades de Full Stack, Cloud Data Engineering y Frontend avanzado.

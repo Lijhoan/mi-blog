@@ -1,3 +1,8 @@
+> Estado documental: PARCIALMENTE IMPLEMENTADO.
+> Backend-spine (Next.js 15) existe como subproyecto separado con Route Handlers funcionales.
+> Lo que NO está implementado: Prisma/PostgreSQL, persistencia real, CI/CD, Power BI embed real.
+> Ver Docs/ROADMAP_CURRENT.md para el estado actual.
+
 # Server-Side Data Activation Layer
 
 ## Goal
