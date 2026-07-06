@@ -1,20 +1,20 @@
-# Agent Rules: Content Source of Truth
+# Reglas de fuente de verdad del contenido para agentes
 
-## Priority Order
+## Prioridad
 
 1. `Docs/cv.md`
 2. `src/content/professionalContent.ts`
-3. UI components
+3. Componentes UI
 
-## Rules For Agents
+## Reglas para agentes
 
-- Always consult `Docs/cv.md` before editing professional copy.
-- Do not overwrite content in components if the same data already exists in the structured module.
-- When content changes, update the markdown source first and then derive the structured module from it.
-- Keep content derivation separate from motion or layout concerns.
+- Siempre consultar `Docs/cv.md` antes de editar la copia profesional.
+- No sobrescribir contenido en componentes si los mismos datos ya existen en el módulo estructurado.
+- Cuando el contenido cambia, editar primero el markdown fuente y luego derivar el módulo estructurado.
+- Mantener la derivación de contenido separada de preocupaciones de motion o layout.
 
-## Safe Editing Pattern
+## Patrón seguro de edición
 
-- Content change: `Docs/cv.md` -> `src/content/professionalContent.ts` -> UI consumers.
-- Layout change: UI consumer only, as long as copy fields remain the same.
-- Never modify motion infrastructure just to edit copy.
+- Cambio de contenido: `Docs/cv.md` -> `src/content/professionalContent.ts` -> Consumidores de UI.
+- Cambio de layout: Consumidor de UI solo, mientras los campos de copia permanezcan idénticos.
+- Nunca modificar la infraestructura de motion solo para editar copia.

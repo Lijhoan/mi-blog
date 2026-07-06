@@ -1,54 +1,54 @@
-# Content Foundation
+# Fundamentos del contenido
 
-## Source of Truth
+## Fuente de verdad
 
-- `Docs/cv.md` is the canonical content source for professional profile data.
-- Structured UI content in `src/content/professionalContent.ts` is derived from `Docs/cv.md` and must stay in sync with it.
+- `Docs/cv.md` es la fuente canónica de contenido para el perfil profesional.
+- El contenido estructurado de la UI en `src/content/professionalContent.ts` se deriva de `Docs/cv.md` y debe mantenerse sincronizado con él.
 
-## What This Layer Solves
+## Lo que esta capa resuelve
 
-- Avoids duplicated copy across components.
-- Gives the UI a typed, reusable, centralized content model.
-- Makes future route rendering in Next.js easier because sections can consume data instead of hardcoded text.
+- Evita la duplicación de copia entre componentes.
+- Brinda a la UI un modelo de contenido centralizado, tipado y reutilizable.
+- Facilita el renderizado futuro de rutas en Next.js, permitiendo que las secciones consuman datos en lugar de texto embebido.
 
-## Canonical vs Derived
+## Campos canónicos vs derivados
 
-### Canonical Fields
+### Campos canónicos
 
-- Name
-- Role
+- Nombre
+- Rol
 - Email
-- Phone
-- Location
-- Social links
-- Overview / profile narrative
-- Experience entries
-- Projects
-- Stack groups
-- Certifications
+- Teléfono
+- Ubicación
+- Enlaces sociales
+- Resumen / narrativa del perfil
+- Entradas de experiencia
+- Proyectos
+- Grupos de stack
+- Certificaciones
 
-### Derived Fields
+### Campos derivados
 
-- Metric labels for presentation
-- UI section titles
-- Badge-friendly group names
-- Card ordering and display grouping
+- Etiquetas de métricas para presentación
+- Títulos de secciones de UI
+- Nombres de grupos aptos para badges
+- Ordenamiento y agrupamiento de tarjetas
 
-## Update Rule
+## Regla de actualización
 
-1. Update `Docs/cv.md` first.
-2. Mirror the same content into `src/content/professionalContent.ts`.
-3. If the UI consumes the new field, update the corresponding component.
-4. Do not invent alternate copies in feature components.
+1. Editar `Docs/cv.md` primero.
+2. Asegurar la misma información en `src/content/professionalContent.ts`.
+3. Si la UI consume el nuevo campo, actualizar el componente correspondiente.
+4. No inventar copias alternativas en componentes de características.
 
-## What Not To Do
+## Lo que NO se debe hacer
 
-- Do not copy profile text into components.
-- Do not store conflicting versions of the same bio or contact data in feature files.
-- Do not treat the structured module as a second source of truth; it is a typed projection of the markdown.
+- No duplicar el texto del perfil dentro de componentes.
+- No almacenar versiones conflictivas del mismo perfil biográfico o datos de contacto en archivos de características.
+- No tratar el módulo estructurado como una segunda fuente de verdad; es una proyección tipada del markdown.
 
-## Future Consumption Model
+## Modelo de consumo futuro
 
-- React components should import from `src/content/professionalContent.ts`.
-- Next.js route components can reuse the same content module without changing the data contract.
-- Future agents should read `Docs/cv.md` before proposing any copy edits.
+- Los componentes de React deberían importar desde `src/content/professionalContent.ts`.
+- Los componentes de rutas de Next.js pueden reutilizar el mismo módulo de contenido sin cambiar el contrato de datos.
+- Los futuros agentes deberían leer `Docs/cv.md` antes de proponer cualquier edición de copia.

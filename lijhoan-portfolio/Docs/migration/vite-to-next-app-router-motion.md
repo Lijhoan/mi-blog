@@ -1,10 +1,10 @@
-> Estado documental: ASPIRACIONAL / EN PAUSA.
+> > Estado documental: ASPIRACIONAL / EN PAUSA.
 > Esta migración no se ha ejecutado. El frontend permanece en Vite.
 > Se ha agregado BrowserRouter (react-router-dom) como paso intermedio.
 > La decisión de migrar a Next.js 15 App Router está en evaluación.
 > Ver Docs/ROADMAP_CURRENT.md para el estado actual.
 
-# Vite to Next App Router Motion Migration
+# Migración de Vite a Next App Router con Motion
 
 ## Goal
 
