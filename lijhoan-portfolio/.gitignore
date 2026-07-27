@@ -26,6 +26,10 @@ dist-ssr
 # Ignorar archivo de setup del Splash Cursor
 SPLASH_CURSOR_SETUP.md
 
+# Logs sueltos de corridas de dev/build
+err.txt
+out.txt
+
 # Next.js build artifacts
 .next
 **/.next
