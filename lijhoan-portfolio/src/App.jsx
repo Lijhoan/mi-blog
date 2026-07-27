@@ -1,4 +1,7 @@
+'use client'
+
 import { useState, useEffect } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button.jsx'
 import ProjectsScrollytellingSection from '@/features/scrollytelling/ProjectsScrollytellingSection.tsx'
 import { dataBiSkills, devSkills, experienceTimeline, featuredProjects, infraSkills, mlSkills, profileContent, aiSkills } from '@/content/index.ts'
@@ -15,11 +18,17 @@ import {
   Download,
   ChevronRight,
 } from 'lucide-react'
-import fotoPerfil from './assets/lijhoan.png'
+import { isDev } from '@/lib/utils.js'
 
+const pathToSection = (pathname) => {
+  const segments = pathname.split('/').filter(Boolean)
+  return segments[0] || 'home'
+}
 
 function App() {
-  const [activeSection, setActiveSection] = useState('home')
+  const pathname = usePathname()
+  const router = useRouter()
+  const activeSection = pathToSection(pathname)
   const [isVisible, setIsVisible] = useState(false)
   const currentChapter = getSceneChapterBySectionId(activeSection)
   const profile = profileContent.identity
@@ -83,7 +92,7 @@ function App() {
     const runtimeConfig = initializeDataActivationLayer()
 
     void smokeTestRemoteFlagshipContent(runtimeConfig).then((payload) => {
-      if (payload && import.meta.env.DEV) {
+      if (payload && isDev()) {
         console.debug('[flagship-content-smoke-test]', payload)
       }
     })
@@ -112,8 +121,6 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 text-white">
       <NavigationShell
         items={navigation}
-        activeSectionId={activeSection}
-        onChangeSection={setActiveSection}
       />
 
       {/* Main Content */}
@@ -147,7 +154,7 @@ function App() {
 
                 <div className="flex flex-col sm:flex-row gap-3 max-w-md pt-2">
                   <Button
-                    onClick={() => setActiveSection('projects')}
+                    onClick={() => router.push('/projects')}
                     className="bg-cyan-500/18 hover:bg-cyan-500/28 text-cyan-200 border border-cyan-300/28 px-6 py-2.5 rounded-lg flex-1 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70 text-sm font-medium"
                   >
                     Ver Proyectos
@@ -170,7 +177,7 @@ function App() {
               {/* Right: Portrait (subordinated) */}
               <div className="order-1 lg:order-2">
                 <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-gradient-to-b from-slate-800/70 to-slate-900/70 opacity-92">
-                  <img src={fotoPerfil} alt={`${profile.name}`} className="h-full w-full object-cover object-top" />
+                  <img src="/lijhoan.png" alt={`${profile.name}`} className="h-full w-full object-cover object-top" />
                 </div>
                 <div className="mt-4 space-y-1 text-center lg:text-left">
                   <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60">{profile.name}</p>
@@ -365,7 +372,7 @@ function App() {
               type="button"
               onClick={() => {
                 trackCtaInteraction('review-experience', 'experience')
-                setActiveSection('experience')
+                router.push('/experience')
               }}
               className="inline-flex items-center gap-2 text-cyan-200 hover:text-cyan-100 transition-colors duration-200"
             >

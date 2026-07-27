@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { ChevronRight } from 'lucide-react'
 
 const chapterKindCopy = {
@@ -6,7 +7,19 @@ const chapterKindCopy = {
   reading: 'Capitulo de lectura',
 }
 
-export default function NavigationShell({ items, activeSectionId, onChangeSection }) {
+const pathToSection = (pathname) => {
+  const segments = pathname.split('/').filter(Boolean)
+  return segments[0] || 'home'
+}
+
+export default function NavigationShell({ items }) {
+  const pathname = usePathname()
+  const router = useRouter()
+  const activeSectionId = useMemo(() => {
+    const section = pathToSection(pathname)
+    if (items.find((item) => item.id === section)) return section
+    return 'home'
+  }, [pathname, items])
   const activeIndex = useMemo(() => {
     const index = items.findIndex((item) => item.id === activeSectionId)
     return index >= 0 ? index : 0
@@ -15,6 +28,10 @@ export default function NavigationShell({ items, activeSectionId, onChangeSectio
   const activeItem = items[activeIndex] ?? items[0]
   const nextItem = items[activeIndex + 1] ?? null
   const progress = ((activeIndex + 1) / Math.max(1, items.length)) * 100
+
+  const navigateTo = (sectionId) => {
+    router.push(sectionId === 'home' ? '/' : `/${sectionId}`)
+  }
 
   return (
     <>
@@ -41,7 +58,7 @@ export default function NavigationShell({ items, activeSectionId, onChangeSectio
                   <li key={item.id} className="relative flex items-center justify-center">
                     <button
                       type="button"
-                      onClick={() => onChangeSection(item.id)}
+                      onClick={() => navigateTo(item.id)}
                       aria-current={isActive ? 'page' : undefined}
                       aria-label={`${item.label} - ${chapterKindCopy[item.kind]}`}
                       className={[
@@ -95,7 +112,7 @@ export default function NavigationShell({ items, activeSectionId, onChangeSectio
               <button
                 key={item.id}
                 type="button"
-                onClick={() => onChangeSection(item.id)}
+                onClick={() => navigateTo(item.id)}
                 aria-current={isActive ? 'page' : undefined}
                 className={[
                   'shrink-0 rounded-full border px-3 py-2 text-[11px] uppercase tracking-[0.16em] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/70 motion-reduce:transition-none',

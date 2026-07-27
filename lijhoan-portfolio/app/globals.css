@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+:root {
+  --app-bg: #020617;
+}
+
+body {
+  background-color: var(--app-bg);
+  color: white;
+}
+
+.chapter-section {
+  animation: chapter-fade-in 520ms cubic-bezier(0.2, 0.65, 0.18, 1);
+}
+
+@keyframes chapter-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chapter-section {
+    animation: none;
+  }
+}

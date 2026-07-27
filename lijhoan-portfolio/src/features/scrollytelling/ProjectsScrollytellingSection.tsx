@@ -11,6 +11,7 @@ import FlagshipProofPanel from '@/features/proof/FlagshipProofPanel.tsx'
 import { trackTelemetryEvent } from '@/features/telemetry/telemetryClient.ts'
 import type { ProjectItem } from '@/content/profile/profile.types'
 import { Calendar, ExternalLink } from 'lucide-react'
+import { isDev } from '@/lib/utils.js'
 
 type ProjectsScrollytellingSectionProps = {
   projects: ProjectItem[]
@@ -30,7 +31,7 @@ const hasCredibleLink = (link?: string) => {
  * This file owns only content and layout for the projects scene.
  */
 export default function ProjectsScrollytellingSection({ projects }: ProjectsScrollytellingSectionProps) {
-  const showRuntimeHud = import.meta.env.DEV && import.meta.env.VITE_SHOW_RUNTIME_HUD === 'true'
+  const showRuntimeHud = isDev()
 
   useEffect(() => {
     trackTelemetryEvent('proof_interaction', {

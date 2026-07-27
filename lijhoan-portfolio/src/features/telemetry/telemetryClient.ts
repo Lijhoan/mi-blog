@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { isDev } from '@/lib/utils.js'
 
 export type TelemetryEventName =
   | 'chapter_activated'
@@ -141,7 +142,7 @@ export const trackTelemetryEvent = (name: TelemetryEventName, payload: Telemetry
 
   activeAdapter.persist(event)
 
-  if (import.meta.env.DEV) {
+  if (isDev()) {
     // Dev-only visibility for contract validation before backend persistence is enabled.
     console.debug('[telemetry]', event)
   }

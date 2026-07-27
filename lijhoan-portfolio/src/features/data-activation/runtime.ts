@@ -117,6 +117,17 @@ export const resolveDataActivationRuntimeConfig = (env: DataActivationRuntimeEnv
   }
 }
 
+const getBrowserEnv = (): DataActivationRuntimeEnv => {
+  try {
+    const e = (process as unknown as Record<string, unknown> | undefined)?.env
+    if (e && typeof e === 'object') return e as DataActivationRuntimeEnv
+  } catch {
+    /* env not available */
+  }
+  return {}
+}
+
 export const getViteDataActivationRuntimeConfig = () => {
-  return resolveDataActivationRuntimeConfig(import.meta.env as unknown as DataActivationRuntimeEnv)
+  const env = getBrowserEnv()
+  return resolveDataActivationRuntimeConfig(env)
 }
