@@ -37,7 +37,7 @@ export default function FlagshipProofPanel() {
       {/* Diagrama centrado sin recortes; fondo igual al interior del SVG (#0a0a0a) para banda continua */}
       <div className="flex h-48 items-center justify-center border-b border-line bg-[#0a0a0a] sm:h-56">
         <img
-          src="/projects/tale-insight-analytics.svg"
+          src="/projects/s10-lakehouse.svg"
           alt={`Diagrama de arquitectura — ${flagshipProofCaseStudy.projectTitle}`}
           loading="lazy"
           decoding="async"

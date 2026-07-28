@@ -10,7 +10,7 @@ export {
   archiveCertificationCredentials,
   certificationTrustSummary,
 } from './certifications/certificationTrust.data'
-export { dataBiSkills, mlSkills, devSkills, infraSkills, aiSkills } from './skills/skills.data'
+export { dataPlatformSkills, biAnalyticsSkills, devopsAutomationSkills, infraSecuritySkills } from './skills/skills.data'
 export type {
   ContentStatus,
   OfficialLink,

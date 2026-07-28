@@ -24,6 +24,26 @@ const toAsset = (filename: string, title: string, tier: CertificationTier) => ({
 
 export const certificationCredentials: CertificationCredential[] = [
   {
+    id: 'dmc-data-engineer-2026',
+    title: 'Especialista en Data Engineer (Diploma)',
+    issuer: 'DMC Institute',
+    issuedAt: '2026-06',
+    tier: 'featured',
+    domain: 'data',
+    proofTags: ['Data Engineering', 'Lakehouse', '168 horas académicas'],
+    asset: toAsset('03062026 Especialista en Data Engineer - DMC INSTITUTE.webp', 'Especialista en Data Engineer', 'featured'),
+  },
+  {
+    id: 'dmc-big-data-2026',
+    title: 'Especialista en Big Data',
+    issuer: 'DMC Institute',
+    issuedAt: '2026-06',
+    tier: 'featured',
+    domain: 'data',
+    proofTags: ['Big Data', 'Arquitectura de Datos', '60 horas académicas'],
+    asset: toAsset('03062026 Especialista en Big Data - DMC INSTITUTE.webp', 'Especialista en Big Data', 'featured'),
+  },
+  {
     id: 'cisco-threat-management-2025',
     title: 'Gestion de Amenazas Ciberneticas',
     issuer: 'Cisco Networking Academy',

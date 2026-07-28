@@ -3,7 +3,15 @@
 import { useState, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import ProjectsScrollytellingSection from '@/features/scrollytelling/ProjectsScrollytellingSection.tsx'
-import { dataBiSkills, devSkills, experienceTimeline, featuredProjects, infraSkills, mlSkills, profileContent, aiSkills } from '@/content/index.ts'
+import {
+  biAnalyticsSkills,
+  dataPlatformSkills,
+  devopsAutomationSkills,
+  experienceTimeline,
+  featuredProjects,
+  infraSecuritySkills,
+  profileContent,
+} from '@/content/index.ts'
 import CertificationTrustLayer from '@/features/experience/CertificationTrustLayer.jsx'
 import NavigationShell from '@/features/navigation/NavigationShell.jsx'
 
@@ -28,38 +36,11 @@ function App() {
   const metrics = profileContent.metrics
   const experience = experienceTimeline
   const contactLinks = profileContent.links.contact
-  const skills = {
-    dataBi: dataBiSkills,
-    ml: mlSkills,
-    dev: devSkills,
-    infra: infraSkills,
-    ai: aiSkills,
-  }
   const skillGroups = [
-    {
-      id: 'data-intelligence',
-      title: 'Inteligencia de datos',
-      summary: 'Modelado de indicadores, visual analytics y decisiones operativas con trazabilidad.',
-      items: skills.dataBi,
-    },
-    {
-      id: 'machine-learning',
-      title: 'Aprendizaje automatico',
-      summary: 'Prediccion, segmentacion y despliegue de modelos orientados a impacto real.',
-      items: skills.ml,
-    },
-    {
-      id: 'engineering-delivery',
-      title: 'Entrega de ingenieria',
-      summary: 'Automatizacion, desarrollo y ejecucion de flujos completos de producto y datos.',
-      items: [...skills.dev, ...skills.ai],
-    },
-    {
-      id: 'platform-governance',
-      title: 'Plataforma y gobernanza',
-      summary: 'Infraestructura cloud, seguridad operativa y escalabilidad para entornos corporativos.',
-      items: skills.infra,
-    },
+    { id: 'data-platform', title: 'Plataforma de datos', items: dataPlatformSkills },
+    { id: 'bi-analytics', title: 'BI y analítica', items: biAnalyticsSkills },
+    { id: 'devops-automation', title: 'Automatización, DevOps e IA', items: devopsAutomationSkills },
+    { id: 'infra-security', title: 'Infraestructura y seguridad', items: infraSecuritySkills },
   ]
 
   const resolveContactHref = (label, fallback) => {

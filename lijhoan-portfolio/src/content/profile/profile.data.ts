@@ -3,19 +3,19 @@ import type { ProfileContent } from './profile.types'
 export const profileContent: ProfileContent = {
   identity: {
     name: 'Lijhoan Machaca Camarena',
-    role: 'Ingeniero Digital | Cloud Data Engineer | Solutions Architect',
+    role: 'Ingeniero Digital | Arquitectura de Datos | Data Engineering | DevOps | IA Aplicada',
     location: 'Lima, Perú',
     email: 'lijhoan@gmail.com',
     phone: '(+51) 931347134',
     linkedin: 'https://www.linkedin.com/in/lijhoanmc/',
     github: 'https://github.com/Lijhoan',
-    tags: ['Solutions Architect', 'Cloud Data Engineering', 'Full Stack', 'TypeScript', 'Next.js 15', 'Python', 'GCP', 'ERP', 'Infraestructura'],
+    tags: ['Arquitectura de Datos', 'Lakehouse', 'Data Engineering', 'Apache Airflow', 'dbt', 'Trino', 'DevOps · CI/CD', 'Seguridad', 'IA Aplicada', 'Python', 'Linux'],
   },
   positioning: {
     headline: 'Transformando datos en decisiones estratégicas',
     summary:
-      'Estratega de datos e Ingeniero Digital con amplia trayectoria liderando la transformación tecnológica de extremo a extremo. Especializado en infraestructuras fundacionales, modernización de sistemas core, desarrollo Full Stack avanzado, orquestación de IA y soluciones empresariales escalables en la nube.',
-    focus: 'Infraestructuras fundacionales, modernización de sistemas core, automatización, data engineering y soluciones empresariales listas para escalar.',
+      'Ingeniero Digital especializado en arquitectura de datos, modernización de sistemas legados y plataformas Lakehouse on-premise. Diseño, implemento y aseguro soluciones completas: desde la ingeniería inversa de un ERP legado hasta pipelines gobernados, DevOps, seguridad de secretos e IA aplicada al análisis técnico.',
+    focus: 'Plataformas de datos empresariales bajo arquitectura Medallion, orquestación y automatización (DataOps), seguridad por mínimo privilegio, CI/CD y analítica orientada a decisiones de negocio.',
   },
   metrics: [
     { value: '6+', label: 'Años de experiencia', source: 'CV: perfil profesional', status: 'canonical' },
@@ -35,28 +35,28 @@ export const profileContent: ProfileContent = {
   },
   stack: [
     {
-      title: 'Infraestructura, Redes y Operaciones',
-      items: ['Topología de redes', 'Configuración de servidores', 'Rocky Linux 9.7', 'Docker Compose', 'Podman', 'systemd', 'Cisco Network Defense'],
+      title: 'Arquitectura y plataforma de datos',
+      items: ['Lakehouse on-premise', 'Arquitectura Medallion (Bronze/Silver/Gold)', 'Apache Airflow', 'dbt Core', 'Apache Iceberg', 'Trino', 'MinIO', 'PostgreSQL · PgBouncer', 'SQL Server', 'Parquet · PyArrow'],
       status: 'canonical',
     },
     {
-      title: 'Data Engineering y Cloud',
-      items: ['Arquitectura de Data Warehouse desde cero', 'Google Cloud Platform (GCP)', 'Microsoft Azure', 'AWS', 'ETL pipelines'],
+      title: 'DevOps y automatización',
+      items: ['Jenkins', 'Gitea · GitHub', 'Registry privado', 'Docker · Docker Compose', 'Podman', 'systemd', 'n8n', 'Bash · PowerShell', 'CI/CD'],
       status: 'canonical',
     },
     {
-      title: 'Desarrollo Full Stack',
-      items: ['Next.js 15 (App Router)', 'React 19', 'TypeScript', 'Vite', 'NestJS', 'Tailwind CSS', 'shadcn/ui', 'Framer Motion', 'NextAuth', 'JWT'],
+      title: 'Seguridad e infraestructura',
+      items: ['OpenBao (secretos · AppRole · mínimo privilegio)', 'TLS/HTTPS · Nginx Proxy Manager', 'Ubuntu Server · Rocky Linux', 'SSH · ACL · firewall', 'DNS interno', 'Redes TCP/IP'],
       status: 'canonical',
     },
     {
-      title: 'Sistemas Core e IA',
-      items: ['Migraciones ERP', 'Profiling con agentes de IA', 'ChatGPT-4 prompting', 'Playwright'],
+      title: 'BI y analítica',
+      items: ['Power BI', 'DAX', 'SQL analítico', 'Modelos dimensionales', 'Python (pandas)', 'KPIs y datasets empresariales'],
       status: 'canonical',
     },
     {
-      title: 'Lenguajes y Bases de Datos',
-      items: ['Python 3.12+', 'TypeScript', 'SQL', 'R', 'PostgreSQL 16+', 'MySQL', 'SQL Server', 'Prisma ORM'],
+      title: 'Desarrollo e IA aplicada',
+      items: ['Python 3.12+', 'TypeScript', 'Next.js · React', 'NestJS', 'Ollama · modelos locales', 'Ingeniería inversa asistida por IA', 'Playwright', 'Microsoft 365 Admin'],
       status: 'canonical',
     },
   ],
