@@ -4,12 +4,10 @@ import { Badge } from '@/components/ui/badge.jsx'
 import { Button } from '@/components/ui/button.jsx'
 import { CardDescription, CardTitle } from '@/components/ui/card.jsx'
 import ScrollyTellingContainer from '@/components/layout/ScrollyTellingContainer.tsx'
-import ScrollRuntimeHud from '@/features/motion/debug/ScrollRuntimeHud.tsx'
 import ProofChapterOverlay from '@/features/experience/ProofChapterOverlay.tsx'
 import FlagshipProofPanel from '@/features/proof/FlagshipProofPanel.tsx'
 import type { ProjectItem } from '@/content/profile/profile.types'
 import { Calendar, ExternalLink } from 'lucide-react'
-import { isDev } from '@/lib/utils.js'
 
 type ProjectsScrollytellingSectionProps = {
   projects: ProjectItem[]
@@ -29,11 +27,8 @@ const hasCredibleLink = (link?: string) => {
  * This file owns only content and layout for the projects scene.
  */
 export default function ProjectsScrollytellingSection({ projects }: ProjectsScrollytellingSectionProps) {
-  const showRuntimeHud = isDev()
-
   return (
     <section className="chapter-section relative min-h-screen overflow-hidden px-4 py-8 sm:px-6 lg:px-10">
-      <ScrollRuntimeHud enabled={showRuntimeHud} />
       <ProofChapterOverlay active={true} />
 
       <div className="relative z-10 max-w-7xl mx-auto">

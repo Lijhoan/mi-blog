@@ -99,14 +99,6 @@ export default function SceneShell({ chapterId, title, eyebrow, summary, accentL
         </p>
       </div>
 
-      <div className={[
-        mood.frameVisibility.desktop ? 'hidden sm:block' : 'hidden',
-        'absolute bottom-4 right-4 lg:bottom-8 lg:right-8 rounded-full border px-4 py-2 text-[11px] uppercase tracking-[0.2em] backdrop-blur-md',
-        mood.contrastBehavior.chipClass,
-      ].join(' ')}>
-        {scene.reducedMotion ? 'Reduced motion' : `Scroll ${Math.round(scene.globalProgress * 100)}%`}
-      </div>
-
       <div className="pointer-events-auto relative z-10 h-full w-full">
         {children}
       </div>

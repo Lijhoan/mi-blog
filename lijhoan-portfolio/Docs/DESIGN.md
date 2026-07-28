@@ -6,6 +6,21 @@ Documento único del sistema de diseño y experiencia. Destila las decisiones v�
 
 ---
 
+## 0. Identidad visual (dirección de arte — Fase 5)
+
+**Dirección elegida: Editorial técnico.** Revista tech premium con alma de ingeniería: editorial pero preciso.
+
+- **Tipografía (voz):**
+  - *Display* — **Fraunces** (serif variable de alto contraste, con `opsz`) para titulares/hero. Da la voz editorial.
+  - *Texto* — **Inter** (sans geométrica neutra) para cuerpo y UI.
+  - *Datos* — **JetBrains Mono** para métricas, años, etiquetas técnicas y detalles de ingeniería.
+  - Se cargan vía `next/font` y se exponen como `--font-display`, `--font-sans`, `--font-mono` (tokens Tailwind v4 `@theme`).
+- **Color:** base de **tinta cálida** (near-black neutro, no el slate azulado de SaaS), texto **marfil cálido** (no blanco puro), **acento frío** de señal y **ámbar cálido** reservado para el cierre (cta). Los valores finos se afinan durante la Fase 5.
+- **Dashboards de proyectos:** se reemplazan los screenshots planos por **diagramas de arquitectura estilizados** (flujo de datos / stack), coherentes con la identidad.
+- **Prohibido (tells de "IA/template"):** palabra-en-degradado cyan→azul en titulares, botones degradado cyan→azul genéricos, barras de porcentaje en skills, fondos slate azulados genéricos, cualquier elemento de debug en pantalla.
+
+---
+
 ## 1. Principios
 
 **Cinco pilares de experiencia**

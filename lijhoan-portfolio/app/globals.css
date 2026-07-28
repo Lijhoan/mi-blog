@@ -1,12 +1,47 @@
 @import "tailwindcss";
 
+@theme {
+  /* Voz tipográfica — Editorial técnico */
+  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* Tinta cálida — base neutra, no slate azulado */
+  --color-ink-950: #08080a;
+  --color-ink-900: #0d0d11;
+  --color-ink-800: #16161c;
+  --color-ink-700: #21212a;
+
+  /* Marfil cálido para texto (no blanco puro) */
+  --color-paper: #f2efe9;
+  --color-paper-muted: #b4afa6;
+  --color-paper-faint: #6f6b64;
+
+  /* Acento frío de señal + ámbar cálido de cierre */
+  --color-signal: #56d4c4;
+  --color-signal-soft: #8fe6da;
+  --color-ember: #e9b872;
+}
+
 :root {
-  --app-bg: #020617;
+  --app-bg: var(--color-ink-950);
 }
 
 body {
   background-color: var(--app-bg);
-  color: white;
+  background-image:
+    radial-gradient(120% 80% at 22% -10%, rgba(86, 212, 196, 0.06), transparent 55%),
+    radial-gradient(90% 70% at 100% 0%, rgba(233, 184, 114, 0.04), transparent 50%);
+  background-attachment: fixed;
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+}
+
+/* Titulares principales con voz editorial (display serif) */
+h1,
+h2 {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
 }
 
 .chapter-section {
