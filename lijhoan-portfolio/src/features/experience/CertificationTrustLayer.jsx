@@ -7,7 +7,6 @@ import {
   featuredCertificationCredentials,
   supportingCertificationCredentials,
 } from '@/content/certifications/certificationTrust.data.ts'
-import { trackTelemetryEvent } from '@/features/telemetry/telemetryClient.ts'
 import { Calendar, Eye, ShieldCheck, X } from 'lucide-react'
 
 function CertificationImage({ credential, className }) {
@@ -70,12 +69,6 @@ function CredentialCard({ credential, compact = false, emphasis = 'standard', on
 
         <Button
           onClick={() => {
-            trackTelemetryEvent('trust_interaction', {
-              action: 'open-credential-proof',
-              credentialId: credential.id,
-              issuer: credential.issuer,
-              compact,
-            })
             onOpen(credential)
           }}
           variant="secondary"
@@ -186,10 +179,6 @@ export default function CertificationTrustLayer() {
             </div>
             <Button
               onClick={() => {
-                trackTelemetryEvent('trust_interaction', {
-                  action: 'open-archive-drawer',
-                  archiveCount: certificationTrustSummary.archiveCount,
-                })
                 setArchiveOpen(true)
               }}
               variant="outline"

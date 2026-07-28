@@ -1,11 +1,7 @@
 'use client'
 
-import { lazy, Suspense, useEffect, useRef } from 'react'
 import { flagshipProofCaseStudy } from '@/content/case-studies/flagshipProof.data.ts'
-import { trackTelemetryEvent } from '@/features/telemetry/telemetryClient.ts'
 import { AlertTriangle, Cloud, Database, Lock, ServerCog, ShieldCheck, Workflow } from 'lucide-react'
-
-const BiEmbedReadinessShell = lazy(() => import('./BiEmbedReadinessShell.tsx'))
 
 const statusLabel = {
   verified: 'Verificado',
@@ -32,39 +28,8 @@ const panelTitleMap: Record<string, string> = {
  * It prioritizes real architecture and impact narrative over decorative complexity.
  */
 export default function FlagshipProofPanel() {
-  const rootRef = useRef<HTMLElement | null>(null)
-
-  useEffect(() => {
-    const root = rootRef.current
-
-    if (!root || typeof IntersectionObserver === 'undefined') {
-      return
-    }
-
-    let reported = false
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting || reported) {
-          return
-        }
-
-        reported = true
-        trackTelemetryEvent('proof_interaction', {
-          action: 'flagship-panel-visible',
-          projectId: flagshipProofCaseStudy.id,
-        })
-      },
-      {
-        threshold: 0.45,
-      },
-    )
-
-    observer.observe(root)
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <article ref={rootRef} className="flex min-h-[84svh] w-[94vw] max-w-[1180px] shrink-0 flex-col justify-between overflow-hidden rounded-[1.6rem] bg-slate-950/60 p-6 sm:p-8 lg:p-10 backdrop-blur-xl">
+    <article className="flex min-h-[84svh] w-[94vw] max-w-[1180px] shrink-0 flex-col justify-between overflow-hidden rounded-[1.6rem] bg-slate-950/60 p-6 sm:p-8 lg:p-10 backdrop-blur-xl">
       <div className="space-y-5">
         <div className="space-y-3 max-w-4xl">
           <p className="text-[11px] uppercase tracking-[0.16em] text-cyan-100/75">Caso principal</p>
@@ -145,20 +110,6 @@ export default function FlagshipProofPanel() {
             </ul>
           </article>
         </section>
-
-        <Suspense
-          fallback={
-            <div className="rounded-2xl bg-black/20 p-4 text-sm text-slate-300">
-              Preparando capa BI...
-            </div>
-          }
-        >
-          <BiEmbedReadinessShell
-            sourceId="tale-insight-analytics"
-            accessMode="private"
-            activationInput={flagshipProofCaseStudy.dataProofLayer.activationContract.currentReadiness}
-          />
-        </Suspense>
       </div>
 
       <div className="mt-5 border-l border-amber-300/35 pl-4 text-xs text-amber-100">
@@ -167,7 +118,7 @@ export default function FlagshipProofPanel() {
           Alcance real
         </p>
         <p className="mt-2 leading-relaxed text-amber-100/90">
-          Las metricas de ahorro economico exacto siguen pendientes de instrumentacion. Este chapter solo declara impacto verificado y deja el contrato BI listo para conexion futura.
+          Las metricas de ahorro economico exacto siguen pendientes de instrumentacion. Este chapter solo declara impacto verificado, sin exagerar resultados.
         </p>
       </div>
     </article>

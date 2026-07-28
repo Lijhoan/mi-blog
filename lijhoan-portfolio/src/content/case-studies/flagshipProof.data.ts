@@ -27,22 +27,6 @@ export type FlagshipProofCaseStudy = {
   impactMetrics: FlagshipProofMetric[]
   constraintsAndComplexity: string[]
   credibilitySignals: string[]
-  dataProofLayer: {
-    strategy: string
-    activationContract: {
-      activationMode: 'user-intent' | 'automatic'
-      requiredData: string[]
-      currentReadiness: {
-        activationRequested: boolean
-        loading: boolean
-        hasEmbedMetadata: boolean
-        hasCredentialProvider: boolean
-      }
-      migrationPath: string[]
-    }
-    reason: string
-    integrationContract: string[]
-  }
   storyPanels: FlagshipProofPanel[]
 }
 
@@ -129,31 +113,6 @@ export const flagshipProofCaseStudy: FlagshipProofCaseStudy = {
     'Arquitectura preparada para integraciones y trazabilidad operacional.',
     'Narrativa de producto interno orientada a decisiones de negocio, no a demo visual.',
   ],
-  dataProofLayer: {
-    strategy: 'Metric panels canonicos + architecture story panels + BI-ready embed shell lazy-loaded.',
-    activationContract: {
-      activationMode: 'user-intent',
-      requiredData: ['sourceId', 'workspaceId', 'reportId', 'tenantId', 'accessMode', 'tokenProvider'],
-      currentReadiness: {
-        activationRequested: false,
-        loading: false,
-        hasEmbedMetadata: true,
-        hasCredentialProvider: false,
-      },
-      migrationPath: [
-        'Mover token exchange a Next.js Route Handlers.',
-        'Persistir auditoria de activaciones en backend seguro.',
-        'Conectar fuentes BI reales solo con secretos server-side.',
-      ],
-    },
-    reason:
-      'No se fuerza embed activo sin credenciales ni entorno productivo de conexion en este repositorio. Se prioriza un contrato honesto y portable.',
-    integrationContract: [
-      'El shell acepta sourceId, accessMode y estado de disponibilidad.',
-      'La activacion real de embed queda desacoplada de la narrativa del chapter.',
-      'La carga es lazy para no penalizar el primer render del recorrido.',
-    ],
-  },
   storyPanels: [
     {
       title: 'Problem Framing',

@@ -12,13 +12,10 @@ import { getSceneChapterBySectionId } from '@/features/experience/chapter-system
 import CtaChapterOverlay from '@/features/experience/CtaChapterOverlay.tsx'
 import CertificationTrustLayer from '@/features/experience/CertificationTrustLayer.jsx'
 import NavigationShell from '@/features/navigation/NavigationShell.jsx'
-import { trackTelemetryEvent, useChapterTelemetry } from '@/features/telemetry/telemetryClient.ts'
-import { initializeDataActivationLayer, smokeTestRemoteFlagshipContent } from '@/features/data-activation/client.ts'
 import {
   Download,
   ChevronRight,
 } from 'lucide-react'
-import { isDev } from '@/lib/utils.js'
 
 const pathToSection = (pathname) => {
   const segments = pathname.split('/').filter(Boolean)
@@ -88,25 +85,7 @@ function App() {
     setIsVisible(true)
   }, [])
 
-  useEffect(() => {
-    const runtimeConfig = initializeDataActivationLayer()
-
-    void smokeTestRemoteFlagshipContent(runtimeConfig).then((payload) => {
-      if (payload && isDev()) {
-        console.debug('[flagship-content-smoke-test]', payload)
-      }
-    })
-  }, [])
-
-  useChapterTelemetry(activeSection)
-
-  const trackCtaInteraction = (action, target) => {
-    trackTelemetryEvent('cta_interaction', {
-      sectionId: activeSection,
-      action,
-      target,
-    })
-  }
+  const trackCtaInteraction = () => {}
   const navigation = [
     { id: 'home', label: 'Inicio', shortLabel: 'Inicio', kind: 'immersive' },
     { id: 'about', label: 'Perfil', shortLabel: 'Perfil', kind: 'reading' },

@@ -1,54 +1,53 @@
 # Lijhoan Machaca — Portfolio Inmersivo
 
-Portafolio profesional con experiencia narrativa inmersiva, scrollytelling horizontal, capa atmosférica WebGL y contratos de datos preparados para backend.
+Portafolio profesional con experiencia narrativa por capítulos, scrollytelling horizontal y capa atmosférica WebGL. Prioriza legibilidad y performance sobre efectos decorativos.
 
-## Stack actual
+## Stack
 
 | Capa | Tecnología |
 |---|---|
-| Frontend | Next.js 16 + React 19 + TypeScript 6 |
-| Routing | Next.js App Router (usePathname/useRouter) |
+| Framework | Next.js 16 (App Router, Turbopack) + React 19 |
+| Lenguaje | TypeScript 6 |
 | Estilos | Tailwind CSS v4 |
 | Motion | GSAP 3.14 + ScrollTrigger + Lenis 1.3 + Framer Motion 12 |
 | WebGL | three + @react-three/fiber 9 + @react-three/drei 10 |
 | UI | Radix UI + shadcn/ui + lucide-react |
-| Backend (separado) | Next.js 15.3 (backend-spine/) |
 | Paquetería | pnpm 10 |
 
-## Estado actual
+Es un SPA de cliente: Next.js sirve un catch-all `'use client'` (`app/[[...slug]]/page.tsx`) que monta `src/App.jsx` (7 secciones navegables por URL). El contenido vive tipado en `src/content/`; no hay backend.
 
-- MVP funcional con características beta técnicas.
-- SPA con 7 secciones navegables y scrollytelling horizontal (migrado a Next.js App Router).
-- Sistema de capítulos narrativos con atmósfera variable.
-- WebGL atmosférico lazy-loaded.
-- Telemetría local en sessionStorage.
-- Backend-spine con 5 endpoints funcionales (en memoria).
-- Prisma/PostgreSQL: schema draft existente, no migrado.
-
-## Comandos de desarrollo
+## Comandos
 
 ```bash
-pnpm install          # instalar dependencias
-pnpm dev              # servidor de desarrollo Next.js
-pnpm typecheck        # TypeScript check
-pnpm lint             # ESLint (cubre .js/.jsx)
-pnpm build            # build producción Next.js
-pnpm start            # servidor de producción
+pnpm install      # instalar dependencias
+pnpm dev          # servidor de desarrollo
+pnpm build        # build de producción
+pnpm start        # servidor de producción
+pnpm lint         # ESLint
+pnpm typecheck    # TypeScript (tsc --noEmit)
 ```
 
-Backend-spine:
-```bash
-cd backend-spine
-pnpm dev              # servidor Next.js
-pnpm build            # build Next.js
+## Estructura
+
+```
+app/                      # cascarón Next.js (layout + catch-all route)
+src/
+  App.jsx                 # SPA raíz (7 secciones)
+  components/             # ui (shadcn), layout (scroll providers)
+  content/                # capa de datos tipada (perfil, proyectos, skills…)
+  features/
+    experience/           # sistema de capítulos narrativos + atmósfera
+    scrollytelling/       # sección horizontal de proyectos
+    navigation/           # NavigationShell
+    motion/               # scroll runtime (GSAP + Lenis)
+    graphics/             # MinimalWebGLLayer (R3F)
+    proof/                # FlagshipProofPanel
+  lib/                    # utilidades
+Docs/                     # ROADMAP.md · DESIGN.md · cv.md
 ```
 
-## Validaciones actuales
+## Documentación
 
-- `pnpm typecheck` ✅ PASS
-- `pnpm build` ✅ PASS
-- `pnpm lint` ✅ PASS (0 errores, 2 warnings preexistentes)
-
-## Roadmap
-
-Ver [`Docs/ROADMAP_CURRENT.md`](Docs/ROADMAP_CURRENT.md) para el plan vigente.
+- [`Docs/ROADMAP.md`](Docs/ROADMAP.md) — plan de implementación por fases y estado actual.
+- [`Docs/DESIGN.md`](Docs/DESIGN.md) — sistema de diseño y experiencia.
+- [`Docs/cv.md`](Docs/cv.md) — contenido fuente del CV (source of truth).
