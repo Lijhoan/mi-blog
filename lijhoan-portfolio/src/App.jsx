@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button.jsx'
 import ProjectsScrollytellingSection from '@/features/scrollytelling/ProjectsScrollytellingSection.tsx'
 import { dataBiSkills, devSkills, experienceTimeline, featuredProjects, infraSkills, mlSkills, profileContent, aiSkills } from '@/content/index.ts'
 import IdentityChapterOverlay from '@/features/experience/IdentityChapterOverlay.tsx'
@@ -12,10 +11,7 @@ import { getSceneChapterBySectionId } from '@/features/experience/chapter-system
 import CtaChapterOverlay from '@/features/experience/CtaChapterOverlay.tsx'
 import CertificationTrustLayer from '@/features/experience/CertificationTrustLayer.jsx'
 import NavigationShell from '@/features/navigation/NavigationShell.jsx'
-import {
-  Download,
-  ChevronRight,
-} from 'lucide-react'
+import { ChevronRight } from 'lucide-react'
 
 const pathToSection = (pathname) => {
   const segments = pathname.split('/').filter(Boolean)
@@ -107,60 +103,71 @@ function App() {
         <SceneContinuityLayer chapter={currentChapter} />
         {/* Home Section */}
         {activeSection === 'home' && (
-          <section className={`chapter-section relative min-h-screen flex items-center px-4 py-8 sm:px-6 lg:px-10 transition-all duration-1000 motion-reduce:transition-none ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <section className={`chapter-section relative min-h-screen flex items-center px-6 py-16 sm:px-8 lg:px-12 transition-all duration-1000 motion-reduce:transition-none ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <IdentityChapterOverlay />
-            <div className="relative z-10 max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.3fr_0.7fr] gap-12 lg:gap-16 items-center">
-              {/* Left: Dominant headline + narrative */}
-              <div className="space-y-8 order-2 lg:order-1">
-                <div className="space-y-6 max-w-3xl">
-                  <p className="text-[10px] uppercase tracking-[0.32em] text-cyan-100/60">Identidad</p>
-                  <h1 className="text-4xl sm:text-5xl lg:text-7xl font-semibold tracking-tighter leading-[1.08] text-white">
-                    {hero.headline}
-                  </h1>
-                  <p className="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-[52ch]">
-                    {hero.summary}
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 max-w-sm">
-                  {hero.metrics.map((metric) => (
-                    <div key={metric.label} className="space-y-1">
-                      <p className="text-3xl sm:text-4xl font-bold text-cyan-300">{metric.value}</p>
-                      <p className="text-xs uppercase tracking-[0.16em] text-gray-400">{metric.label}</p>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-3 max-w-md pt-2">
-                  <Button
-                    onClick={() => router.push('/projects')}
-                    className="bg-cyan-500/18 hover:bg-cyan-500/28 text-cyan-200 border border-cyan-300/28 px-6 py-2.5 rounded-lg flex-1 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70 text-sm font-medium"
-                  >
-                    Ver Proyectos
-                    <ChevronRight size={16} className="ml-2" />
-                  </Button>
-
-                  <Button
-                    onClick={() => {
-                      trackCtaInteraction('download-cv', '/cv.pdf')
-                      window.open('/cv.pdf', '_blank')
-                    }}
-                    className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-6 py-2.5 rounded-lg flex-1 transition-all duration-300 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70"
-                  >
-                    <Download size={16} className="mr-2" />
-                    CV
-                  </Button>
-                </div>
+            <div className="relative z-10 mx-auto w-full max-w-5xl">
+              {/* Metadatos técnicos superiores */}
+              <div className="flex items-baseline justify-between gap-4 border-b border-line pb-4 text-[10px] uppercase tracking-[0.14em] text-faint">
+                <span>[ portfolio — v2.0 ]</span>
+                <span className="hidden sm:inline">{profile.location}</span>
+                <span>2026</span>
               </div>
 
-              {/* Right: Portrait (subordinated) */}
-              <div className="order-1 lg:order-2">
-                <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-gradient-to-b from-slate-800/70 to-slate-900/70 opacity-92">
-                  <img src="/lijhoan.png" alt={`${profile.name}`} className="h-full w-full object-cover object-top" />
+              <div className="grid grid-cols-1 items-center gap-12 pt-12 lg:grid-cols-[1.4fr_0.6fr] lg:gap-16 lg:pt-16">
+                {/* Izquierda: headline dominante + narrativa */}
+                <div className="order-2 space-y-8 lg:order-1">
+                  <p className="text-[10px] uppercase tracking-[0.22em] text-dim">{`// ${profile.role}`}</p>
+                  <h1 className="font-doto text-[clamp(44px,8vw,92px)] font-black leading-[1.02] text-ink">
+                    {hero.headline}
+                    <span className="text-accent motion-reduce:hidden" style={{ animation: 'blink 1.2s steps(1) infinite' }}>▮</span>
+                  </h1>
+                  <p className="max-w-[58ch] text-sm leading-8 text-dim">
+                    {hero.summary}
+                  </p>
+
+                  <div className="flex max-w-md gap-10 border-t border-line pt-6">
+                    {hero.metrics.map((metric) => (
+                      <div key={metric.label} className="space-y-1">
+                        <p className="font-doto text-2xl font-bold text-ink sm:text-3xl">{metric.value}</p>
+                        <p className="text-[9px] uppercase tracking-[0.14em] text-faint">{metric.label}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap gap-3 pt-2">
+                    <button
+                      type="button"
+                      onClick={() => router.push('/projects')}
+                      className="cursor-pointer rounded-full bg-accent px-6 py-3 text-[12px] uppercase tracking-[0.1em] text-white transition-all duration-200 hover:-translate-y-px hover:opacity-85 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ink"
+                    >
+                      Ver proyectos →
+                    </button>
+                    <a
+                      href="/cv.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="rounded-full border border-line px-6 py-3 text-[12px] uppercase tracking-[0.1em] text-ink transition-all duration-200 hover:-translate-y-px hover:border-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ink"
+                    >
+                      CV [pdf] ↗
+                    </a>
+                  </div>
                 </div>
-                <div className="mt-4 space-y-1 text-center lg:text-left">
-                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60">{profile.name}</p>
-                  <p className="text-sm text-gray-400">{profile.role}</p>
+
+                {/* Derecha: retrato como ficha técnica */}
+                <div className="order-1 lg:order-2">
+                  <figure className="border border-line bg-card">
+                    <div className="flex items-center justify-between border-b border-line px-4 py-2 text-[9px] uppercase tracking-[0.14em] text-faint">
+                      <span className="font-doto text-[11px] font-bold text-accent">ID.01</span>
+                      <span>retrato</span>
+                    </div>
+                    <div className="aspect-[3/4] overflow-hidden">
+                      <img src="/lijhoan.png" alt={profile.name} className="h-full w-full object-cover object-top grayscale" />
+                    </div>
+                    <figcaption className="space-y-1 border-t border-line px-4 py-3">
+                      <p className="text-[10px] uppercase tracking-[0.18em] text-ink">{profile.name}</p>
+                      <p className="text-[9px] uppercase tracking-[0.12em] text-faint">{profile.role}</p>
+                    </figcaption>
+                  </figure>
                 </div>
               </div>
             </div>
