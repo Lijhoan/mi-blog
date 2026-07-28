@@ -4,11 +4,6 @@ import { useState, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import ProjectsScrollytellingSection from '@/features/scrollytelling/ProjectsScrollytellingSection.tsx'
 import { dataBiSkills, devSkills, experienceTimeline, featuredProjects, infraSkills, mlSkills, profileContent, aiSkills } from '@/content/index.ts'
-import IdentityChapterOverlay from '@/features/experience/IdentityChapterOverlay.tsx'
-import TrustChapterOverlay from '@/features/experience/TrustChapterOverlay.tsx'
-import SceneContinuityLayer from '@/features/experience/SceneContinuityLayer.tsx'
-import { getSceneChapterBySectionId } from '@/features/experience/chapter-system.ts'
-import CtaChapterOverlay from '@/features/experience/CtaChapterOverlay.tsx'
 import CertificationTrustLayer from '@/features/experience/CertificationTrustLayer.jsx'
 import NavigationShell from '@/features/navigation/NavigationShell.jsx'
 import { ChevronRight } from 'lucide-react'
@@ -23,7 +18,6 @@ function App() {
   const router = useRouter()
   const activeSection = pathToSection(pathname)
   const [isVisible, setIsVisible] = useState(false)
-  const currentChapter = getSceneChapterBySectionId(activeSection)
   const profile = profileContent.identity
   const hero = {
     headline: profileContent.positioning.headline,
@@ -99,13 +93,11 @@ function App() {
       />
 
       {/* Main Content */}
-      <main className="relative z-10 min-h-screen pb-24 md:ml-[86px] md:pb-0 lg:ml-[104px]">
-        <SceneContinuityLayer chapter={currentChapter} />
+      <main className="relative z-10 min-h-screen pt-16">
         {/* Home Section */}
         {activeSection === 'home' && (
-          <section className={`chapter-section relative min-h-screen flex items-center px-6 py-16 sm:px-8 lg:px-12 transition-all duration-1000 motion-reduce:transition-none ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <IdentityChapterOverlay />
-            <div className="relative z-10 mx-auto w-full max-w-5xl">
+          <section className={`chapter-section relative min-h-[calc(100svh-4rem)] flex items-center px-6 py-16 sm:px-8 lg:px-12 transition-all duration-1000 motion-reduce:transition-none ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <div className="relative z-10 mx-auto w-full max-w-6xl">
               {/* Metadatos técnicos superiores */}
               <div className="flex items-baseline justify-between gap-4 border-b border-line pb-4 text-[10px] uppercase tracking-[0.14em] text-faint">
                 <span>[ portfolio — v2.0 ]</span>
@@ -113,7 +105,7 @@ function App() {
                 <span>2026</span>
               </div>
 
-              <div className="grid grid-cols-1 items-center gap-12 pt-12 lg:grid-cols-[1.4fr_0.6fr] lg:gap-16 lg:pt-16">
+              <div className="grid grid-cols-1 items-center gap-12 pt-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20 lg:pt-16">
                 {/* Izquierda: headline dominante + narrativa */}
                 <div className="order-2 space-y-8 lg:order-1">
                   <p className="text-[10px] uppercase tracking-[0.22em] text-dim">{`// ${profile.role}`}</p>
@@ -255,7 +247,6 @@ function App() {
 
       {activeSection === 'experience' && (
         <section className="chapter-section relative min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center overflow-hidden">
-          <TrustChapterOverlay />
           <div className="relative z-10 max-w-6xl mx-auto w-full space-y-8">
             <div className="max-w-3xl">
               <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60 mb-4">Trayectoria</p>
@@ -324,7 +315,6 @@ function App() {
 {/* Contact Section */}
 {activeSection === 'contact' && (
   <section className="chapter-section relative min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center overflow-hidden">
-    <CtaChapterOverlay />
     <div className="relative z-10 max-w-6xl mx-auto w-full space-y-10">
       <div className="max-w-4xl">
         <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60 mb-4">Capitulo cierre</p>

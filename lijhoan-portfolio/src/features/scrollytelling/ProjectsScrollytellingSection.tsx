@@ -4,7 +4,6 @@ import { Badge } from '@/components/ui/badge.jsx'
 import { Button } from '@/components/ui/button.jsx'
 import { CardDescription, CardTitle } from '@/components/ui/card.jsx'
 import ScrollyTellingContainer from '@/components/layout/ScrollyTellingContainer.tsx'
-import ProofChapterOverlay from '@/features/experience/ProofChapterOverlay.tsx'
 import FlagshipProofPanel from '@/features/proof/FlagshipProofPanel.tsx'
 import type { ProjectItem } from '@/content/profile/profile.types'
 import { Calendar, ExternalLink } from 'lucide-react'
@@ -29,7 +28,6 @@ const hasCredibleLink = (link?: string) => {
 export default function ProjectsScrollytellingSection({ projects }: ProjectsScrollytellingSectionProps) {
   return (
     <section className="chapter-section relative min-h-screen overflow-hidden px-4 py-8 sm:px-6 lg:px-10">
-      <ProofChapterOverlay active={true} />
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="mb-8 max-w-2xl text-left sm:mb-10">

@@ -1,6 +1,7 @@
 import './globals.css';
 import type { ReactNode } from 'react';
 import { Space_Mono, Doto } from 'next/font/google';
+import Providers from './providers';
 
 const spaceMono = Space_Mono({
   subsets: ['latin'],
@@ -20,9 +21,9 @@ export default function RootLayout({
   children,
 }: { children: ReactNode }) {
   return (
-    <html lang="es" className={`${spaceMono.variable} ${doto.variable}`}>
+    <html lang="es" className={`${spaceMono.variable} ${doto.variable}`} suppressHydrationWarning>
       <body className="min-h-screen antialiased">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
