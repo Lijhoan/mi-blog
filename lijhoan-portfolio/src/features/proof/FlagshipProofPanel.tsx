@@ -27,21 +27,21 @@ const panelTitleMap: Record<string, string> = {
  */
 export default function FlagshipProofPanel() {
   return (
-    <article className="flex min-h-[72svh] w-[88vw] max-w-[980px] shrink-0 flex-col border border-line bg-card">
+    <article className="flex min-h-[72svh] w-[86vw] max-w-[840px] shrink-0 flex-col border border-line bg-card">
       <div className="flex items-baseline justify-between gap-3 border-b border-line px-5 py-2.5 text-[9px] uppercase tracking-[0.14em] text-faint sm:px-6">
         <span className="font-doto text-[11px] font-bold text-accent">P.01</span>
         <span>caso principal</span>
         <span>{flagshipProofCaseStudy.projectCategory}</span>
       </div>
 
-      {/* Diagrama de arquitectura (spec-sheet, en public/projects/) */}
-      <div className="h-44 overflow-hidden border-b border-line sm:h-52">
+      {/* Diagrama centrado sin recortes; fondo igual al interior del SVG (#0a0a0a) para banda continua */}
+      <div className="flex h-48 items-center justify-center border-b border-line bg-[#0a0a0a] sm:h-56">
         <img
           src="/projects/tale-insight-analytics.svg"
           alt={`Diagrama de arquitectura — ${flagshipProofCaseStudy.projectTitle}`}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover object-top"
+          className="h-full w-full object-contain"
         />
       </div>
 
@@ -71,9 +71,9 @@ export default function FlagshipProofPanel() {
           </div>
           <div className="grid grid-cols-2 gap-px bg-line sm:grid-cols-4">
             {flagshipProofCaseStudy.impactMetrics.map((metric) => (
-              <article key={metric.label} className="bg-card px-4 py-3">
+              <article key={metric.label} className="min-w-0 bg-card px-4 py-3">
                 <p className="text-[9px] uppercase tracking-[0.14em] text-faint">{metric.label}</p>
-                <p className="font-doto mt-2 text-base font-bold text-ink sm:text-lg">{metric.value}</p>
+                <p className="font-doto mt-2 break-words text-sm font-bold text-ink sm:text-base">{metric.value}</p>
                 <p className="mt-1 text-[10px] text-faint">{metric.unit}</p>
                 <p className={['mt-2 text-[9px] uppercase tracking-[0.14em]', statusClass[metric.status]].join(' ')}>
                   {metric.status === 'verified' && <span aria-hidden="true" className="text-accent">● </span>}

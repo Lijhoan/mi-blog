@@ -49,13 +49,14 @@ export default function ProjectsScrollytellingSection({ projects }: ProjectsScro
                   <span>{project.year}</span>
                 </div>
 
-                <div className="h-52 overflow-hidden border-b border-line sm:h-64">
+                {/* Diagrama completo, proporción nativa 1200x760 — sin recortes */}
+                <div className="aspect-[30/19] overflow-hidden border-b border-line">
                   <img
                     src={project.image}
                     alt={`Diagrama de arquitectura — ${project.title}`}
                     loading="lazy"
                     decoding="async"
-                    className="h-full w-full object-cover object-top"
+                    className="h-full w-full object-cover"
                   />
                 </div>
 
