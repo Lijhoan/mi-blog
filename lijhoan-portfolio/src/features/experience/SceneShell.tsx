@@ -22,7 +22,6 @@ export type SceneShellProps = {
  * It turns runtime signals into subtle atmospheric motion without owning content or scroll logic.
  */
 export default function SceneShell({ chapterId, title, eyebrow, summary, accentLabel = 'Immersive profile', children, className, active = true }: SceneShellProps) {
-  if (!active) return null
   const scene = useScrollRuntimeSelector((runtime) => ({
     reducedMotion: runtime.reducedMotion,
     globalProgress: runtime.globalProgress,
@@ -35,15 +34,17 @@ export default function SceneShell({ chapterId, title, eyebrow, summary, accentL
   const atmosphereStyle = useMemo(() => {
     const driftX = (scene.globalProgress * 2 - 1) * 24
     const driftY = scene.direction === 'down' ? 18 : scene.direction === 'up' ? -18 : 0
-    const pulse = Math.min(1.08, 1 + Math.abs(scene.velocity) * 0.015)
+    const pulse = Math.min(1.08, 1 + Math.abs(scene.velocity) * 0.015 * mood.motionIntensity.pulseMultiplier)
 
     return {
       '--scene-drift-x': `${driftX}px`,
       '--scene-drift-y': `${driftY}px`,
       '--scene-pulse': scene.reducedMotion ? '1' : String(pulse),
       opacity: scene.reducedMotion ? 0.72 : 1,
-        } as CSSProperties
-      }, [mood.motionIntensity.pulseMultiplier, scene.direction, scene.globalProgress, scene.reducedMotion, scene.velocity])
+    } as CSSProperties
+  }, [mood.motionIntensity.pulseMultiplier, scene.direction, scene.globalProgress, scene.reducedMotion, scene.velocity])
+
+  if (!active) return null
 
   return (
     <section className={['pointer-events-none absolute inset-0 overflow-hidden', className].filter(Boolean).join(' ')}>
