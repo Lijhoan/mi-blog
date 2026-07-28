@@ -73,3 +73,4 @@ De ~40 `.md` contradictorios a **cuatro piezas vivas**: `README.md`, `Docs/ROADM
 | Manejo de legacy | **Borrado directo** (git conserva historial) |
 | Documentación | **4 piezas**: README + ROADMAP + DESIGN + cv.md |
 | Prioridad post-estabilización | **Pulido visual/motion** |
+| Dirección de arte | **Nothing / spec-sheet** (Space Mono + Doto, monocromo + rojo señal, 1px, sin sombras) — ver DESIGN.md §0 |

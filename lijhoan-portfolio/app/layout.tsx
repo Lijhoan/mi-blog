@@ -1,23 +1,18 @@
 import './globals.css';
 import type { ReactNode } from 'react';
-import { Fraunces, Inter, JetBrains_Mono } from 'next/font/google';
+import { Space_Mono, Doto } from 'next/font/google';
 
-const fraunces = Fraunces({
+const spaceMono = Space_Mono({
   subsets: ['latin'],
-  variable: '--font-display',
-  display: 'swap',
-  axes: ['opsz', 'SOFT'],
-});
-
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-sans',
+  weight: ['400', '700'],
+  variable: '--font-space-mono',
   display: 'swap',
 });
 
-const jetbrainsMono = JetBrains_Mono({
+const doto = Doto({
   subsets: ['latin'],
-  variable: '--font-mono',
+  weight: ['400', '700', '900'],
+  variable: '--font-doto',
   display: 'swap',
 });
 
@@ -25,7 +20,7 @@ export default function RootLayout({
   children,
 }: { children: ReactNode }) {
   return (
-    <html lang="es" className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="es" className={`${spaceMono.variable} ${doto.variable}`}>
       <body className="min-h-screen antialiased">
         {children}
       </body>

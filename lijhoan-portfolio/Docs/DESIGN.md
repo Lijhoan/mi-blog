@@ -6,18 +6,61 @@ Documento único del sistema de diseño y experiencia. Destila las decisiones v�
 
 ---
 
-## 0. Identidad visual (dirección de arte — Fase 5)
+## 0. Identidad visual (dirección de arte — filosofía vigente)
 
-**Dirección elegida: Editorial técnico.** Revista tech premium con alma de ingeniería: editorial pero preciso.
+**Dirección elegida: Nothing / spec-sheet.** Estética de ficha técnica industrial: monocromo estricto, rojo como señal puntual, tipografía mono, líneas de 1px, metadatos en mayúsculas. La *forma* (composición por sección) se decide durante la implementación; estas son las **reglas**, no un layout literal.
 
-- **Tipografía (voz):**
-  - *Display* — **Fraunces** (serif variable de alto contraste, con `opsz`) para titulares/hero. Da la voz editorial.
-  - *Texto* — **Inter** (sans geométrica neutra) para cuerpo y UI.
-  - *Datos* — **JetBrains Mono** para métricas, años, etiquetas técnicas y detalles de ingeniería.
-  - Se cargan vía `next/font` y se exponen como `--font-display`, `--font-sans`, `--font-mono` (tokens Tailwind v4 `@theme`).
-- **Color:** base de **tinta cálida** (near-black neutro, no el slate azulado de SaaS), texto **marfil cálido** (no blanco puro), **acento frío** de señal y **ámbar cálido** reservado para el cierre (cta). Los valores finos se afinan durante la Fase 5.
-- **Dashboards de proyectos:** se reemplazan los screenshots planos por **diagramas de arquitectura estilizados** (flujo de datos / stack), coherentes con la identidad.
-- **Prohibido (tells de "IA/template"):** palabra-en-degradado cyan→azul en titulares, botones degradado cyan→azul genéricos, barras de porcentaje en skills, fondos slate azulados genéricos, cualquier elemento de debug en pantalla.
+### Tokens (única fuente de verdad — nada de colores hardcodeados en componentes)
+
+```css
+:root {
+  --bg:    #000000;
+  --ink:   #ededed;
+  --dim:   rgba(237,237,237,.55);  /* texto secundario */
+  --faint: rgba(237,237,237,.32);  /* micro-labels, metadatos */
+  --line:  rgba(237,237,237,.14);  /* bordes y líneas 1px */
+  --card:  #0a0a0a;                /* superficies */
+  --accent:#d71920;                /* rojo señal — con moderación */
+}
+```
+
+Modo claro disponible vía `:root[data-theme="light"]` (mismos roles, valores invertidos). Se exponen como tokens Tailwind v4 (`bg-bg`, `text-ink`, `text-dim`, `text-faint`, `border-line`, `bg-card`, `text-accent`…).
+
+### Tipografía (voz)
+
+- **Space Mono** — todo: cuerpo, UI, labels, titulares de sección. `--font-mono` (default del body).
+- **Doto** (dot-matrix) — **solo display**: H1 del hero (900), números de sección `[01]`, índices `P.01`/`S.01`, email gigante del cierre (700). `--font-doto`.
+- Cargadas vía `next/font`, expuestas como variables.
+
+Escala: H1 hero `clamp(44px, 8vw, 92px)` Doto 900 lh 1.02 · encabezado de sección 13px/700/`tracking .22em`/MAYÚSCULAS · cuerpo 12–14px lh 1.8–2 · tags 9.5–11px · micro-labels 9–10px `--faint` MAYÚSCULAS `tracking .14em`.
+
+### Reglas de oro
+
+1. **Rojo = señal, no decoración.** Dots de estado, números de sección, hovers, 1 CTA primario. Máximo 1 elemento rojo dominante por viewport. Nunca fondos grandes.
+2. **1px siempre.** Bordes, divisores, líneas. **Nada de sombras.**
+3. **Radios: 999px (pills) o 0 (cards/tablas).** Nada intermedio.
+4. **MAYÚSCULAS + letter-spacing generoso** en labels/metadatos; cuerpo en sentence case.
+5. **Transiciones .2–.25s** en color, borde y translateY. Sin animaciones grandes de entrada.
+6. Micro-detalles de firma: corchetes `[ PORTFOLIO — v2.0 ]`, dot rojo de estado `● TEXTO`, comentarios `// COPY SECUNDARIO`, flechas `→` / `↗` en links de acción, cursor parpadeante `▮` en el hero.
+7. Secciones separadas por `border-top: 1px solid var(--line)`; padding vertical ≥ 90px; mucho aire.
+
+### Patrones de referencia (adaptar, no copiar)
+
+- **Encabezado de sección:** índice Doto rojo `[01]` + título 13px tracking .22em + línea 1px que llena + metadato `--faint` opcional.
+- **Ficha spec-sheet:** tabla 1px con filas `label --faint MAYÚSCULAS | valores · separados`; ideal para stack/skills.
+- **Card de proyecto:** borde 1px `--line` sobre `--card`, hover `border-color` rojo suave + `translateY(-3px)`; índice `P.01` Doto; zona técnica con patrón `repeating-linear-gradient` 45°; fila de links `REPO ↗ / DEMO ↗` con border-top.
+- **Timeline:** grid fecha `--faint` | columna con línea 1px + dot 9px (rojo solo el actual) | contenido.
+- **Botones pill:** primario fondo `--accent`, secundario borde `--line` → hover borde rojo; ambos `translateY(-1px)`.
+- **Cierre:** email gigante Doto (hover rojo) + pills sociales `GITHUB ↗` + barra legal 9.5px `--faint`.
+
+### Prohibido (tells de "IA/template" + drift)
+
+- Palabra-en-degradado en titulares y botones degradado cyan→azul.
+- Barras de porcentaje en skills.
+- Fondos slate azulados genéricos, glass sobreusado, sombras.
+- Colores hardcodeados en componentes que dupliquen los tokens (cyan-*/blue-*/slate-* sueltos): todo color pasa por token.
+- Cualquier elemento de debug en pantalla.
+- **Dashboards de proyectos:** los screenshots planos se reemplazan por **diagramas de arquitectura estilizados** coherentes con la ficha técnica.
 
 ---
 
@@ -30,7 +73,7 @@ Documento único del sistema de diseño y experiencia. Destila las decisiones v�
 - **Data-Driven Credibility** — métricas como evidencia verificable, nunca adorno ni cifras ficticias.
 - **Tactile Motion** — peso y fricción vía transforms y parallax medido.
 
-**Tono:** "enterprise + experimental", estudio de producto serio. Fondos profundos (`bg-slate-950/*`), acentos luminosos fríos, contraste de texto fuerte. Nunca template.
+**Tono:** "enterprise + experimental", estudio de producto serio con estética de ficha técnica. Fondo negro monocromo (`--bg`), texto `--ink`, rojo `--accent` como única señal de color. Nunca template.
 
 **Language lock (español):** idioma principal en labels, headings, badges, microcopy y scene registry. Inglés solo deliberado: nombres de tecnología/marca (Next.js, Power BI, Zero Trust, GitHub, LinkedIn) y denominaciones oficiales de rol/certificación. *Gap:* aún hay términos en inglés en data de proyectos/certificaciones pendientes de normalizar.
 
@@ -76,7 +119,7 @@ Valores reales (`frameVisibility.mobile = false` en los cuatro):
 | trust | cyan tenue | 0.38 | 0.04 | 0.06 | 0.52 | 0.78 | 0.24 |
 | cta | amber | 0.32 | 0.03 | 0.04 | 0.46 | 0.72 | 0.18 |
 
-Lectura: **proof** es el capítulo más expresivo/denso; **trust** y **cta** los más calmos. Paleta editorial fría (azul/cyan) salvo el cierre cálido (amber).
+Lectura: **proof** es el capítulo más expresivo/denso; **trust** y **cta** los más calmos. **Re-tonificación (filosofía spec-sheet):** la variación entre capítulos se expresa por densidad/intensidad/ritmo (los multiplicadores de la tabla), **no por matiz de color** — el monocromo + rojo señal es constante; las columnas de acento cyan/blue/amber quedan obsoletas y se migran a tokens neutros durante la implementación.
 
 **Anti-drift:** prohibido hardcodear colores/estilos de capítulo dentro de componentes de sección o animaciones fuera de componentes gobernados por token. Si un capítulo necesita comportamiento nuevo, se extiende primero la forma del token. WebGL debe **consumir** estos tokens, no redefinir mood.
 
