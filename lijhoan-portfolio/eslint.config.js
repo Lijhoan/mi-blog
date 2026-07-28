@@ -5,7 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 
 export default tseslint.config(
-  { ignores: ['.next', 'dist', 'node_modules', '.git'] },
+  { ignores: ['.next', 'out', 'dist', 'node_modules', '.git'] },
   {
     files: ['**/*.{js,jsx}'],
     languageOptions: {
@@ -54,6 +54,14 @@ export default tseslint.config(
         'warn',
         { allowConstantExport: true },
       ],
+    },
+  },
+  {
+    // Next.js App Router exige exports adicionales (generateStaticParams, metadata)
+    // en archivos de ruta; la regla de react-refresh no aplica ahí.
+    files: ['app/**/*.{ts,tsx}'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
     },
   },
 )

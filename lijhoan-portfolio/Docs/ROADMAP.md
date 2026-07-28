@@ -47,20 +47,37 @@ De ~40 `.md` contradictorios a **cuatro piezas vivas**: `README.md`, `Docs/ROADM
 - **Puerta dura:** lint + typecheck + build en verde. Aquí el proyecto queda estable.
 - *(Convertir el núcleo JS/JSX → TS es opcional y se difiere.)*
 
-### Fase 5 — Pulido visual/motion (prioridad #1 hacia Awwwards)
-- Transiciones entre secciones/rutas (`AnimatePresence` / GSAP) coherentes con el sistema de capítulos.
-- Suavizar narrativa entre capítulos (identity → proof → trust → cta) y sus mood tokens.
-- Pase tipográfico y editorial (jerarquía, espaciado, ritmo) — mayor impacto pendiente.
-- Microinteracciones (hover, cursor, loading states, feedback táctil).
-- Optimizar la capa WebGL (`MinimalWebGLLayer`, chunk ~865 KB) con tiers de performance y lazy real.
-- Ver gaps detallados en [`DESIGN.md`](DESIGN.md) §9.
+### ✅ Fase 5 — Rediseño Nothing/spec-sheet (ejecutada, reemplazó al plan original de "pulido")
+Pivot de dirección de arte a **Nothing/spec-sheet** (ver [`DESIGN.md`](DESIGN.md) §0):
+- Fundamentos: tokens únicos (`--bg/--ink/--dim/--faint/--line/--card/--accent`), Space Mono + Doto vía `next/font`, modo oscuro/claro con next-themes.
+- Todas las secciones restilizadas: hero ficha técnica, skills como ficha de especificaciones con iconos mínimos, timeline 1px, certificaciones con tiers e índices, contacto con email gigante Doto, nav pill fija.
+- Eliminado el sistema antiguo completo (atmósfera/overlays/WebGL/mood tokens) y sus dependencias (three, react-three, leva, meshline) + componentes shadcn huérfanos.
+- Proyectos reforzados: **diagramas de arquitectura SVG propios** (s10-lakehouse, tale-insight-analytics, tale-banking-admin, tale-jarvis-bank) en lugar de screenshots; estados honestos (● privado/nda, verified/pending).
 
-### Fase 6 — Performance, accesibilidad y producción
-- `next/image` + WebP/srcset (corrige además el contrato `StaticImageData` de los imports de PNG, hoy tratados como string — ver `src/types/assets.d.ts`).
-- `next.config.js`: optimización de imágenes/headers/redirects.
-- Accesibilidad: `prefers-reduced-motion`, contraste, teclado, foco visible.
+### ✅ Fase 5.5 — Integración del perfil maestro (contenido)
+- Caso insignia **Plataforma S10 Lakehouse** (P.01) + experiencia TALE enriquecida (Medallion, Airflow, dbt, Iceberg, Trino, OpenBao, CI/CD, IA local).
+- Skills reestructuradas en 4 grupos de ingeniería real; Verisure corregida (Abr–Nov 2025).
+- Certificados DMC Institute (Data Engineer 168h · Big Data 60h, Jun 2026) integrados como destacados con `● reciente` dinámico y assets WebP optimizados.
+- `cv.md` actualizado como fuente de verdad. Sin datos sensibles (IPs/secretos/correo corporativo excluidos).
+
+### ⏳ Spec-7 — QA visual final (PENDIENTE)
+- **Responsive móvil: ajustar todas las secciones sin distorsión** (hero Doto grande, scrollytelling horizontal, tablas de skills, nav pill con overflow).
+- QA en ambos temas (oscuro/claro): contrastes, bordes visibles, estados hover/focus.
+- Microdetalles de firma restantes y pase tipográfico fino.
+
+### ⏳ Fase 6 — Performance, accesibilidad y producción (PENDIENTE)
+- Metadata SEO (title/description/OpenGraph), favicon coherente con la marca spec-sheet (hoy sigue `analysis_ico.png`).
+- Accesibilidad: contraste, teclado, foco visible, `prefers-reduced-motion` (parcialmente cubierto).
 - Auditoría Lighthouse (target 90+ Performance).
-- Opcional: CI (GitHub Actions), tests (Vitest/Playwright), docs de despliegue.
+- Opcional: CI (GitHub Actions) para desplegar a Azure en cada push a `main`; tests (Vitest/Playwright).
+
+---
+
+## Despliegue (Azure, web estática)
+
+- Build como **export estático**: `output: 'export'` en `next.config.ts` + `generateStaticParams` pre-renderiza las 7 rutas → salida en `out/`.
+- Publicación: subir `out/` al hosting estático de Azure (Static Web App o Storage `$web`), p. ej. `az storage blob upload-batch -s out -d '$web' --account-name <cuenta> --overwrite`.
+- `pnpm start`/`preview` no aplican con export estático; usar cualquier servidor estático para probar `out/` localmente.
 
 ---
 
