@@ -1,7 +1,9 @@
 import type { ProjectItem } from '../profile/profile.types'
-import dashboardQuality from '../../assets/dashboard-quality.png'
-import dashboardTelecom from '../../assets/dashboard-telecom.png'
-import dashboardAutomation from '../../assets/dashboard-automation.png'
+
+// Diagramas de arquitectura spec-sheet (SVG, en public/projects/)
+const dashboardQuality = '/projects/tale-insight-analytics.svg'
+const dashboardTelecom = '/projects/tale-banking-admin.svg'
+const dashboardAutomation = '/projects/tale-jarvis-bank.svg'
 
 export const featuredProjects: ProjectItem[] = [
   {

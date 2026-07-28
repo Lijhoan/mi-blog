@@ -6,7 +6,6 @@ import ProjectsScrollytellingSection from '@/features/scrollytelling/ProjectsScr
 import { dataBiSkills, devSkills, experienceTimeline, featuredProjects, infraSkills, mlSkills, profileContent, aiSkills } from '@/content/index.ts'
 import CertificationTrustLayer from '@/features/experience/CertificationTrustLayer.jsx'
 import NavigationShell from '@/features/navigation/NavigationShell.jsx'
-import { ChevronRight } from 'lucide-react'
 
 const pathToSection = (pathname) => {
   const segments = pathname.split('/').filter(Boolean)
@@ -75,7 +74,6 @@ function App() {
     setIsVisible(true)
   }, [])
 
-  const trackCtaInteraction = () => {}
   const navigation = [
     { id: 'home', label: 'Inicio', shortLabel: 'Inicio', kind: 'immersive' },
     { id: 'about', label: 'Perfil', shortLabel: 'Perfil', kind: 'reading' },
@@ -153,7 +151,7 @@ function App() {
                       <span>retrato</span>
                     </div>
                     <div className="aspect-[3/4] overflow-hidden">
-                      <img src="/lijhoan.png" alt={profile.name} className="h-full w-full object-cover object-top grayscale" />
+                      <img src="/lijhoan.webp" alt={profile.name} className="h-full w-full object-cover object-top grayscale" />
                     </div>
                     <figcaption className="space-y-1 border-t border-line px-4 py-3">
                       <p className="text-[10px] uppercase tracking-[0.18em] text-ink">{profile.name}</p>
@@ -167,41 +165,34 @@ function App() {
         )}
         {/* About Section */}
         {activeSection === 'about' && (
-          <section className="chapter-section min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center">
-            <div className="max-w-6xl mx-auto w-full">
-              <div className="mb-12 max-w-3xl">
-                <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60 mb-4">Perfil</p>
-                <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 text-white">
-                  Sobre <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">mí</span>
-                </h2>
-                <p className="text-lg text-gray-300 leading-relaxed max-w-2xl">
-                  {overview}
-                </p>
-              </div>
+          <section className="chapter-section min-h-[calc(100svh-4rem)] px-6 py-24 sm:px-8 lg:px-12 flex items-center">
+            <div className="mx-auto w-full max-w-5xl">
+              <SectionHeader index="01" title="Perfil" meta="sistemas · datos · cloud" />
 
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
-                <div className="lg:col-span-2 space-y-6">
-                  <p className="text-base text-gray-300 leading-relaxed">
-                    {positioning.focus}
-                  </p>
+              <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
+                <div className="space-y-6">
+                  <p className="text-sm leading-8 text-ink">{overview}</p>
+                  <p className="text-sm leading-8 text-dim">{positioning.focus}</p>
+                </div>
 
-                  <div className="grid grid-cols-3 gap-4">
+                <aside className="space-y-10">
+                  <div className="grid grid-cols-3 gap-6 border-t border-line pt-6">
                     {metrics.slice(1, 4).map((metric) => (
-                      <div key={metric.label} className="space-y-2">
-                        <p className="text-3xl sm:text-4xl font-bold text-cyan-300">{metric.value}</p>
-                        <p className="text-xs uppercase tracking-[0.14em] text-gray-400">{metric.label}</p>
+                      <div key={metric.label} className="space-y-1">
+                        <p className="font-doto text-xl font-bold text-ink sm:text-2xl">{metric.value}</p>
+                        <p className="text-[9px] uppercase tracking-[0.14em] text-faint">{metric.label}</p>
                       </div>
                     ))}
                   </div>
-                </div>
 
-                <aside className="space-y-4 lg:pt-2">
-                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60">Pilares operativos</p>
-                  <ul className="space-y-3 text-sm text-gray-300 leading-relaxed">
-                    <li>Arquitectura de datos orientada a decisiones empresariales</li>
-                    <li>Implementación full-stack con adopción operativa</li>
-                    <li>Gobernanza y escalabilidad corporativa</li>
-                  </ul>
+                  <div className="space-y-3">
+                    <p className="text-[10px] uppercase tracking-[0.22em] text-faint">{'// pilares'}</p>
+                    <ul className="space-y-2.5 text-[13px] leading-relaxed text-dim">
+                      <li><span className="text-accent">—</span> Arquitectura de datos orientada a decisiones</li>
+                      <li><span className="text-accent">—</span> Implementación full-stack con adopción operativa</li>
+                      <li><span className="text-accent">—</span> Gobernanza y escalabilidad corporativa</li>
+                    </ul>
+                  </div>
                 </aside>
               </div>
             </div>
@@ -214,30 +205,37 @@ function App() {
         )}
 
       {activeSection === 'skills' && (
-        <section className="chapter-section min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center">
-          <div className="max-w-6xl mx-auto w-full space-y-10">
-            <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60 mb-4">Capacidades</p>
-              <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 text-white">
-                Curadas <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">por impacto</span>
-              </h2>
-              <p className="text-base text-gray-300 leading-relaxed max-w-2xl">
-                Cada grupo agrupa habilidades por rol operativo real. Foco en capacidad de ejecución, madurez técnica y transferencia a negocio.
-              </p>
-            </div>
+        <section className="chapter-section min-h-[calc(100svh-4rem)] px-6 py-24 sm:px-8 lg:px-12 flex items-center">
+          <div className="mx-auto w-full max-w-5xl">
+            <SectionHeader index="03" title="Habilidades" meta="ficha de especificaciones" />
 
-            <div className="grid gap-8 lg:grid-cols-2">
-              {skillGroups.map((group) => (
-                <article key={group.id} className="space-y-4">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.22em] text-cyan-100/60 mb-2">{group.title}</p>
-                    <p className="text-sm text-gray-300">{group.summary}</p>
+            <div className="grid gap-x-16 gap-y-14 lg:grid-cols-2">
+              {skillGroups.map((group, groupIndex) => (
+                <article key={group.id}>
+                  <div className="flex items-baseline justify-between gap-4 border-b border-line pb-3">
+                    <h3 className="text-[11px] font-bold uppercase tracking-[0.18em] text-ink">{group.title}</h3>
+                    <span className="font-doto text-[11px] font-bold text-faint">S.0{groupIndex + 1}</span>
                   </div>
-                  <div className="grid gap-2">
-                    {group.items.map((skill) => (
-                      <SkillCard key={skill.name} skill={skill} />
-                    ))}
-                  </div>
+                  <ul>
+                    {group.items.map((skill) => {
+                      const band = resolveSkillBand(skill.level)
+
+                      return (
+                        <li key={skill.name} className="group/skill flex items-center justify-between gap-4 border-b border-line py-3">
+                          <span className="flex min-w-0 items-center gap-3">
+                            <skill.icon
+                              size={13}
+                              strokeWidth={1.5}
+                              aria-hidden="true"
+                              className="shrink-0 text-faint transition-colors duration-200 group-hover/skill:text-accent motion-reduce:transition-none"
+                            />
+                            <span className="truncate text-[13px] text-ink">{skill.name}</span>
+                          </span>
+                          <span className={['shrink-0 text-[9px] uppercase tracking-[0.16em]', band.className].join(' ')}>{band.label}</span>
+                        </li>
+                      )
+                    })}
+                  </ul>
                 </article>
               ))}
             </div>
@@ -246,66 +244,52 @@ function App() {
       )}
 
       {activeSection === 'experience' && (
-        <section className="chapter-section relative min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center overflow-hidden">
-          <div className="relative z-10 max-w-6xl mx-auto w-full space-y-8">
-            <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60 mb-4">Trayectoria</p>
-              <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 text-white">
-                Con <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">evidencia operativa</span>
-              </h2>
-              <p className="text-base text-gray-300 leading-relaxed max-w-2xl">
-                De implementación técnica a adopción empresarial: continuidad entre entrega, gobernanza y resultados.
-              </p>
-            </div>
+        <section className="chapter-section min-h-[calc(100svh-4rem)] px-6 py-24 sm:px-8 lg:px-12 flex items-center">
+          <div className="mx-auto w-full max-w-5xl">
+            <SectionHeader index="04" title="Trayectoria" meta="evidencia operativa" />
 
-            <div className="grid gap-8 lg:grid-cols-[1fr_1.3fr]">
-              <div className="space-y-4">
-                <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60 mb-3">Tesis de confianza</p>
-                  <h3 className="text-xl font-semibold text-white mb-3">Ejecución antes que retórica</h3>
-                  <p className="text-sm text-gray-300 leading-relaxed mb-4">
-                    La credibilidad se construye con continuidad entre arquitectura, entrega y adopción operativa.
-                  </p>
-                </div>
-                <ul className="space-y-2 text-sm text-gray-300">
-                  <li className="leading-relaxed">Implementación en entornos corporativos con requisitos de control y escalabilidad.</li>
-                  <li className="leading-relaxed">Capacidad de traducir complejidad técnica a decisiones accionables.</li>
-                  <li className="leading-relaxed">Ejecución end-to-end: diseño, despliegue, adopción y mejora continua.</li>
-                </ul>
-              </div>
+            <div>
+              {experience.map((entry, entryIndex) => {
+                const isCurrent = entryIndex === 0
+                const isLast = entryIndex === experience.length - 1
 
-              <div className="space-y-4">
-                {experience.map((entry) => (
-                  <article key={`${entry.company}-${entry.role}`} className="space-y-2 pb-4 border-b border-white/8 last:border-0">
-                    <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1">
-                      <h4 className="text-lg font-semibold text-white">{entry.role}</h4>
-                      <p className="text-xs uppercase tracking-[0.12em] text-gray-400">{entry.period}</p>
+                return (
+                  <article key={`${entry.company}-${entry.role}`} className="grid grid-cols-[16px_1fr] gap-x-6 sm:grid-cols-[150px_16px_1fr] sm:gap-x-8">
+                    <p className="hidden pt-1 text-right text-[10px] uppercase tracking-[0.12em] text-faint sm:block">{entry.period}</p>
+
+                    <div className="relative flex justify-center">
+                      {!isLast && <span aria-hidden="true" className="absolute bottom-0 top-3 w-px bg-line" />}
+                      <span
+                        aria-hidden="true"
+                        className={[
+                          'relative z-10 mt-1 h-2.5 w-2.5 rounded-full border bg-bg',
+                          isCurrent ? 'border-accent' : 'border-line',
+                        ].join(' ')}
+                      />
                     </div>
-                    <p className="text-xs uppercase tracking-[0.14em] text-cyan-100/60">{entry.company}</p>
-                    <div className="space-y-1.5 mt-2">
-                      {entry.highlights.map((highlight) => (
-                        <p key={highlight} className="text-sm text-gray-300 leading-relaxed">{highlight}</p>
-                      ))}
+
+                    <div className={isLast ? 'pb-2' : 'pb-12'}>
+                      <p className="text-[10px] uppercase tracking-[0.12em] text-faint sm:hidden">{entry.period}</p>
+                      <h3 className="mt-1 text-[14px] font-bold text-ink sm:mt-0">{entry.role}</h3>
+                      <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-accent">{entry.company}</p>
+                      <div className="mt-3 space-y-1.5">
+                        {entry.highlights.map((highlight) => (
+                          <p key={highlight} className="text-[12px] leading-relaxed text-dim">{highlight}</p>
+                        ))}
+                      </div>
                     </div>
                   </article>
-                ))}
-              </div>
+                )
+              })}
             </div>
           </div>
         </section>
       )}
 
       {activeSection === 'certifications' && (
-        <section className="chapter-section min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center">
-          <div className="max-w-6xl mx-auto w-full space-y-6">
-            <div className="max-w-3xl">
-              <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/72">Capitulo credenciales</p>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight mb-4">
-                Certificaciones <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">& Formación</span>
-              </h2>
-              <p className="text-sm text-gray-300 leading-relaxed max-w-[62ch]">Evidencia verificable organizada por relevancia editorial: posicionamiento, soporte tecnico y trazabilidad historica.</p>
-            </div>
-
+        <section className="chapter-section min-h-[calc(100svh-4rem)] px-6 py-24 sm:px-8 lg:px-12">
+          <div className="mx-auto w-full max-w-5xl">
+            <SectionHeader index="05" title="Certificaciones" meta="evidencia verificable" />
             <CertificationTrustLayer />
           </div>
         </section>
@@ -314,93 +298,54 @@ function App() {
 
 {/* Contact Section */}
 {activeSection === 'contact' && (
-  <section className="chapter-section relative min-h-screen px-4 py-8 sm:px-6 lg:px-10 flex items-center overflow-hidden">
-    <div className="relative z-10 max-w-6xl mx-auto w-full space-y-10">
-      <div className="max-w-4xl">
-        <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60 mb-4">Capitulo cierre</p>
-        <h2 className="text-4xl sm:text-5xl font-semibold tracking-tight mb-6 text-white">
-          Construyamos <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">el siguiente sistema</span>
-        </h2>
-        <p className="text-base sm:text-lg text-gray-300 leading-relaxed max-w-3xl">
-          Trabajo con equipos que necesitan pasar de iniciativas aisladas a plataformas confiables de datos, automatización y decisiones operativas.
-        </p>
-      </div>
+  <section className="chapter-section min-h-[calc(100svh-4rem)] px-6 py-24 sm:px-8 lg:px-12 flex items-center">
+    <div className="mx-auto w-full max-w-5xl">
+      <SectionHeader index="06" title="Contacto" meta="respuesta en 24h hábiles" />
 
-      <div className="grid gap-10 lg:grid-cols-[1.12fr_0.88fr]">
-        <div className="space-y-6">
-          <div>
-            <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60 mb-3">Siguiente paso</p>
-            <a
-              href={emailHref}
-              onClick={() => trackCtaInteraction('email-primary', emailHref)}
-              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3 text-sm font-semibold text-white transition-all duration-300 hover:from-cyan-600 hover:to-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/70"
-            >
-              Iniciar conversación por correo
-              <ChevronRight size={16} />
-            </a>
-            <p className="mt-3 text-xs text-gray-400">
-              Respuesta en 24 horas hábiles con enfoque inicial y siguientes pasos claros.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-gray-300">
-            <button
-              type="button"
-              onClick={() => {
-                trackCtaInteraction('review-experience', 'experience')
-                router.push('/experience')
-              }}
-              className="inline-flex items-center gap-2 text-cyan-200 hover:text-cyan-100 transition-colors duration-200"
-            >
-              Ver trayectoria reciente
-              <ChevronRight size={14} />
-            </button>
-
-            <a
-              href={linkedinHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackCtaInteraction('linkedin-secondary', linkedinHref)}
-              className="inline-flex items-center gap-2 hover:text-cyan-300 transition-colors duration-200"
-            >
-              LinkedIn
-              <span className="text-gray-500">→</span>
-            </a>
-
-            <a
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackCtaInteraction('whatsapp-secondary', whatsappHref)}
-              className="inline-flex items-center gap-2 hover:text-cyan-300 transition-colors duration-200"
-            >
-              WhatsApp
-              <span className="text-gray-500">→</span>
-            </a>
-          </div>
-
-          <p className="text-xs text-gray-400">
-            {profile.email} · {profile.phone} · {profile.location}
+      <div className="space-y-10">
+        <div className="space-y-4">
+          <p className="text-[10px] uppercase tracking-[0.22em] text-faint">{'// siguiente paso'}</p>
+          <a
+            href={emailHref}
+            className="font-doto block break-all text-[clamp(24px,4.4vw,48px)] font-bold leading-tight text-ink transition-colors duration-200 hover:text-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ink"
+          >
+            {profile.email}
+          </a>
+          <p className="max-w-[58ch] text-sm leading-8 text-dim">
+            Trabajo con equipos que necesitan pasar de iniciativas aisladas a plataformas confiables de datos, automatización y decisiones operativas.
           </p>
         </div>
 
-        <div className="space-y-6">
-          <div className="space-y-3">
-            <p className="text-xs uppercase tracking-[0.2em] text-cyan-100/60">Propuesta actual</p>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              Tomo proyectos donde la complejidad técnica debe convertirse en operación estable, gobernable y medible para el negocio.
-            </p>
-          </div>
+        <div className="flex flex-wrap gap-3">
+          <a
+            href={linkedinHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full border border-line px-5 py-2.5 text-[11px] uppercase tracking-[0.1em] text-ink transition-all duration-200 hover:-translate-y-px hover:border-accent"
+          >
+            LinkedIn ↗
+          </a>
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full border border-line px-5 py-2.5 text-[11px] uppercase tracking-[0.1em] text-ink transition-all duration-200 hover:-translate-y-px hover:border-accent"
+          >
+            WhatsApp ↗
+          </a>
+          <a
+            href="/cv.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-full border border-line px-5 py-2.5 text-[11px] uppercase tracking-[0.1em] text-ink transition-all duration-200 hover:-translate-y-px hover:border-accent"
+          >
+            CV [pdf] ↗
+          </a>
+        </div>
 
-          <ul className="space-y-2 text-sm text-gray-300 leading-relaxed">
-            <li>Arquitectura y modernización de plataformas de datos en entornos corporativos.</li>
-            <li>Integración de sistemas, automatización de procesos y trazabilidad operativa.</li>
-            <li>Diseño de soluciones analíticas y de IA aplicadas a decisiones reales.</li>
-          </ul>
-
-          <p className="border-l border-cyan-300/35 pl-4 text-sm text-gray-300 leading-relaxed">
-            6+ años ejecutando de punta a punta: diseño, despliegue, adopción y mejora continua.
-          </p>
+        <div className="flex flex-wrap items-baseline justify-between gap-4 border-t border-line pt-4 text-[9.5px] uppercase tracking-[0.14em] text-faint">
+          <span>{profile.phone} · {profile.location}</span>
+          <span>[ fin ]</span>
         </div>
       </div>
     </div>
@@ -414,39 +359,25 @@ function App() {
 
 const resolveSkillBand = (level) => {
   if (level >= 90) {
-    return { label: 'Nucleo', className: 'text-cyan-100' }
+    return { label: 'Nucleo', className: 'text-ink' }
   }
 
   if (level >= 80) {
-    return { label: 'Solido', className: 'text-blue-100' }
+    return { label: 'Solido', className: 'text-dim' }
   }
 
-  return { label: 'Soporte', className: 'text-slate-100' }
+  return { label: 'Soporte', className: 'text-faint' }
 }
 
-function SkillCard({ skill }) {
-  const band = resolveSkillBand(skill.level)
-
+function SectionHeader({ index, title, meta }) {
   return (
-    <article className="group px-2 py-3 transition-all duration-300">
-      <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900/60">
-          <skill.icon size={18} className="text-cyan-300" />
-        </div>
-        <div className="min-w-0 flex-1">
-          <h3 className="text-sm sm:text-base font-semibold text-white truncate">{skill.name}</h3>
-          <p className={[
-            'mt-1 text-[10px] uppercase tracking-[0.14em]',
-            band.className,
-          ].join(' ')}>{band.label}</p>
-        </div>
-        <p className="text-sm font-semibold text-cyan-200">{skill.level}%</p>
-      </div>
-
-      <div className="mt-3 h-1.5 rounded-full bg-white/10">
-        <div className="h-1.5 rounded-full bg-gradient-to-r from-cyan-400/85 to-blue-500/85" style={{ width: `${Math.max(24, skill.level)}%` }} />
-      </div>
-    </article>
+    <div className="mb-12 flex items-baseline gap-4">
+      <span className="font-doto text-[13px] font-bold text-accent">[{index}]</span>
+      <h2 className="text-[13px] font-bold uppercase tracking-[0.22em] text-ink">{title}</h2>
+      <span aria-hidden="true" className="h-px flex-1 self-center bg-line" />
+      {meta && <span className="hidden text-[10px] uppercase tracking-[0.12em] text-faint sm:inline">{meta}</span>}
+    </div>
   )
 }
+
 export default App

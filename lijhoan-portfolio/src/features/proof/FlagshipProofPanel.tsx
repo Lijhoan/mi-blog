@@ -1,7 +1,6 @@
 'use client'
 
 import { flagshipProofCaseStudy } from '@/content/case-studies/flagshipProof.data.ts'
-import { AlertTriangle, Cloud, Database, Lock, ServerCog, ShieldCheck, Workflow } from 'lucide-react'
 
 const statusLabel = {
   verified: 'Verificado',
@@ -11,13 +10,12 @@ const statusLabel = {
 } as const
 
 const statusClass = {
-  verified: 'text-emerald-200',
-  estimated: 'text-blue-200',
-  pending: 'text-amber-200',
-  unavailable: 'text-slate-200',
+  verified: 'text-ink',
+  estimated: 'text-dim',
+  pending: 'text-faint',
+  unavailable: 'text-faint',
 } as const
 
-const architectureIcons = [Database, Workflow, ServerCog, Cloud] as const
 const panelTitleMap: Record<string, string> = {
   'Problem Framing': 'Marco del problema',
   'Architecture Snapshot': 'Resumen de arquitectura',
@@ -29,97 +27,66 @@ const panelTitleMap: Record<string, string> = {
  */
 export default function FlagshipProofPanel() {
   return (
-    <article className="flex min-h-[84svh] w-[94vw] max-w-[1180px] shrink-0 flex-col justify-between overflow-hidden rounded-[1.6rem] bg-slate-950/60 p-6 sm:p-8 lg:p-10 backdrop-blur-xl">
-      <div className="space-y-5">
-        <div className="space-y-3 max-w-4xl">
-          <p className="text-[11px] uppercase tracking-[0.16em] text-cyan-100/75">Caso principal</p>
-          <h3 className="text-2xl font-semibold leading-tight text-white sm:text-3xl lg:text-4xl">{flagshipProofCaseStudy.projectTitle}</h3>
-          <p className="max-w-[64ch] text-sm leading-relaxed text-slate-200 sm:text-base">{flagshipProofCaseStudy.whyThisCase}</p>
+    <article className="flex min-h-[72svh] w-[88vw] max-w-[980px] shrink-0 flex-col border border-line bg-card">
+      <div className="flex items-baseline justify-between gap-3 border-b border-line px-5 py-2.5 text-[9px] uppercase tracking-[0.14em] text-faint sm:px-6">
+        <span className="font-doto text-[11px] font-bold text-accent">P.01</span>
+        <span>caso principal</span>
+        <span>{flagshipProofCaseStudy.projectCategory}</span>
+      </div>
+
+      {/* Diagrama de arquitectura (spec-sheet, en public/projects/) */}
+      <div className="h-44 overflow-hidden border-b border-line sm:h-52">
+        <img
+          src="/projects/tale-insight-analytics.svg"
+          alt={`Diagrama de arquitectura — ${flagshipProofCaseStudy.projectTitle}`}
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover object-top"
+        />
+      </div>
+
+      <div className="flex flex-1 flex-col gap-6 p-5 sm:p-6 lg:p-8">
+        <div className="max-w-3xl space-y-3">
+          <h3 className="text-lg font-bold leading-snug text-ink sm:text-xl">{flagshipProofCaseStudy.projectTitle}</h3>
+          <p className="max-w-[64ch] text-[12px] leading-relaxed text-dim sm:text-[13px]">{flagshipProofCaseStudy.whyThisCase}</p>
         </div>
 
         <div className="grid gap-4 lg:grid-cols-2">
-          {flagshipProofCaseStudy.storyPanels.slice(0, 2).map((panel, panelIndex) => {
-            const Icon = architectureIcons[panelIndex] ?? Workflow
-
-            return (
-              <section key={panel.title} className="rounded-2xl bg-white/[0.02] p-4">
-                <div className="mb-2 flex items-center gap-2 text-cyan-100">
-                  <Icon size={15} />
-                  <h4 className="text-sm font-semibold uppercase tracking-[0.14em]">{panelTitleMap[panel.title] ?? panel.title}</h4>
-                </div>
-                <ul className="space-y-2 text-sm text-slate-300">
-                  {panel.points.map((point) => (
-                    <li key={point} className="leading-relaxed">{point}</li>
-                  ))}
-                </ul>
-              </section>
-            )
-          })}
+          {flagshipProofCaseStudy.storyPanels.slice(0, 2).map((panel) => (
+            <section key={panel.title} className="border border-line p-4">
+              <h4 className="mb-3 text-[10px] font-bold uppercase tracking-[0.18em] text-faint">{panelTitleMap[panel.title] ?? panel.title}</h4>
+              <ul className="space-y-2 text-[12px] leading-relaxed text-dim">
+                {panel.points.map((point) => (
+                  <li key={point}><span aria-hidden="true" className="text-accent">—</span> {point}</li>
+                ))}
+              </ul>
+            </section>
+          ))}
         </div>
 
-        <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {flagshipProofCaseStudy.impactMetrics.map((metric) => (
-            <article key={metric.label} className="rounded-xl bg-black/20 px-4 py-3">
-              <div className="flex items-center justify-between gap-2">
-                <p className="text-[11px] uppercase tracking-[0.16em] text-slate-400">{metric.label}</p>
-                <span className={["text-[10px] uppercase tracking-[0.12em]", statusClass[metric.status]].join(' ')}>
+        <section>
+          <div className="mb-3 flex items-baseline gap-4">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.18em] text-faint">Métricas de impacto</h4>
+            <span aria-hidden="true" className="h-px flex-1 self-center bg-line" />
+          </div>
+          <div className="grid grid-cols-2 gap-px bg-line sm:grid-cols-4">
+            {flagshipProofCaseStudy.impactMetrics.map((metric) => (
+              <article key={metric.label} className="bg-card px-4 py-3">
+                <p className="text-[9px] uppercase tracking-[0.14em] text-faint">{metric.label}</p>
+                <p className="font-doto mt-2 text-base font-bold text-ink sm:text-lg">{metric.value}</p>
+                <p className="mt-1 text-[10px] text-faint">{metric.unit}</p>
+                <p className={['mt-2 text-[9px] uppercase tracking-[0.14em]', statusClass[metric.status]].join(' ')}>
+                  {metric.status === 'verified' && <span aria-hidden="true" className="text-accent">● </span>}
                   {statusLabel[metric.status]}
-                </span>
-              </div>
-              <p className="mt-2 text-lg font-semibold text-white">{metric.value}</p>
-              <p className="mt-1 text-xs text-slate-300">{metric.unit}</p>
-              <p className="mt-1 text-xs text-slate-400">{metric.timeframe}</p>
-              {metric.baseline && (
-                <p className="mt-2 text-xs text-slate-400">Baseline: {metric.baseline}</p>
-              )}
-              {metric.after && (
-                <p className="mt-1 text-xs text-slate-400">After: {metric.after}</p>
-              )}
-              {metric.delta && (
-                <p className="mt-1 text-xs text-slate-300">Delta: {metric.delta}</p>
-              )}
-              {metric.confidenceNote && (
-                <p className="mt-2 text-xs text-slate-400">{metric.confidenceNote}</p>
-              )}
-            </article>
-          ))}
+                </p>
+              </article>
+            ))}
+          </div>
         </section>
 
-        <section className="grid gap-4 lg:grid-cols-2">
-          <article className="rounded-2xl bg-white/[0.02] p-4">
-            <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-cyan-100">
-              <ShieldCheck size={15} />
-              Señales de credibilidad
-            </h4>
-            <ul className="space-y-2 text-sm text-slate-300">
-              {flagshipProofCaseStudy.credibilitySignals.map((signal) => (
-                <li key={signal} className="leading-relaxed">{signal}</li>
-              ))}
-            </ul>
-          </article>
-
-          <article className="rounded-2xl bg-white/[0.02] p-4">
-            <h4 className="mb-2 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.14em] text-cyan-100">
-              <Lock size={15} />
-              Restricciones y complejidad
-            </h4>
-            <ul className="space-y-2 text-sm text-slate-300">
-              {flagshipProofCaseStudy.constraintsAndComplexity.map((constraint) => (
-                <li key={constraint} className="leading-relaxed">{constraint}</li>
-              ))}
-            </ul>
-          </article>
-        </section>
-      </div>
-
-      <div className="mt-5 border-l border-amber-300/35 pl-4 text-xs text-amber-100">
-        <p className="flex items-center gap-2 uppercase tracking-[0.14em]">
-          <AlertTriangle size={13} />
-          Alcance real
-        </p>
-        <p className="mt-2 leading-relaxed text-amber-100/90">
-          Las metricas de ahorro economico exacto siguen pendientes de instrumentacion. Este chapter solo declara impacto verificado, sin exagerar resultados.
-        </p>
+        <div className="mt-auto border-l border-accent pl-4 text-[11px] leading-relaxed text-dim">
+          {'// '}Las métricas de ahorro económico exacto siguen pendientes de instrumentación. Este caso solo declara impacto verificado, sin exagerar resultados.
+        </div>
       </div>
     </article>
   )

@@ -203,7 +203,7 @@ export default function ScrollyTellingContainer({ children, className, runtimeSc
         >
           {children}
           {!isMotionActive && (
-            <p className="w-[88vw] max-w-[1100px] rounded-2xl border border-white/10 bg-black/20 px-5 py-4 text-sm text-gray-300">
+            <p className="w-[88vw] max-w-[1100px] border border-line bg-card px-5 py-4 text-[12px] leading-relaxed text-dim">
               Motion deshabilitado por preferencia de accesibilidad o medición insuficiente. El contenido se mantiene visible en flujo vertical.
             </p>
           )}
