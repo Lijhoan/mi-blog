@@ -46,8 +46,15 @@ src/
 Docs/                     # ROADMAP.md · DESIGN.md · cv.md
 ```
 
+## Despliegue
+
+El sitio se publica en **Azure Static Web Apps** (`mi-blog-lijhoan`) mediante SWA CLI. GitHub se usa solo para control de versiones: **`git push` no despliega automáticamente**.
+
+Procedimiento completo: [`Docs/DEPLOY_AZURE_STATIC_WEB_APP.md`](Docs/DEPLOY_AZURE_STATIC_WEB_APP.md)
+
 ## Documentación
 
 - [`Docs/ROADMAP.md`](Docs/ROADMAP.md) — plan de implementación por fases y estado actual.
 - [`Docs/DESIGN.md`](Docs/DESIGN.md) — sistema de diseño y experiencia.
+- [`Docs/DEPLOY_AZURE_STATIC_WEB_APP.md`](Docs/DEPLOY_AZURE_STATIC_WEB_APP.md) — procedimiento de despliegue.
 - [`Docs/cv.md`](Docs/cv.md) — contenido fuente del CV (source of truth).
