@@ -85,10 +85,10 @@ function App() {
               </div>
 
               <div className="grid grid-cols-1 items-center gap-12 pt-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20 lg:pt-16">
-                {/* Izquierda: headline dominante + narrativa */}
-                <div className="order-2 space-y-8 lg:order-1">
+                {/* Izquierda: headline dominante + narrativa (abre en móvil) */}
+                <div className="space-y-8">
                   <p className="text-[10px] uppercase tracking-[0.22em] text-dim">{`// ${profile.role}`}</p>
-                  <h1 className="font-doto text-[clamp(44px,8vw,92px)] font-black leading-[1.02] text-ink">
+                  <h1 className="font-doto break-words text-[clamp(38px,10vw,92px)] font-black leading-[1.02] text-ink">
                     {hero.headline}
                     <span className="text-accent motion-reduce:hidden" style={{ animation: 'blink 1.2s steps(1) infinite' }}>▮</span>
                   </h1>
@@ -125,7 +125,7 @@ function App() {
                 </div>
 
                 {/* Derecha: retrato como ficha técnica */}
-                <div className="order-1 lg:order-2">
+                <div>
                   <figure className="border border-line bg-card">
                     <div className="flex items-center justify-between border-b border-line px-4 py-2 text-[9px] uppercase tracking-[0.14em] text-faint">
                       <span className="font-doto text-[11px] font-bold text-accent">ID.01</span>

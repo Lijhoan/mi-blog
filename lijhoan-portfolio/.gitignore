@@ -30,6 +30,9 @@ SPLASH_CURSOR_SETUP.md
 err.txt
 out.txt
 
+# Capturas del QA visual (scripts/visual-qa.mjs)
+.qa-shots
+
 # Next.js build artifacts
 .next
 **/.next

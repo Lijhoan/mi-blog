@@ -4,18 +4,20 @@ Documento único de planificación. Reemplaza todos los planes, roadmaps y bitá
 
 ## Objetivo
 
-Portfolio personal inmersivo, enfocado y mantenible sobre **Next.js 16**: narrativa por capítulos con motion premium (GSAP + Lenis + Framer Motion) y capa WebGL atmosférica, priorizando **legibilidad y performance** sobre efectos decorativos. Sin capa empresarial de datos/BI. Meta de calidad: pulido nivel Awwwards con base técnica estable.
+Portfolio personal enfocado y mantenible sobre **Next.js 16** con dirección de arte **Nothing/spec-sheet** (ver [`DESIGN.md`](DESIGN.md)): monocromo + rojo señal, tipografía mono/dot-matrix, líneas de 1px, priorizando **legibilidad y performance** sobre efectos decorativos. Sin capa empresarial de datos/BI. Meta de calidad: nivel Awwwards con base técnica estable.
 
 ## Stack real
 
 | Capa | Tecnología |
 |---|---|
-| Framework | Next.js 16 (App Router, Turbopack) + React 19 |
+| Framework | Next.js 16 (App Router, Turbopack, export estático) + React 19 |
 | Lenguaje | TypeScript 6 (núcleo aún en JS/JSX) |
-| Estilos | Tailwind CSS v4 (vía `@tailwindcss/postcss`) |
-| Motion | GSAP 3.14 + ScrollTrigger + Lenis 1.3 + Framer Motion 12 |
-| WebGL | three + @react-three/fiber 9 + @react-three/drei 10 |
-| UI | Radix UI + shadcn/ui + lucide-react |
+| Estilos | Tailwind CSS v4 (vía `@tailwindcss/postcss`) + tokens spec-sheet |
+| Tipografía | Space Mono + Doto vía `next/font` |
+| Motion | GSAP 3.14 + ScrollTrigger + Lenis 1.3 (scrollytelling horizontal) |
+| UI | lucide-react (iconos); componentes propios, sin librería de UI |
+| Tema | next-themes (oscuro/claro con `data-theme`) |
+| QA visual | Playwright (`scripts/visual-qa.mjs`) |
 | Paquetería | pnpm 10 |
 
 **Arquitectura:** Next.js sirve un catch-all `'use client'` (`app/[[...slug]]/page.tsx`) que envuelve el SPA `src/App.jsx` (7 secciones). No hay backend; el contenido vive tipado en `src/content/`.
@@ -40,12 +42,8 @@ Eliminados `features/telemetry/`, `features/data-activation/`, `features/proof/B
 ### ✅ Fase 3 — Consolidación documental
 De ~40 `.md` contradictorios a **cuatro piezas vivas**: `README.md`, `Docs/ROADMAP.md`, `Docs/DESIGN.md`, `Docs/cv.md` (fuente de contenido). Eliminado `.github/` (instrucciones/skills de agentes obsoletas) y bitácoras dispersas.
 
-### ⏳ Fase 4 — Consistencia técnica (puerta de estabilidad)
-- Extender ESLint para cubrir `.ts/.tsx` (añadir `typescript-eslint`).
-- Endurecer `tsconfig` (`noUnusedLocals`/`noUnusedParameters`) sin romper el build.
-- Normalizar imports con extensión explícita mezclada en `App.jsx` (cosmético).
-- **Puerta dura:** lint + typecheck + build en verde. Aquí el proyecto queda estable.
-- *(Convertir el núcleo JS/JSX → TS es opcional y se difiere.)*
+### ✅ Fase 4 — Consistencia técnica (puerta de estabilidad)
+ESLint extendido a `.ts/.tsx` con typescript-eslint (detectó y corrigió una violación real de rules-of-hooks). Lint + typecheck + build en verde como puerta permanente. *(Convertir el núcleo JS/JSX → TS sigue diferido como opcional.)*
 
 ### ✅ Fase 5 — Rediseño Nothing/spec-sheet (ejecutada, reemplazó al plan original de "pulido")
 Pivot de dirección de arte a **Nothing/spec-sheet** (ver [`DESIGN.md`](DESIGN.md) §0):
@@ -60,10 +58,11 @@ Pivot de dirección de arte a **Nothing/spec-sheet** (ver [`DESIGN.md`](DESIGN.m
 - Certificados DMC Institute (Data Engineer 168h · Big Data 60h, Jun 2026) integrados como destacados con `● reciente` dinámico y assets WebP optimizados.
 - `cv.md` actualizado como fuente de verdad. Sin datos sensibles (IPs/secretos/correo corporativo excluidos).
 
-### ⏳ Spec-7 — QA visual final (PENDIENTE)
-- **Responsive móvil: ajustar todas las secciones sin distorsión** (hero Doto grande, scrollytelling horizontal, tablas de skills, nav pill con overflow).
-- QA en ambos temas (oscuro/claro): contrastes, bordes visibles, estados hover/focus.
-- Microdetalles de firma restantes y pase tipográfico fino.
+### ✅ Spec-7 — QA visual responsive (comprobado con capturas reales)
+Verificado con Playwright (`node scripts/visual-qa.mjs` con el dev server activo): capturas de las 7 rutas en móvil 375px y desktop 1440px, temas oscuro y claro, midiendo overflow horizontal del documento.
+- **Resultado: 0 px de overflow en las 12 combinaciones** y layout limpio en todas las secciones (ficha de skills, timeline, certificaciones, contacto y scrollytelling).
+- Corregido: titular Doto del hero desbordaba 9 px en 375px (`clamp(38px,10vw,92px)` + `break-words`); el retrato ahora va después del titular en móvil (el headline abre la página); el link "Inicio" se oculta en móvil (el logo LM ya navega a home), liberando espacio en la nav pill.
+- Fix de routing dev: `generateStaticParams` con `{ slug: [] }` para la raíz (con `{ slug: undefined }` el modo dev devolvía 404 en todas las rutas; el export no se veía afectado).
 
 ### ⏳ Fase 6 — Performance, accesibilidad y producción (PENDIENTE)
 - Metadata SEO (title/description/OpenGraph), favicon coherente con la marca spec-sheet (hoy sigue `analysis_ico.png`).

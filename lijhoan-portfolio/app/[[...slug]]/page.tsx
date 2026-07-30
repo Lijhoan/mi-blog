@@ -4,7 +4,7 @@ const SECTIONS = ['about', 'projects', 'skills', 'experience', 'certifications',
 
 // Pre-renderiza la raíz y las 6 secciones para el export estático (Azure).
 export function generateStaticParams() {
-  return [{ slug: undefined }, ...SECTIONS.map((section) => ({ slug: [section] }))];
+  return [{ slug: [] }, ...SECTIONS.map((section) => ({ slug: [section] }))];
 }
 
 export default function SlugPage() {

@@ -57,6 +57,8 @@ export default function NavigationShell({ items }) {
             aria-current={isActive ? 'page' : undefined}
             className={[
               'shrink-0 cursor-pointer rounded-full px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] transition-colors duration-200',
+              // En móvil el logo LM ya lleva a inicio; se libera espacio de la pill
+              item.id === 'home' ? 'hidden sm:block' : '',
               isActive ? 'text-ink' : 'text-dim hover:text-ink',
             ].join(' ')}
           >
