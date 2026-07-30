@@ -41,12 +41,14 @@ export type SkillItem = {
   status?: ContentStatus
 }
 
+export type ProjectGlyphKind = 'analytics' | 'banking' | 'automation' | 'generic'
+
 export type ProjectItem = {
   id: number
   title: string
   description: string
   technologies: string[]
-  image?: string
+  glyph?: ProjectGlyphKind
   link: string
   category: string
   year: string

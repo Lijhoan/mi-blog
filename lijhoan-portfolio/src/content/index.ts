@@ -29,5 +29,5 @@ export type {
 export type {
   FlagshipProofCaseStudy,
   FlagshipProofMetric,
-  FlagshipProofPanel,
+  FlagshipPipelineStep,
 } from './case-studies/flagshipProof.data'

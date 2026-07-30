@@ -1,9 +1,12 @@
 import type { ProjectItem } from '../profile/profile.types'
 
-// Diagramas de arquitectura spec-sheet (SVG, en public/projects/)
-const dashboardQuality = '/projects/tale-insight-analytics.svg'
-const dashboardTelecom = '/projects/tale-banking-admin.svg'
-const dashboardAutomation = '/projects/tale-jarvis-bank.svg'
+// ── Cómo integrar un proyecto nuevo ─────────────────────────────────
+// 1. Agregar una entrada ProjectItem a featuredProjects: la card P.0X
+//    se genera sola en el scrollytelling, con estado honesto de link.
+// 2. Elegir su `glyph` ('analytics' | 'banking' | 'automation' |
+//    'generic') o dibujar uno nuevo en features/scrollytelling/ProjectGlyph.tsx.
+// El caso insignia (P.01) vive aparte en case-studies/flagshipProof.data.ts.
+// ────────────────────────────────────────────────────────────────────
 
 export const featuredProjects: ProjectItem[] = [
   {
@@ -11,7 +14,7 @@ export const featuredProjects: ProjectItem[] = [
     title: 'Tale Insight Analytics',
     description: 'Plataforma BI corporativa para gestión, visualización e interacción de reportes Power BI con control de acceso por áreas.',
     technologies: ['Next.js 15', 'React 19', 'TypeScript', 'Tailwind CSS', 'shadcn/ui', 'PostgreSQL 16+', 'JWT', 'Podman', 'Rocky Linux 9.7'],
-    image: dashboardQuality,
+    glyph: 'analytics',
     link: '',
     category: 'Business Intelligence',
     year: '2024',
@@ -24,7 +27,7 @@ export const featuredProjects: ProjectItem[] = [
     title: 'TALE Banking Admin Platform',
     description: 'Plataforma bancaria orientada al cumplimiento regulatorio y gestión eficiente de cuentas con auditoría inmutable.',
     technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Prisma ORM', 'NextAuth', 'Docker'],
-    image: dashboardTelecom,
+    glyph: 'banking',
     link: '',
     category: 'Core Banking',
     year: '2024',
@@ -37,7 +40,7 @@ export const featuredProjects: ProjectItem[] = [
     title: 'TaleJarvisBank',
     description: 'Sistema profesional en Python para extracción automatizada de movimientos bancarios bajo arquitectura Zero Trust.',
     technologies: ['Python 3.12', 'Playwright', 'REST APIs', 'Podman', 'systemd'],
-    image: dashboardAutomation,
+    glyph: 'automation',
     link: '',
     category: 'Automation',
     year: '2025',
@@ -53,7 +56,7 @@ export const projectArchive: ProjectItem[] = [
     title: 'TALE SignRoom',
     description: 'Plataforma de reserva de salas de reuniones con sincronización bidireccional en tiempo real hacia Microsoft Graph.',
     technologies: ['React 18', 'Vite', 'NestJS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Framer Motion', 'MSAL'],
-    image: dashboardAutomation,
+    glyph: 'generic',
     link: '',
     category: 'Collaboration',
     year: '2024',
@@ -66,7 +69,7 @@ export const projectArchive: ProjectItem[] = [
     title: 'Sistema de Gestión Portátil de Validación',
     description: 'Sistema independiente para procesamiento de archivos locales con lógicas de negocio complejas.',
     technologies: ['Python', 'SQLite', 'Bottle', 'HTML/JS', 'PyWebView', 'Pandas'],
-    image: dashboardQuality,
+    glyph: 'automation',
     link: '',
     category: 'Automation',
     year: '2024',

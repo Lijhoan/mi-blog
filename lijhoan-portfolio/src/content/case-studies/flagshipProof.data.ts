@@ -5,15 +5,12 @@ export type FlagshipProofMetric = {
   status: 'verified' | 'estimated' | 'pending' | 'unavailable'
   sourceNote: string
   timeframe: string
-  baseline?: string
-  after?: string
-  delta?: string
   confidenceNote?: string
 }
 
-export type FlagshipProofPanel = {
-  title: string
-  points: string[]
+export type FlagshipPipelineStep = {
+  label: string
+  detail: string
 }
 
 export type FlagshipProofCaseStudy = {
@@ -22,12 +19,13 @@ export type FlagshipProofCaseStudy = {
   projectCategory: string
   whyThisCase: string
   problemFraming: string[]
-  architectureSnapshot: string[]
-  stack: string[]
+  pipeline: {
+    title: string
+    steps: FlagshipPipelineStep[]
+    transversal: string
+  }
   impactMetrics: FlagshipProofMetric[]
-  constraintsAndComplexity: string[]
-  credibilitySignals: string[]
-  storyPanels: FlagshipProofPanel[]
+  honestyNote: string
 }
 
 export const flagshipProofCaseStudy: FlagshipProofCaseStudy = {
@@ -35,36 +33,26 @@ export const flagshipProofCaseStudy: FlagshipProofCaseStudy = {
   projectTitle: 'Plataforma de Datos S10 Lakehouse',
   projectCategory: 'Data Platform · Lakehouse On-Premise',
   whyThisCase:
-    'Modernización integral del ecosistema de datos de TALE: ingeniería inversa de un ERP legado (S10 / SQL Server) y construcción de una plataforma Lakehouse on-premise con arquitectura Medallion, orquestación desacoplada, seguridad de secretos, CI/CD y consumo analítico en Power BI.',
+    'Modernización integral del ecosistema de datos de TALE: ingeniería inversa de un ERP legado y construcción de una plataforma Lakehouse on-premise con arquitectura Medallion, orquestación desacoplada, seguridad de secretos y CI/CD.',
   problemFraming: [
-    'ERP monolítico con alta dependencia de SQL Server y documentación funcional limitada.',
-    'Información operativa fragmentada, sin trazabilidad ni capa analítica gobernada.',
-    'Necesidad de desacoplar los datos del ERP sin interrumpir la operación.',
+    'ERP monolítico (S10 / SQL Server) con documentación limitada y lectura operativa fragmentada.',
+    'Necesidad de datos gobernados, trazables y consumibles sin interrumpir la operación.',
+    'Arquitectura distribuida en 3 servidores Linux: datos, aplicaciones y DevOps.',
   ],
-  architectureSnapshot: [
-    'Extracción con Python (pyodbc, pandas, PyArrow) hacia Parquet en MinIO (capa Bronze).',
-    'Apache Airflow orquesta con DAGs delgados; un runtime-agent externo ejecuta la ingesta.',
-    'Apache Iceberg + catálogo PostgreSQL; dbt Core transforma Bronze → Silver → Gold.',
-    'Trino expone SQL distribuido; Power BI consume los modelos Gold.',
-    'OpenBao gestiona secretos con AppRole y mínimo privilegio; Jenkins/Gitea/Registry cubren CI/CD.',
-  ],
-  stack: [
-    'Apache Airflow',
-    'Python',
-    'SQL Server',
-    'Parquet',
-    'MinIO',
-    'Apache Iceberg',
-    'PostgreSQL',
-    'PgBouncer',
-    'dbt Core',
-    'Trino',
-    'OpenBao',
-    'Jenkins',
-    'Gitea',
-    'Docker · Podman',
-    'Power BI',
-  ],
+  pipeline: {
+    title: 'erp s10 → power bi',
+    steps: [
+      { label: 'ERP S10 · SQL Server', detail: 'origen' },
+      { label: 'Airflow + runtime-agent', detail: 'orquestación' },
+      { label: 'Python → Parquet', detail: 'extracción' },
+      { label: 'MinIO (S3)', detail: 'almacenamiento' },
+      { label: 'Iceberg + catálogo', detail: 'tablas analíticas' },
+      { label: 'dbt · B/S/G', detail: 'transformación' },
+      { label: 'Trino', detail: 'sql distribuido' },
+      { label: 'Power BI', detail: 'kpis · decisiones' },
+    ],
+    transversal: 'OpenBao (secretos) · Jenkins / Gitea (CI/CD) · auditoría y observabilidad',
+  },
   impactMetrics: [
     {
       label: 'Arquitectura distribuida',
@@ -76,7 +64,7 @@ export const flagshipProofCaseStudy: FlagshipProofCaseStudy = {
     },
     {
       label: 'Capas de datos',
-      value: 'Bronze / Silver / Gold',
+      value: 'B / S / G',
       unit: 'patrón Medallion',
       status: 'verified',
       sourceNote: 'Perfil profesional maestro: arquitectura implementada con dbt.',
@@ -97,41 +85,9 @@ export const flagshipProofCaseStudy: FlagshipProofCaseStudy = {
       status: 'pending',
       sourceNote: 'Sin instrumentación de impacto económico cerrada.',
       timeframe: 'Sin ventana cerrada',
-      confidenceNote: 'Se declara solo lo implementado; el impacto económico se medirá con la plataforma en producción plena.',
+      confidenceNote: 'Se declara solo lo implementado.',
     },
   ],
-  constraintsAndComplexity: [
-    'Ingeniería inversa de un sistema sin documentación funcional completa.',
-    'Operación on-premise con seguridad de secretos y mínimo privilegio.',
-    'Separación estricta entre orquestación, ejecución y almacenamiento.',
-  ],
-  credibilitySignals: [
-    'Seguridad centralizada con OpenBao: AppRole, políticas y credenciales separadas por servicio.',
-    'CI/CD real con Jenkins, Gitea y Registry privado.',
-    'Auditoría de pipelines: ejecuciones, errores, tiempos y filas afectadas.',
-    'OpenMetadata y evolución a Azure declaradas como integración en curso, no como hecho.',
-  ],
-  storyPanels: [
-    {
-      title: 'Problem Framing',
-      points: [
-        'ERP legado monolítico (S10 / SQL Server) con documentación limitada y lectura operativa fragmentada.',
-        'Necesidad de datos gobernados, trazables y consumibles sin interrumpir la operación.',
-      ],
-    },
-    {
-      title: 'Architecture Snapshot',
-      points: [
-        'Airflow + runtime-agent → Python/Parquet → MinIO → Iceberg → dbt (Bronze/Silver/Gold) → Trino → Power BI.',
-        'Transversal: OpenBao (secretos), Jenkins/Gitea (CI/CD), observabilidad y auditoría.',
-      ],
-    },
-    {
-      title: 'Impact and Credibility',
-      points: [
-        'Plataforma distribuida en 3 servidores Linux con responsabilidades separadas.',
-        'Roadmap honesto: OpenMetadata y migración a Azure en integración.',
-      ],
-    },
-  ],
+  honestyNote:
+    'Las métricas de ahorro económico exacto siguen pendientes de instrumentación. Este caso solo declara impacto verificado; OpenMetadata y la evolución a Azure están en integración (roadmap).',
 }
