@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import ProjectsScrollytellingSection from '@/features/scrollytelling/ProjectsScrollytellingSection.tsx'
+import ProjectsSection from '@/features/projects/ProjectsSection.tsx'
 import {
   biAnalyticsSkills,
   dataPlatformSkills,
@@ -182,7 +182,7 @@ function App() {
 
         {/* Projects Section */}
         {activeSection === 'projects' && (
-          <ProjectsScrollytellingSection projects={featuredProjects} />
+          <ProjectsSection projects={featuredProjects} />
         )}
 
       {activeSection === 'skills' && (

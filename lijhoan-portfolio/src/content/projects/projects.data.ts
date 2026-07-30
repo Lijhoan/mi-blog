@@ -1,10 +1,10 @@
 import type { ProjectItem } from '../profile/profile.types'
 
 // ── Cómo integrar un proyecto nuevo ─────────────────────────────────
-// 1. Agregar una entrada ProjectItem a featuredProjects: la card P.0X
-//    se genera sola en el scrollytelling, con estado honesto de link.
+// 1. Agregar una entrada ProjectItem a featuredProjects: la fila P.0X
+//    se genera sola en el índice de proyectos, con estado honesto de link.
 // 2. Elegir su `glyph` ('analytics' | 'banking' | 'automation' |
-//    'generic') o dibujar uno nuevo en features/scrollytelling/ProjectGlyph.tsx.
+//    'generic') o dibujar uno nuevo en features/projects/ProjectGlyph.tsx.
 // El caso insignia (P.01) vive aparte en case-studies/flagshipProof.data.ts.
 // ────────────────────────────────────────────────────────────────────
 

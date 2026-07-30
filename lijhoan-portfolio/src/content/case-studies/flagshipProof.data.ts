@@ -5,7 +5,6 @@ export type FlagshipProofMetric = {
   status: 'verified' | 'estimated' | 'pending' | 'unavailable'
   sourceNote: string
   timeframe: string
-  confidenceNote?: string
 }
 
 export type FlagshipPipelineStep = {
@@ -18,7 +17,6 @@ export type FlagshipProofCaseStudy = {
   projectTitle: string
   projectCategory: string
   whyThisCase: string
-  problemFraming: string[]
   pipeline: {
     title: string
     steps: FlagshipPipelineStep[]
@@ -33,12 +31,7 @@ export const flagshipProofCaseStudy: FlagshipProofCaseStudy = {
   projectTitle: 'Plataforma de Datos S10 Lakehouse',
   projectCategory: 'Data Platform · Lakehouse On-Premise',
   whyThisCase:
-    'Modernización integral del ecosistema de datos de TALE: ingeniería inversa de un ERP legado y construcción de una plataforma Lakehouse on-premise con arquitectura Medallion, orquestación desacoplada, seguridad de secretos y CI/CD.',
-  problemFraming: [
-    'ERP monolítico (S10 / SQL Server) con documentación limitada y lectura operativa fragmentada.',
-    'Necesidad de datos gobernados, trazables y consumibles sin interrumpir la operación.',
-    'Arquitectura distribuida en 3 servidores Linux: datos, aplicaciones y DevOps.',
-  ],
+    'Ingeniería inversa de un ERP legado (S10 / SQL Server) y construcción de una plataforma Lakehouse on-premise: arquitectura Medallion, orquestación desacoplada, seguridad de secretos y CI/CD.',
   pipeline: {
     title: 'erp s10 → power bi',
     steps: [
@@ -55,39 +48,29 @@ export const flagshipProofCaseStudy: FlagshipProofCaseStudy = {
   },
   impactMetrics: [
     {
-      label: 'Arquitectura distribuida',
-      value: '3 servidores',
-      unit: 'datos · aplicaciones · devops',
+      label: 'Servidores Linux',
+      value: '3',
+      unit: 'datos · apps · devops',
       status: 'verified',
-      sourceNote: 'Perfil profesional maestro: topología implementada en Linux.',
+      sourceNote: 'Perfil profesional maestro: topología implementada.',
       timeframe: '2025–2026',
     },
     {
-      label: 'Capas de datos',
-      value: 'B / S / G',
-      unit: 'patrón Medallion',
+      label: 'Capas Medallion',
+      value: 'B/S/G',
+      unit: 'bronze · silver · gold',
       status: 'verified',
-      sourceNote: 'Perfil profesional maestro: arquitectura implementada con dbt.',
+      sourceNote: 'Arquitectura implementada con dbt Core.',
       timeframe: '2025–2026',
     },
     {
-      label: 'Servicios de plataforma',
+      label: 'Servicios integrados',
       value: '15+',
-      unit: 'componentes integrados',
+      unit: 'plataforma completa',
       status: 'verified',
-      sourceNote: 'Airflow, dbt, Iceberg, Trino, MinIO, PostgreSQL, PgBouncer, OpenBao, Jenkins, Gitea, Registry, proxy inverso, n8n, observabilidad.',
+      sourceNote: 'Airflow, dbt, Iceberg, Trino, MinIO, PostgreSQL, OpenBao, Jenkins, Gitea, Registry, n8n, observabilidad.',
       timeframe: '2025–2026',
-    },
-    {
-      label: 'ROI cuantitativo',
-      value: 'Pendiente',
-      unit: '% ahorro',
-      status: 'pending',
-      sourceNote: 'Sin instrumentación de impacto económico cerrada.',
-      timeframe: 'Sin ventana cerrada',
-      confidenceNote: 'Se declara solo lo implementado.',
     },
   ],
-  honestyNote:
-    'Las métricas de ahorro económico exacto siguen pendientes de instrumentación. Este caso solo declara impacto verificado; OpenMetadata y la evolución a Azure están en integración (roadmap).',
+  honestyNote: 'ROI pendiente de instrumentación · OpenMetadata y Azure en integración (roadmap)',
 }

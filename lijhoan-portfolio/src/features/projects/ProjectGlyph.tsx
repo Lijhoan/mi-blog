@@ -32,7 +32,7 @@ function AnalyticsGlyph() {
   const peakY = baseY - (heights[peakCol] - 1) * PITCH
 
   return (
-    <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
+    <svg width="100%" height="100%" viewBox="0 0 132 132" aria-hidden="true">
       <g transform="translate(36, 6)">
         {all.map(({ x, y }) => {
           const isPeak = x === peakCol * PITCH && y === peakY
@@ -49,7 +49,7 @@ function BankingGlyph() {
   const rows = [7, 7, 7, 7, 4]
 
   return (
-    <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
+    <svg width="100%" height="100%" viewBox="0 0 132 132" aria-hidden="true">
       <rect x="16.5" y="16.5" width="99" height="99" fill="none" stroke="currentColor" strokeOpacity="0.35" strokeWidth="1" />
       <g transform="translate(28, 30)">
         {rows.map((count, rowIndex) => (
@@ -70,7 +70,7 @@ function BankingGlyph() {
 // Automatización: retícula de precisión con centro rojo y satélite en órbita.
 function AutomationGlyph() {
   return (
-    <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
+    <svg width="100%" height="100%" viewBox="0 0 132 132" aria-hidden="true">
       <circle cx="66" cy="66" r="42" fill="none" stroke="currentColor" strokeOpacity="0.55" strokeWidth="1" />
       <circle cx="66" cy="66" r="20" fill="none" stroke="currentColor" strokeOpacity="0.3" strokeWidth="1" strokeDasharray="3 5" />
       {[
@@ -92,7 +92,7 @@ function GenericGlyph() {
   const positions = [24, 66, 108]
 
   return (
-    <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
+    <svg width="100%" height="100%" viewBox="0 0 132 132" aria-hidden="true">
       {positions.flatMap((y) =>
         positions.map((x) => (
           <g key={`${x}-${y}`} stroke="currentColor" strokeOpacity="0.55" strokeWidth="1">
@@ -117,7 +117,7 @@ export default function ProjectGlyph({ kind = 'generic', className }: GlyphProps
   const Glyph = GLYPHS[kind] ?? GenericGlyph
 
   return (
-    <span className={className}>
+    <span className={['block', className ?? ''].join(' ')}>
       <Glyph />
     </span>
   )
